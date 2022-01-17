@@ -1,0 +1,4 @@
+[submodule "mathsummaries/public"]
+	path = mathsummaries/public
+	url = https://github.com/quantophile/mathsummaries.git
+	branch = main
