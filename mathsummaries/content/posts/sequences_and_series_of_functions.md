@@ -1,7 +1,7 @@
 ---
 title: Sequences and Series of Functions
 date: 2022-01-17T20:38:23+01:00
-mathjax: true
+math: true
 ---
 
 This is some content.
