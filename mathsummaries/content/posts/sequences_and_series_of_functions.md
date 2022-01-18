@@ -2,6 +2,8 @@
 title: Sequences and Series of Functions
 date: 2022-01-17T20:38:23+01:00
 math: true
+tags: ["sequence-of-functions", "uniform-convergence", "real-analysis"]
+categories: ["Real Analysis"]
 ---
 
 In 1689, Jakob Bernoulli published his *Tractus de seriebus infinitis* summarizing what was known about the infinite series towards the end of the 17th century. Full of clever calculations and conclusions, this publication was also notable for one particular question that it didn't answer; namely, what is the precise value of the series
@@ -19,13 +21,29 @@ $$
 Thus, for example, $\sum_{n=0}^{\infty}1/2^n = 2$ and $\sum_{n=0}^{\infty}(-1/3)^n = 3/4$. Geometric series were part of the mathematical folklore long before Bernoulli; however what was relatively novel in Bernoulli's time was the idea of operating on infinite series such as (1) with tools from the budding theory of calculus. For instance, what happens if we take the derivative on each side of the equation (1)? The left side is easy enough - we just get $1/(1-x)^2$. But what about the right side? Adopting a 17th century mindset, a natural way to proceed is to treat the infinite series as a polynomial, albeit of infinite degree. Differentiation across equation (1) in this fashion gives:
 
 $$
-\frac{1}{(1-x)^2} = 0 + 1 + 2x + 3x^2 + 4x^3 + \ldots
+\frac{1}{(1-x)^2} = 0 + 1 + 2x + 3x^2 + 4x^3 + \ldots \tag{2}
 $$
 
 Is this a valid formula, at least for values of $x$ in $(-1,1)$? Empirical evidence suggests it is. Setting $x = 1/2$, we get
 
 $$
-4 = \sum_{n=1}^{\infty}\frac{n}{2^{n-1}} = 1 + 1 + \frac{3}{4} + \frac{4}{8} + \frac{5}{16} + \ldots
+4 = \sum_{n=1}^{\infty}\frac{n}{2^{n-1}} = 1 + 1 + \frac{3}{4} + \frac{4}{8} + \frac{5}{16} + \ldots 
+$$
+
+which feels plausible, and is in fact true. Although not Bernoulli's requested series, this does suggest a possible new line of attack.
+
+Manipulations of this sort can be used to create a wide assortnment of new series representations for familiar functions. Substituting $-x^2$ for $x$ in (1) gives:
+
+$$
+\frac{1}{1 + x^2} = 1 - x^2 + x^4 - x^6 + x^8 - \ldots \tag{3}
+$$
+
+for all $x \in (-1,1)$.
+
+Once again closing our eyes to the potential danger of treating an infinite series as though it were a polynomial, let's see what happens when we take antiderivatives. Using the fact that,
+
+$$
+(\arctan x)' = \frac{1}{1 + x^2} \quad \text{ and } \arctan 0 = 0
 $$
 
 ---
