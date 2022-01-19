@@ -183,7 +183,7 @@ f_n(x) = \frac{x^2 + nx}{n}
 \end{align\*}
 $$
 
-on all of $\mathbf{R}$. Graphs of $f_1,f_5,f_10$ and $f_20$ give an indication of what is happening as $n$ gets larger. Algebraically, we can compute:
+on all of $\mathbf{R}$. Graphs of $f_1,f_5,f_{10}$ and $f_{20}$ give an indication of what is happening as $n$ gets larger. Algebraically, we can compute:
 
 $$
 \lim_{n \to \infty} f_n(x) = \lim_{n \to \infty} \frac{x^2 + nx}{n} = \lim_{n \to \infty} \frac{x^2}{n} + x = x
@@ -193,3 +193,25 @@ Thus, $(f_n)$ converges pointwise to $f(x) = x$ on $\mathbf{R}$.
 
 (ii) Let $g_n(x) = x^n$ on the set $[0,1]$, and consider what happens as $n$ tends to infinity. If $0 \leq x < 1$, then we have seen that $x^n \to 0$. On the other hand, if $x = 1$, then $x^n \to 1$. It follows that, $g_n \to g$ pointwise on $[0,1]$, where
 
+$$
+\begin{align\*}
+g(x) &= \begin{cases}
+0 & \text{ for } 0 \leq x < 1 \\\\
+1 & \text{ for } x = 1
+\end{cases}
+\end{align\*}
+$$
+
+(iii) Consider $h_n(x) = x^{1+\frac{1}{2n-1}}$ on the set $[-1.1]$. For a fixed $x \in [-1,1]$ we have:
+
+$$
+\begin{align\*}
+h_n(x) = x \lim_{n \to \infty} x^{\frac{1}{2n-1}} = |x|
+\end{align\*}
+$$
+
+Examples 6.2.2. (ii) and (iii) are our first indication that there is some difficult work ahead of us. The central theme of this chapter is analysing which properties the limit function inherits from the approximating sequence. In example 6.2.2 (iii), we have a sequence of differentiable functions converging pointwise to a limit that is not differentiable at the origin. In example 6.2.2 (ii), we see an even more fundamental problem of a sequence of continuous functions converging to a limit that is not continuous.
+
+### Continuity of the Limit Function.
+
+With example 6.2.2 (ii) firmly in mind, we begin this discussion with a doomed attempt to prove that the pointwise limit of continuous functions is continuous. Upon discovering the problem in the argument, we will be in a better position to understand the need for a stronger notion 
