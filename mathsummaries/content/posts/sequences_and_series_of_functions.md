@@ -531,4 +531,83 @@ $f_M$ is continuous at $c = 0$. Pick an arbitrary $\epsilon > 0$. By the Archime
 
 $f$ is not continuous at $c = 0$. Consider the sequence $(x_n)$ defined by $x_n:= \frac{1}{n}$. We have, $(x_n) \to 0$. But, $f(x_n)$ is the sequence $(1,1,1,\ldots)$, which converges to $1$, whilst $f(0)= 0$. So, $f$ fails to be continuous at $c=0$.
 
-(b) 
+(b) Define 
+
+$$
+g(x) = \begin{cases}
+x \quad \text{ if } x \in \\{\frac{1}{n} : n \in \mathbf{N}\\}\\\\
+0 \quad \text{ otherwise }
+\end{cases}
+$$
+
+**Pointwise convergence.**
+
+Pick an arbitrary $\epsilon > 0$. By the Archimedean property, there exists $N \in\mathbf{N}$, such that, $\frac{1}{N} < \epsilon$. 
+
+Let $x \in \\{\frac{1}{n}:n\in\mathbf{N}\\}$. 
+
+If $n < N$, then $x = \frac{1}{n} > \frac{1}{N}$. Pick $M > N + 1$, then $\frac{1}{M} < \frac{1}{N} < x$. Thus, $|g_m(x) - g(x)| = |x - x| = 0 < \frac{1}{N} < \epsilon$ for all $m \geq M$.
+
+If $n > N$, then $x = \frac{1}{n} < \frac{1}{N}$. Again, pick $M > \left(\frac{1}{x} + 1\right)$. Then, $\frac{1}{M} < x < \frac{1}{N}$. Thus, $|g_m(x) - g(x)| = |x - x| = 0 < \epsilon$ for all $m \geq M$.
+
+Consequently, $(g_n)$ converges pointwise to $g$.
+
+**Uniform convergence.**
+
+Consider an arbitrary $g_N(x)$. And sample $g_N(x)$ at $x = \frac{1}{n}$, $n \in\mathbf{N}$. We have,
+
+$$
+g_N(1) = 1, g_N\left(\frac{1}{2}\right) = \frac{1}{2}, g_N\left(\frac{1}{3}\right) = \frac{1}{3},\ldots, g_N\left(\frac{1}{N}\right) = \frac{1}{N}, g_N\left(\frac{1}{N+1}\right) = 0
+$$
+
+And,
+
+$$
+g(1) = 1, g\left(\frac{1}{2}\right) = \frac{1}{2}, g\left(\frac{1}{3}\right) = \frac{1}{3},\ldots, g\left(\frac{1}{N}\right) = \frac{1}{N}, g\left(\frac{1}{N+1}\right) = \frac{1}{N+1}
+$$
+
+So, $\sup_x |g_N(x) - g(x)| = \frac{1}{N+1}$.
+
+If we pick, $N > \frac{1}{\epsilon}$, then $|g_n(x) - g(x)| < \epsilon$ for all $x \in A$ and for all $n \geq N$. Consequently, $(g_n)$ converges uniformly to $g$ on $\mathbf{R}$.
+
+**Continuity of $g_n$.**
+
+$(g_n)$ is continuous at $c = 0$.
+
+**Continuity of $g$.**
+
+By continuous limit theorem, since $(g_n)$ converges uniformly to $g$, and each $g_n$ is continuous at $c=0$, it follows that $g$ is continuous at $c = 0$.
+
+$g$ is continuous at $c = 0$. Pick an arbitrary $\epsilon > 0$. Let $(x_n)$ be an arbitrary sequence, such that $(x_n) \to 0$, with $x_n \neq 0$. The image sequence $g(x_n) = (x_n)$, which converges to $0$. This is true for all sequences $(x_n)$. Consequently, $g$ is continuous at $c = 0$.
+
+(c) Define 
+
+$$
+h(x) = \begin{cases}
+x &\text{ if } x \in \\{\frac{1}{n}:n\in\mathbf{N}\\}\\\\
+0 &\text{ otherwise }
+\end{cases}
+$$
+
+**Pointwise convergence.**
+
+Pick an arbitrary $\epsilon > 0$. By the Archimedean property, there exists $N > 0$ such that $\frac{1}{N} < \epsilon$. 
+
+
+Let $x \in \\{\frac{1}{n}:n \in \mathbf{N} \\}$.
+
+Pick $M > \max \\{N+1, \frac{1}{x}\\}$. Then, the distance $|h_m(x) - h(x)|=|x - x| = 0 <\epsilon$ for all $m \geq M$ and $x \in (0,\infty)$. Consequently, $(h_m)$ converges to $h$ pointwise.
+
+**Uniform convergence.**
+
+Pick $\epsilon_0 = \frac{1}{2}$. If $M = 1$, pick $x_0 = 1/2$, we have $|h_2(1/2) - h(1/2)| = 1 - \frac{1}{2} \geq \frac{1}{2}$. If $M \geq 2$, pick $x_0 = \frac{1}{M}$, for all $M \in \mathbf{N}$. Then, $|h_M(x_0) - h(x_0)|=1 - \frac{1}{M} \geq \frac{1}{2} = \epsilon_0$.
+
+Consequently, $(h_m)$ does not converge uniformly to $h$.
+
+**Continuity of $(h_n)$.**
+
+$h_n$ is continuous at $c = 0$. 
+
+**Continuity of $h$.**
+
+$h$ is continuous at $c = 0$.
