@@ -214,4 +214,96 @@ Examples 6.2.2. (ii) and (iii) are our first indication that there is some diffi
 
 ### Continuity of the Limit Function.
 
-With example 6.2.2 (ii) firmly in mind, we begin this discussion with a doomed attempt to prove that the pointwise limit of continuous functions is continuous. Upon discovering the problem in the argument, we will be in a better position to understand the need for a stronger notion 
+With example 6.2.2 (ii) firmly in mind, we begin this discussion with a doomed attempt to prove that the pointwise limit of continuous functions is continuous. Upon discovering the problem in the argument, we will be in a better position to understand the need for a stronger notion of convergence for sequences of functions.
+
+Assume that $(f_n)$ is a sequence of continuous functions on a set $A \subseteq \mathbf{R}$, and assume $(f_n)$ converges pointwise to a limit $f$. To argue that $f$ is continuous, fix a point $c \in A$, and let $\epsilon > 0$. To argue that $f$ is continuous, fix a point $c \in A$, and let $\epsilon > 0$. We need to find a $\delta > 0$ such that
+
+$$
+|x - c| < \delta \implies |f(x) - f(c)| < \epsilon
+$$
+
+By the triangle inequality,
+
+$$
+\begin{align\*}
+|f(x) - f(c)| &= |f(x) - f_n(x) + f_n(x) - f_n(c) + f_n(c) - f(c)|\\\\
+&\leq |f(x) - f_n(x)| + |f_n(x) - f_n(c)| + |f_n(c) - f(c)|
+\end{align\*}
+$$
+
+Our first, optimistic impression is that each term in the sum of the right-hand side can be made small - the first and third by the fact that $f_n \to f$, and the middle term by the continuity of $f_n$. In order to use the continuity of $f_n$, we must first establish which particular $f_n$ we are talking about. Our first, optimistic impression is that each term in the sum on the right-hand can be small - the first and third by the fact that $f_n \to f$, and the middle term by the continuity of $f_n$. In order to use the continuity of $f_n$, we must first establish which particular $f_n$ we are talking about. Because $c \in A$ is fixed, there exists $N(\epsilon/3,c)$ such that 
+
+$$
+|f_N(x) - f_N(c) < \frac{\epsilon}{3}
+$$
+
+for all $x$ satisfying $|x-c|<\delta$.
+
+Not that $N$ is chosen, the continuity of $f_N$ at $c$ implies that there exists $\delta(N,\epsilon/3) > 0$ such that
+
+$$
+|f_N(x) - f_N(c)|< \frac{\epsilon}{3}
+$$
+
+for all $x$ satisfying $|x - c| < \delta$.
+
+But, here is the problem. We also need 
+$$
+|f_N(x) - f(x)| < \frac{\epsilon}{3}
+$$
+
+That is, for an arbitrary point $x$, it might very well be the case that, $f_{P} - f(x)<\epsilon/3$, where $P > N$. More, to the point, the variable $x$ is not fixed the way $c$ is in this discussion but represents any point in the interval $(c-\delta,c+\delta)$. Pointwise convergence implies that we can make $|f_n(x) - f(x)| < \epsilon/3$ for large enough values of $n$, but *the value of $n$ depends on the point $x$*. It is possible that different values of $x$ will result in the need for different - larger - choices of $n$. So, the set 
+
+$$\\{N \in \mathbf{N}:|f_N(x) - f(x)|<\epsilon \text{ for all }x \in V_{\epsilon/3}(c)\\}$$
+
+can be an unbounded set. 
+
+### Uniform Convergence.
+
+To resolve this dilemma, we define a new, stronger notion of convergence of functions. 
+
+---
+**Definition. (Uniform Convergence).** Let $(f_n)$ be a sequence of functions defined on a set $A \subseteq \mathbf{R}$. Then, $(f_n)$ *converges uniformly* on $A$ to a limit function $f$ defined on $A$ if and only if, for all $\epsilon > 0$, there exists $N = N(\epsilon)$, such that $|f_n(x) - f(x)|<\epsilon$ for all $n \geq N$ and $x \in A$. Mathematically,
+
+$$: (\forall \epsilon >0), (\exists N(\epsilon) \in \mathbf{N}) : |f_n(x) - f(x)|<\epsilon, \forall x \in A, \forall n \geq N$$
+
+---
+
+To emphasize the difference between uniform convergence and pointwise convergence, we restate the definition of pointwise convergence being more explicit about the relationship between $\epsilon$, $N$ and $x$. In particular, notice where the domain point $x$ is referenced in each definition and consequently how the choice of $N$ then does or does not depend on this value.
+
+---
+**Definition (Pointwise Convergence).** Let $f_n$ be a sequence of functions defined on a set $A \subseteq \mathbf{R}$. Then, $(f_n)$ *converges  pointwise* on $A$ to a limit $f$ defined on $A$ if, for every $\epsilon > 0$ and for all $x \in A$, there exists $N=N(\epsilon,x)$ such that $|f_n(x) - f(x)| < \epsilon$ for all $n \geq N$. Mathematically,
+
+$$: (\forall \epsilon >0), (\forall x \in A), (\exists N(\epsilon, x) \in \mathbf{N}) : |f_n(x) - f(x)|<\epsilon, \forall n \geq N$$
+
+---
+
+The use of the adverb *uniformly* here should be reminiscient of its use in the phrase uniformly continuous from Chapter 4. In both cases, the term uniformly is employed to express the fact that the response $\delta$ or $N$ to a prescribed $\epsilon$ can be chosen to work simultaneously for all values of $x$ in the relevant domain.
+
+**Example.** (i) Let 
+
+$$
+g_n(x) = \frac{1}{n(1+x^2)}
+$$
+
+For any fixed $x \in \mathbf{R}$, we can see that $\lim g_n(x) = 0$ is the pointwise limit of the sequence $(g_n)$ on $\mathbf{R}$. Is this convergence uniform? The observation that,
+
+$$
+\frac{1}{1 + x^2} \leq 1
+$$
+
+for all $x \in \mathbf{R}$ implies that
+
+$$
+|g_n(x) - g(x)| = \left|\frac{1}{n(1+x^2)} - 0\right| \leq \frac{1}{n}
+$$
+
+Thus, given $\epsilon > 0$, we can choose $N > 1/\epsilon$ (which does not depend on $x$), and it follows that 
+
+$$
+n \geq N \quad \text{ implies } \quad |g_n(x) - g(x)| < \epsilon
+$$
+
+for all $x \in \mathbf{R}$. By definition, $g_n \to 0$ uniformly on $\mathbf{R}$.
+
+(ii) Look back at example 6.2.2 (i), where we saw that $f_n(x) = (x^2 + nx)/n$ converges pointwise on $\mathbf{R}$ to $f(x) = x$. On 
