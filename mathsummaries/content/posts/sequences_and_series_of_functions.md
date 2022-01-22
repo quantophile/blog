@@ -452,6 +452,83 @@ It follows that, $(f_n)$ converges to $f$ uniformly.
 2. [Abbott 6.2.2] (a) Define a sequence of functions on $\mathbf{R}$ by,
 
 $$
+f_n(x) = \begin{cases}
+1 &\text{ if } x = 1,\frac{1}{2},\frac{1}{3},\ldots,\frac{1}{n}\\\\
+0 &\text{ otherwise }
+\end{cases}
 $$
 
+and let $f$ be the pointwise limit of $f_n$. Is each $f_n$ continuous at zero? Does $f_n \to f$ uniformly on $\mathbf{R}$? Is $f$ continuous at zero?
+
+(b) Repeat this exercise using the sequence of functions 
+
+$$
+g_n(x) = \begin{cases}
+x \quad \text{ if } x = 1,\frac{1}{2}, \frac{1}{3}, \ldots,\frac{1}{n}\\\\
+0 \quad \text{ otherwise }
+\end{cases}
+$$
+
+(c) Repeat the exercise once more with the sequence
+
+$$
+h_n(x) = \begin{cases}
+1 \quad \text{ if } x = \frac{1}{n} \\\\
+x \quad \text{ if } x = 1, \frac{1}{2},\frac{1}{3},\ldots,\frac{1}{n-1} \\\\
+0 \quad \text{ otherwise }
+\end{cases}
+$$
+
+In each case, explain how the results are consistent with the content of the Continuous Limit Theorem.
+
 ---
+
+*Proof*. 
+
+(a) 
+
+Define 
+
+$$
+f(x) = \begin{cases}
+1 &\text{ if } x \in \\{\frac{1}{n}:n \in \mathbf{N}\\} \\\\
+0 &\text{ otherwise }
+\end{cases}
+$$
+
+**Pointwise convergence.**
+
+We show that, $(f_n)$ converges to $f$ pointwise for all $x$.
+
+Let $x \in \\{ \frac{1}{n}:n\in\mathbf{N}\\}$.
+
+Pick an arbitrary $\epsilon > 0$. By the Archimedean property, there exists an $N \in \mathbf{N}$ such that $\frac{1}{N} < \epsilon$.
+
+If we choose $M > N + 1$, then $\frac{1}{M} < \frac{1}{N+1} < \epsilon$. The distance
+
+$$
+|f_m(x) - f(x)| = |1 - 1| = 0 < \epsilon
+$$
+
+for all $m \geq M$ and $x \in \\{ \frac{1}{n}:n\in\mathbf{N}\\}$. Moreover, if $x$ does not belong to this set, then $|f_m(x) - f(x)| = |0 - 0| < \epsilon$. 
+
+**Uniform convergence.**
+
+$(f_n)$ does not converge uniformly to $f$. Carefully, negating the definition of uniform convergence, we have,
+
+---
+**Absence of uniform convergence.** Let $(f_n)$ be a sequence of functions defined on a set $A\subseteq \mathbf{R}$. Then, $(f_n)$ fails to converge uniformly on $A$ to $f$, if, there exists $\epsilon_0 > 0$, for all $N$, such that $|f_n(x) - f(x)| \geq \epsilon_0$ for atleast one $n \geq N$ and some $x \in A$.
+
+---
+
+Pick $\epsilon_0 = \frac{1}{2}$ and $x_0 \in \\{\frac{1}{n}:n \in \mathbf{N}, n > N\\}$. Then, $|f_N(x_0) - f(x_0)| = |0 - 1| = 1 > \frac{1}{2} = \epsilon_0$. 
+
+**Continuity of $f_n$.**
+
+$f_M$ is continuous at $c = 0$. Pick an arbitrary $\epsilon > 0$. By the Archimedean property, there exists a natural number $N \in\mathbf{N}$ such that, $N < \frac{1}{\epsilon}$. We are interested to make the distance $|f_M(x) - f_M(0)| < \frac{1}{N}$. Pick $\delta = \min \\{\frac{1}{2M},\frac{1}{2N}\\}$. Then, for all $x \in (-\delta,\delta)$, it follows that $|f_M(x) - f_M(0)| = |0 - 0| = 0 <\epsilon$.
+
+**Continuity of $f$.**
+
+$f$ is not continuous at $c = 0$. Consider the sequence $(x_n)$ defined by $x_n:= \frac{1}{n}$. We have, $(x_n) \to 0$. But, $f(x_n)$ is the sequence $(1,1,1,\ldots)$, which converges to $1$, whilst $f(0)= 0$. So, $f$ fails to be continuous at $c=0$.
+
+(b) 
