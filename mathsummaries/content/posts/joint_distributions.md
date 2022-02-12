@@ -1,6 +1,7 @@
 ---
 title: Joint Distributions
 date: 2022-02-11T11:36:50+01:00
+math: true
 tags: ["probability", "joint-distributions", "multi-variate-gaussian"]
 categories: ["Stochastic Calculus"]
 ---
