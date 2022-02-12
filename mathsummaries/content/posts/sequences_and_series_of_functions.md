@@ -611,3 +611,25 @@ $h_n$ is continuous at $c = 0$.
 **Continuity of $h$.**
 
 $h$ is continuous at $c = 0$.
+
+---
+3. [Abbott 6.2.3] For each $n \in \mathbf{N}$ and $x \in [0,\infty)$, let 
+
+$$
+g_n(x) = \frac{x}{1 + x^n} \quad \text{ and } \quad h_n(x) = \begin{cases}
+1 & \text{ if } x \geq 1/n \\\\
+nx & \text{ if } 0 \leq x < 1/n 
+\end{cases}
+$$
+
+Answer the following questions for the sequences $(g_n)$ and $(h_n)$:
+
+(a) Find the pointwise limit on $[0,\infty)$.
+
+(b) Explain how we know that the convergence *cannot* be uniform on $[0,\infty)$.
+
+(c) Choose a smaller set over which the convergence is uniform and supply an argument to show that this is indeed the case.
+
+---
+
+*Proof.*
