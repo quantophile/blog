@@ -1,5 +1,5 @@
 ---
-title: "Basic Notions of Probability"
+title: Basic Notions of Probability
 date: 2022-02-11T21:22:12+01:00
 tags: ["probability", "random-variables", "law-of-large-numbers"]
 categories: ["Stochastic Calculus"]
