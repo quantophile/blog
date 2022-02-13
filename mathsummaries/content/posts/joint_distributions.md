@@ -210,3 +210,52 @@ We'll do one more example of discrete joint distribution to round out this secti
 
 *Solution:*
 
+We seek the joint PMF $P(X = x_j,Y = y_k)$ for non-negative integers $x_j$, $y_k$. Conditional on the total number of eggs $N$, the eggs are independent Bernoulli trials with probability of success $p$, so by the story of the binomial and further $X$ and $Y$ are conditionally dependent, because $Y = N - X$. Thus, we can write:
+
+\begin{align\*}
+f_{X,Y}(x_j,y_k) &= P(X = x_j, Y = y_k)\\\\
+&= P(X = x_j, Y = y_k, N = x_j + y_k)\\\\
+&= P(X = x_j, Y = y_k | N = x_j + y_k) \cdot P(N = x_j + y_k)\\\\
+&= {x_j + y_k \choose x_j}p^{x_j}q^{y_k} \cdot e^{-\lambda} \frac{\lambda^{(x_j + y_k)}}{(x_j + y_k)!}\\\\
+&= \frac{(x_j + y_k)!}{x_j! y_k!}p^{x_j}q^{y_k} \cdot e^{-\lambda(p+q)} \frac{\lambda^{(x_j + y_k)}}{(x_j + y_k)!}\\\\
+&= e^{-\lambda p} \frac{(\lambda p)^{x_j}}{x_j!} \cdot e^{-\lambda q} \frac{(\lambda q)^{y_k}}{y_k!}
+\end{align\*}
+
+The joint PMF factors into the product of the $Poisson(\lambda p)$ PMF (as a function of $x$) and the $Poisson(\lambda q)$ PMF (as a function of $y$). This tells us two elegant facts: (1) $X$ and $Y$ are independent, since their joint PMF is the product of their marginal PMFs, and (2) $X \sim Poisson(\lambda p)$ and $Y \sim Poisson(\lambda q)$. 
+
+At first it may seem deeply counterintuitive that $X$ is unconditionally independent of $Y$. Doesn't knowing that a lot of eggs hatched mean that there are probably not so many that didn't hatch? For a *fixed* number of eggs, this independence would be impossible: knowing the number of hatched eggs would perfectly determine the number of unhatched eggs. But, in this example, the number of eggs is random, following a Poisson distribution. Without any advanced knowledge of the total number of eggs, the number of eggs reveals no additional information about the number of unhatched ones.
+
+The chicken-egg story supplements the following result:
+
+---
+**Theorem.** If $X \sim Poisson(\lambda p)$, $Y \sim Poisson(\lambda q)$, and $X$ and $Y$ are independent, then $N = X + Y \sim Poisson (\lambda)$ and $X|N = n \sim Binomial(n,p)$.
+
+---
+
+*Proof.* 
+
+Let $X \sim Poisson(\lambda p)$ and $Y \sim Poisson(\lambda q)$ be independent random variables. Let $N = X + Y$. We have:
+
+\begin{align\*}
+P(N = n) &= P(X + Y = n) \\\\
+&= \sum_{x} P(X = x, Y = n - x) \quad \\{ \text{Law of total probability}\\}\\\\
+&= \sum_{x} P(Y = n - x | X = x) P(X = x) \\\\
+&= \sum_{x} P(Y = n - x ) \cdot P(X = x) \quad \\{ X \text{ is independent of } Y\\} \\\\
+&= \sum_{x} e^{-\lambda q} \frac{(\lambda q)^{n-x}}{(n - x)!} \cdot e^{-\lambda p} \frac{(\lambda p)^x}{x!}\\\\
+&= e^{-\lambda} \frac{\lambda^n}{n!} \sum_{x} \frac{n!}{(n-x)!x!} p^x q^{n - x} \\\\
+&= e^{-\lambda} \frac{\lambda^n}{n!} \sum_{x} {n \choose x} p^x q^{n - x} \\\\
+&= e^{-\lambda} \frac{\lambda^n}{n!} (p + q)^n \\\\
+&= e^{-\lambda} \frac{\lambda^n}{n!}
+\end{align\*}
+
+Thus, $N \sim Poisson (\lambda)$.
+
+Further, we wish to prove that the conditional on $N = n$, $X$ is a binomial random variable. We have:
+
+\begin{align\*}
+f_{X|N = n}(x) &= P(X = x|N = n) \\\\
+&= 
+\end{align\*}
+
+
+
