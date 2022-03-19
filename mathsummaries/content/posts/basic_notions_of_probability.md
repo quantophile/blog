@@ -158,11 +158,11 @@ How can we construct a random variable on $\Omega$? If we have a good descriptio
 
 In words, $\mathbf{1}_A(\omega) = 1$, if the event $A$ occurs, that is, the outcome $\omega \in A$, and $\mathbf{1}_A(\omega) = 0$ if the event $A$ does not occur, that is the outcome $\omega \notin A$.
 
-More generally, if $X$ is a random variable on the probability space $(\Omega, \mathcal{F},\mathbf{P})$, then any reasonable function $X$ is also a random variable. For example, if $g:\mathbb{R} \to \mathbb{R}$ is a continuous function (like $g(x) = x^2$ for example), then the composition $g(X)$ is also a random variable. Clearly, there are many different random variables that can be defined on a given sample space. 
+More generally, if $X$ is a random variable on the probability space $(\Omega, \mathcal{F},\mathbf{P})$, then any reasonable function $g(X)$ is also a random variable. For example, if $g:\mathbb{R} \to \mathbb{R}$ is a continuous function (like $g(x) = x^2$ for example), then the composition $g(X)$ is also a random variable. Clearly, there are many different random variables that can be defined on a given sample space. 
 
 Consider a probability space $(\Omega,\mathcal{F},\mathbf{P})$ modelling some random experiment. It is often difficult to have a precise knowledge of all outcomes of $\Omega$ and of the specific function $X$. If the experiment is elementary, such as a die roll or coin tosses, then there is no problem in enumerating the elements of $\Omega$ and to construct random variable explicitly as we did before. However, in more complex modelling situations such as models of mathematical finance, the sample space might be very large and hard to describe. Furthermore, the detailed relations between the source of randomness and the observed output (for example Dow Jones index at closing on a given day) might be too complex to write down. This is one of the reasons why it often more convenient to study the *distribution of a random variable* rather than to study the random variable as a function on the source of randomness. 
 
-To illustrate the notion of distribution, consider the probability space $(\omega, \mathcal{F},\mathbf{P})$ with $\Omega = \{0,1\} \times \{0,1\}$. All outcomes are equally likely. $\mathcal{F}$ is all the subsets of $\Omega$. Take $X$ to be the random variable equal to the number of $0$s in the outcome. This random variable takes three possible values: $0,1,2$. Th exact value of $X(\omega)$ is random since it depends on the input $\omega$. In fact, it is not hard to check that:
+To illustrate the notion of distribution, consider the probability space $(\Omega, \mathcal{F},\mathbf{P})$ with $\Omega = \\{0,1\\} \times \\{0,1\\}$. All outcomes are equally likely. $\mathcal{F}$ is all the subsets of $\Omega$. Take $X$ to be the random variable equal to the number of $0$s in the outcome. This random variable takes three possible values: $0,1,2$. Th exact value of $X(\omega)$ is random since it depends on the input $\omega$. In fact, it is not hard to check that:
 
 $$\mathbf{P}(\\{\omega:X(\omega) = 0\\}) = 1/4, \quad \mathbf{P}(\\{\omega:X(\omega) = 1\\}) = 1/2, \quad \mathbf{P}(\\{\omega:X(\omega) = 2\\}) = 1/4$$
 
@@ -179,17 +179,17 @@ To lighten the notation, we write the events involving random variables by dropp
 
 $$\rho_X((a,b]) = \mathbf{P}(\\{\omega \in \Omega : X(\omega) \in (a,b]\\}) = \mathbf{P}(X \in (a,b])$$
 
-But always keep in minnd that a probability is evaluated on a subset of the elementary outcomes.
+But always keep in mind that a probability is evaluated on a subset of the elementary outcomes.
 
 We stress that the distribution $\rho_X$ is a probability on subsets of $\mathbb{R}$. 
 
-**Remark.** (A refined definition of a random variable). In the above definition of distribution, how can we be sure that the event $\{\omega \in \Omega : X(\omega) \in (a,b]\}$ is in $\mathcal{F}$, so that the probability is well-defined? In general, we are not! This is why it is necessary to be more precise when building rigorous probability theory. With this in mind, the correct definition of a random variable $X$ is a function $X:\Omega \to \mathbb{R}$ such that for any interval $(a,b] \in \mathbb{R}$, the pre-image $\{\omega \in \Omega:X(\omega) \in ((a,b])\}$ is an event in $\mathcal{F}$. If we consider a function o f$X$, $g(X)$, then we must ensure that events of the form $\{\omega \in \Omega:g(X(\omega)) \in (a,b]\}= \{\omega \in \Omega:X(\omega) \in g^{-1}(a,b]\}$ are in $\mathcal{F}$. This is the case in particular if $g$ is continuous. This is the case in particular, if $g$ is continuous. More generally, a function whose pre-image of intervals $(a,b]$ are reasonable subsets of $\mathbb{R}$ is called *Borel measurable*. In this blog, whenever we write $g(X)$, we will always assume that $g$ is Borel measureable.
+**Remark.** (A refined definition of a random variable). In the above definition of distribution, how can we be sure that the event $\\{\omega \in \Omega : X(\omega) \in (a,b]\\}$ is in $\mathcal{F}$, so that the probability is well-defined? In general, we are not! This is why it is necessary to be more precise when building rigorous probability theory. With this in mind, the correct definition of a random variable $X$ is a function $X:\Omega \to \mathbb{R}$ such that for any interval $(a,b] \in \mathbb{R}$, the pre-image $\\{\omega \in \Omega:X(\omega) \in ((a,b])\\}$ is an event in $\mathcal{F}$. If we consider a function of $X$, $g(X)$, then we must ensure that events of the form $\{\omega \in \Omega:g(X(\omega)) \in (a,b]\}= \{\omega \in \Omega:X(\omega) \in g^{-1}(a,b]\}$ are in $\mathcal{F}$. This is the case in particular if $g$ is continuous. More generally, a function whose pre-image of intervals $(a,b]$ are reasonable subsets of $\mathbb{R}$ is called *Borel measurable*. In this blog, whenever we write $g(X)$, we will always assume that $g$ is Borel measureable.
 
 Note that by the properties of a probability, we have for any interval $(a,b]$ : 
 
 \begin{align\*}
 \mathbf{P}(X \in (a,b]) &= \mathbf{P}(X \in (-\infty,b] \setminus (-\infty,a]) \\\\
-&=\mathbf{P}(X \in (\infty,b]) - \mathbf{P}(X \in (\infty,b]) \quad \\{ \text{ since } (-\infty,a) \subseteq (\infty,b)\\}\\\\
+&=\mathbf{P}(X \in (-\infty,b]) - \mathbf{P}(X \in (-\infty,a]) \quad \\{ \text{ since } (-\infty,a) \subseteq (-\infty,b)\\}\\\\
 &= \mathbf{P}(X \leq b) - \mathbf{P}(X \leq a)
 \end{align\*}
 
@@ -236,3 +236,11 @@ A Bernoulli random varaible takes the value $0$ with probability $1 - p$, and it
 $$\mathbf{P}(X = k) = {n \choose k} p^k (1 - p)^{n-k}, \quad k=0,1,\ldots,n$$
 
 In this case, the CDF is 
+
+\begin{align\*}
+F_X(x) = \begin{cases}
+0 & \text{ if } x < 0 \\\\
+\sum_{j=0}^k {n \choose j} p^j (1-p)^{n-j} & \text{ if } k \leq x < k+1\\\\
+1 & \text{ if } x \geq n
+\end{cases}
+\end{align\*}

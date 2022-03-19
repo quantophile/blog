@@ -330,13 +330,56 @@ Conceptually, this is easy - just integrate over the unwanted variables to get t
 Returning to the case of the joint distribution of two random variables $X$ and $Y$, let's consider how to update our distribution for $Y$ after observing the value of $X$, using the conditional density function.
 
 ---
-**Definition.** For continuous random variables $X$ and $Y$ with the joint density function $f_{X,Y}$, the conditional PDF of $Y$ given $X = x$ is,
+**Definition.** For continuous random variables $X$ and $Y$ with the joint density function $f_{X,Y}$, the conditional density of $Y$ given $X = x$ is,
 
 \begin{align\*}
-f_{Y|X}(y) = \frac{f_{X,Y}(x,y)}{f_X(x)}
+f_{Y|X}(y|x) = \frac{f_{X,Y}(x,y)}{f_X(x)}
 \end{align\*}
+
+---
 
 for all $x$ with $f_X(x) > 0$. This is considered as a function of $y$ for fixed $x$. As a convention, in order to make $f_{Y|X}(x)$ well-defined for all real $x$, let $f_{Y|X}(y) = 0$ for all $x$ with $f_X(x) = 0$.
 
+Note that, we can recover the joint density function $f_{X,Y}$, if we have the conditional density $f_{Y|X}$ and the corresponding marginal $f_X$:
 
+$$
+f_{X,Y}(x,y) = f_{Y|X=x}(y|x) \cdot f_X(x)
+$$
+
+Similarly, we can recover the joint density if we have $f_{X|Y=y}$ and $f_Y$:
+
+$$
+f_{X,Y}(x,y) = f_{X|Y}(x|y) f_Y(y)
+$$
+
+This allows us to develop the continuous versions of the Bayes' rule and LOTP, The continuous versions are analogous to the discrete versions, with probability density functions in place of probabilities and integrals in place of sums.
+
+---
+**Theorem.** (Continuous form of Bayes' rule and LOTP). For continuous random variables $X$ and $Y$, we have the following continuous form of Bayes' rule:
+
+$$
+f_{Y|X}(y|x) = \frac{f_{X|Y}(x|y)f_Y(y)}{f_X(x)}, \quad \text{ for } f_X(x) > 0
+$$
+
+And we have the following continuous form of the law of total probability:
+
+$$
+f_X(x) = \int_{-\infty}^{\infty} f_{X|Y}(x|y) f_Y(y) dy
+$$
+
+---
+
+*Proof*.
+
+By the definition of conditional density functions, we have:
+
+$$
+f_{Y|X}(y|x) f_X(x) = f_{X,Y}(x,y) = f_{X|Y}(x|y) f_Y(y)
+$$
+
+The continuous version of Bayes' rule follows immediately from dividing by $f_X(x)$. The continuous version of LOTP follows immediately from integrating with respect to $y$: 
+
+$$
+f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x,y)dy = \int_{\infty}^{\infty}f_{X|Y}(x|y)f_Y(y)dy
+$$
 
