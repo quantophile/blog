@@ -73,3 +73,109 @@ In both cases (i) and (ii), exists a convergent sequence $(x_n) \to x$, with $(x
 
 $\Longleftarrow$ direction.
 
+We proceed by contradiction. We are given that, for all non-empty disjoint sets $A$, $B$, satisfying $E = A \cup B$, there exists a convergent sequence $(x_n) \to x$, with $(x_n)$ contained in one of the sets, and $x$ in the other set.
+
+Assume that $E$ is disconnected. By definition, there exists a partition $C|D$ of $E$, such that both $cl(C) \cap D = \emptyset$ and $C \cap cl(D) = \emptyset$. 
+
+Since $C|D$ is a valid partition of $E$, there exists a convergent sequence $(x_n)\to x$, such that $(x_n)$ is contained in one of $C$, $D$, whilst $x$ is contained in the other.
+
+Thus, atleast one of $cl(C) \cap D$ and $C \cap cl(D)$ is non-empty.
+
+But, this is a contradiction. Our initial assumption must be false. $E$ is a connected set. 
+
+The concept of connectedness is more relevant when working with subsets of the plane and other higher dimensional spaces. This is because in $\mathbf{R}$, the connected sets coincide precisely with the collection of intervals (with the understanding that unbounded intervals $(-\infty,3)$ and $(0,\infty)$ are inclded.
+
+---
+**Theorem.** (Characterization of connected sets) A set $E \subseteq \mathbf{R}$ is connected if and only if whenever $a < c < b$ with $a,b \in E$, it follows that $c \in E$.
+
+---
+
+***Proof.***
+
+$\Longrightarrow$ direction.
+
+We are given that $E$ is connected. We proceed by contradiction. Assume that, if whenever $a,b \in E$, with $a < c < b$, then $c \notin E$.
+
+Let $A = E \cap (-\infty,c)$ and $B = E \cap (c,\infty)$. Clearly, $A,B$ are non-empty disjoint subsets of $E$ satisfying $E = A \cup B$, so $A | B$ is a partition of $E$.
+
+Any limit point of $A$ lies in $(-\infty,c]$ by the order limit theorem, so $cl(A) \cap B = \emptyset$. By similar logic, $A \cap cl(B) = \emptyset$. Thus, we have found a partition $A|B$ of $E$, that is separate. By definition, $E$ is disconnected. This is a contradiction. Our initial assumption must be false.
+
+If whenever $a,b \in E$, with $a < c < b$, then $c \in E$.
+
+$\Longleftarrow$ direction.
+
+We are interested to prove that $E$ is connected. We must show that, for all partitions $A|B$ of $E$, there exists a convergent sequence $(x_n) \to x$, such that $(x_n)$ belongs to one of $A$,$B$, with $x$ belonging to the other set.
+
+Let's take an arbitrary partition of $E$. Let $A$, $B$ be non-empty disjoint sets satisfying $E = A \cup B$. $A|B$ is a partition of $E$. 
+
+Since $A$, $B$ are non-empty, there exists elements $a \in A$ and $b \in B$.
+
+Let $I_1 = [a_1,b_1] = [a,b]$. 
+
+We compute the midpoint of the straight-line joining $a_1$ and $b_1$.
+
+$$m = \frac{a_1 + b_1}{2}$$
+
+Since $a_1 < \frac{a_1 + b_1}{2} < b_1$, with $a_1$, $b_1$ belonging to $E$, it follows that $(a_1+b_1)/2 \in E$. Thus, either $(a_1 + b_1)/2 \in A$ or $(a_1+b_1)/2 \in B$.
+
+If $(a_1+b_1)/2 \in A$, we let $a_2 = (a_1 + b_1)/2$, $b_2 = b_1$, $I_2 = [a_2,b_2]$.
+
+If $(a_1+b_1)/2 \in B$, we let $a_2 = a_1$, $b_2 = (a_1 + b_1)/2$, $I_2 = [a_2,b_2]$.
+
+We can continue this construction indefinitely. Now,
+
+$$I_1 \subseteq I_2 \subseteq I_3 \ldots \subseteq I_n \subseteq I_{n+1} \subseteq \ldots $$
+
+By the nested interval property,
+
+$$\bigcap_{n=1}^{\infty} I_n \neq \emptyset$$
+
+and there exists 
+
+$$x \in \bigcap_{n=1}^{\infty} I_n$$
+
+with $\lim a_n = x$ and $\lim b_n = x$.
+
+Since $a_n \leq x \leq b_n$ and $a_n$, $b_n$ belong to $E$ for all $n \in \mathbf{N}$, it follows that $x \in E$. But, it means, either $x \in A$ or $x \in B$. 
+
+If $x \in A$, then from the fact that $\lim b_n = x$, we have a convergent sequence $(x_n)$ in $B$, and it's limit point $x$ in $A$.
+
+If $x \in B$, then from the fact that $\lim a_n = x$, we have a convergent sequence $(x_n)$ in $A$, and it's limit point $x$ in $B$.
+
+As $A|B$ was an arbitrary partition of $E$ to begin with, this holds true for all partitions of $E$. 
+
+Consequently, $E$ is connected.
+
+---
+[Abbott 3.4.5] Let $A$ and $B$ be non-empty subsets of $\mathbf{R}$. Show that if there exist disjoint open sets $U$ and $V$ with $A \subseteq U$ and $B \subseteq V$, then $A$ and $B$ are separated.
+
+---
+
+***Proof.***
+
+If $A$ and $B$ have no limit points, then $cl(A) = A$ and $cl(B) = B$. So, $cl(A) \cap B = \emptyset$ and $A \cap cl(B) = \emptyset$ and therefore $A$ and $B$ are separated. And we are done.
+
+Let's assume that atleast one of $A$, $B$ has a limit point. 
+
+Suppose $x$ is an arbitrary limit point of $A$. There exists a sequence $(x_n) \subseteq A$, with $x_n \neq x$ for all $n \in \mathbf{N}$, such that $(x_n) \to x$. Since, $A \subseteq U$, it follows that $(x_n) \subseteq U$. So, $x$ is a limit point of $U$.
+
+We are interested to prove that $x \notin V$. For the sake of contradiction, assume that $x \in V$. Since $V$ is an open set, there exists an $\epsilon-$ball around $x$, $V_\epsilon(x)=(x-\epsilon,x+\epsilon)$ that is contained in $V$. Since, $U$ and $V$ are disjoint, $(x - \epsilon,x+\epsilon) \cap U = \emptyset$. Since, $x$ is a limit point of $U$, we must have that, $(x-\epsilon,x+\epsilon)$ intersects $U$ in atleast one point other than $x$. So, $(x - \epsilon,x+\epsilon) \cap U \neq \emptyset$. This is a contradiction. Our initial assumption is false. It follows that $x \notin V$. This implies, $x \notin B$. Since, $x$ was arbitrary, we conclude that $cl(A) \cap B = \emptyset$.
+
+We can similarly argue that if $x$ is an arbitrary limit point of $B$, it does not belong to $A$. 
+
+Consequently, $A$ and $B$ are separated.
+
+---
+**Definition.** (Compactness) A set $K \subseteq \mathbf{R}$ is *compact* if every sequence in $K$ has a subsequence that converges to a limit that is also in $K$.
+
+---
+
+---
+**Theorem.** (Characterization of Compactness) A set $K \subseteq \mathbf{R}$ is compact if and only if it is closed and bounded.
+
+---
+
+***Proof.***
+
+
+
