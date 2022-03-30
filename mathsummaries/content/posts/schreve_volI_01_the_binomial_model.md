@@ -7,18 +7,37 @@ date: 2022-01-19T13:01:03+01:00
 ---
 
 
-## Model Description.
+## One-Period Binomial Model.
 
-Running time is denoted by the letter $t$, and by definition we have two points in time, $t=0$ and $t=1$. In the model, we have two assets: a **bond** and a **stock**. At time $t$, the bond is denoted by $B_t$ and the price of one share of stock is denoted by $S_t$. Thus, we have two price processes $B$ and $S$.
+The *binomial asset pricing* model provides a powerful tool to understand *arbitrage pricing theory* and probability. In this post, we introduce this tool for the first purpose. In this section we consider the simplest binomial model, the one with only one period.  This is generalized to the more realistic multiperiod binomial model in the next section.
 
-The bond price process is deterministic and given by,
+For the general one-period model, we call the beginning of period *time zero* and the dned of the period *time one*. At time zero, we have a stock who price per share we denote by $S_0$, a positive quantity known at time zero. At time one, the price per share of this stock will be one of two positive values, which we denote $S_1(H)$ and $S_1(T)$, the $H$ and $T$ standing for head and tail respectively. Thus, we are imagining that a coin is tossed, and the outcome of the coin toss determines th eprice at time one. We dnot assume this coin is fair (i.e. the probability of head need not be one-half). We assume only that the probability of head, which we call $p$, is positive, and the probability of tail, which is $q = 1 - p$, is also positive.
 
 $$
 \begin{align\*}
-    B_0 &= 1\\\\
-    B_1 &= B_0(1+r)
+    S_1 = \begin{cases}
+	S_1(H) & \text{ if the coin lands heads }\\\\
+	S_1(T) & \text{ if the coin lands tails }
+	\end{cases}
 \end{align\*}
 $$
+
+The outcome of the coin toss, and hence the value which the stock price will take at time one is known at time one, but not at time zero. We shall refer to any quantity not known at time zero as *random* because it depends upon the random experiment of tossing a coin. 
+
+We introduce the two positive numbers 
+
+$$u = \frac{S_1(H)}{S_0}, \quad d = \frac{S_(T)}{S_0}$$
+
+We assume that $d < u$: if we instead had $d > u$, we may achieve $d < u$ by relabeling the sides of our coin. If $d = u$, the stock price at time one is not really random and the model is uninteresting. We refer to $u$ as the *up factor* and $d$ as the *down factor*. It is intuitively helpful to think of $u$ as greater than one and to think of $d$ as less than one, and hence the names *up factor* and *down factor*, but the mathematics we develop here does not require that these inequalities hold. 
+
+We also introduce an interest rate $r$. One dollar invested in the money market at time zero will yield $(1+r)$ dollars at time one. Conversely, one dollar borrowed from the money market at time zero will result in a debt of $(1+r)$ at time one. In particular, the interest rate for borrowing is the same as the interest rate for investing. It is almost always true that $r \geq 0$ and this is the case to keep in mind. 
+
+An essential feature to keep in mind is that if a trading strategy turns nothing into something, then it must also run the risk of loss. Otherwise, there would be an *arbitrage*. Risk is proportional to the reward. More specifically, we define *arbitrage* as a trading strategy that beings with no money, has a zero probability of losing money, and has a strictly positive probability of making money. A mathematical model that admits arbitrage cannot be used for analysis. Wealth can be generated from nothing in such a model, and the questions one would want tht emodel to illuminate are provided by paradoxical answers by the model. Real markets sometimes exhibit arbtrage, but this is necessarily fleeting; as soon as someone discovers it, trading takes place that removes it.
+
+In the one-period binomial model, to rule out arbitrage we must assume 
+
+$$0 < d < 1 + r < u$$
+
 
 The constant $r$ is the spot rate for the period, we can also interpret the existence of the bond as the existence of a bank with $r$ as its rate of interest. The stock price process is a stochastic process, and its dynamical behavior can be described as follows:
 
