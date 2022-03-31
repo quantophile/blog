@@ -22,6 +22,58 @@ We begin by reviewing a few basic results in analysis.
 
 ## Review of basic Real Analysis.
 
+---
+**Definition.** (Compactness) A set $K \subseteq \mathbf{R}$ is *compact* if every sequence in $K$ has a subsequence that converges to a limit that is also in $K$.
+
+---
+
+---
+**Theorem.** (Characterization of Compactness) A set $K \subseteq \mathbf{R}$ is compact if and only if it is closed and bounded.
+
+---
+
+***Proof.***
+
+$\Longrightarrow$ direction.
+
+We are given that $K$ is compact. We first prove the boundedness of $K$. We proceed by contradiction. Assume that $K$ is not bounded. Then, for all $n \in \mathbf{N}$, there exists $x \in K$, such that $|x|> n$. Pick $x_1 \in K$, such that $|x_1| > 1$. Pick $x_2 \in K$, such that $|x_2| > 2$. In general, we pick $|x_n| > n$ for all $n \in \mathbf{N}$. $(x_n)$ is unbounded. Every subsequence of $(x_n)$ increases without bounds.
+
+By definition of compact sets, every sequence in $K$ has a subsequence that converges to a limit that is also in $K$. Consequently, $(x_n)$ has a subsequence $(x_{n_k})$ such that $\lim x_{n_k}$ exists. Convergent sequences are bounded. This is a contradiction. Hence, our initial assumption is false. $K$ is bounded.
+
+Our claim is that $K$ is closed.
+
+Let $x$ be an arbitrary limit point of $K$. We are intereted to prove that $x \in K$. 
+
+Since, $x$ is a limit point of $K$, there exists an sequence $(x_n) \in K$, with $x_n \neq x$ for all $n \in\mathbf{N}$, such that $\lim x_n = x$.
+
+Since $K$ is compact, every sequence in $K$, has atleast one subsequence that converges to a limit that is also in $K$. Consequently, $(x_n)$ has a subsequence $(x_{n_m})$ such that $\lim x_{n_m} \in K$. But, $\lim x_{n_m} = \lim x_n = x$. Consequently, $x \in K$. Since, $x$ was arbitrary, this is true for all limit points of $K$. Therefore, $K$ is closed.
+
+$\Longleftarrow$ direction.
+
+We are given that $K$ is closed and bounded. We are interested to prove that $K$ is compact.
+
+Let $(x_n)$ be an arbitrary sequence in $K$. Since, $(x_n)$ is a bounded sequence, by the Bolzanno Weierstrass theorem, there exists atleast one convergent subsequence $(x_{n_m})$ of $(x_n)$. Since, $K$ is closed, $\lim x_{n_m} \in K$. As $(x_n)$ was arbitrary to begin with, this holds for all sequences in $K$. Every sequence has atleast one subsequence that converges to a limit also in $K$. Therefore, $K$ is compact.
+
+---
+**Theorem.** (Nested Compact Set property).
+
+If 
+
+$$K_1 \supseteq K_2 \supseteq K_3 \supseteq K_4 \ldots$$
+
+is a nested sequence of non-empty compact sets, then the intersection 
+
+$$\bigcap_{n=1}^{\infty}K_n$$
+
+is non-empty.
+
+---
+
+***Proof.***
+
+
+
+
 **Connected Sets.** Although the two open sets $(1,2)$ and $(2,5)$ have the limit point $x=2$, in common, there is still some space between them in the sense that no limit point of one of these intervals is actually contained in the other. Said another way, the closure of $(1,2)$ is disjoint from $(2,5)$, and the closure of $(2,5)$ does not intersect $(1,2)$. Notice that this same observation cannot be made about $(1,2]$ and $(2,5)$, even though these latter sets are disjoint.
 
 ---
@@ -164,18 +216,6 @@ We are interested to prove that $x \notin V$. For the sake of contradiction, ass
 We can similarly argue that if $x$ is an arbitrary limit point of $B$, it does not belong to $A$. 
 
 Consequently, $A$ and $B$ are separated.
-
----
-**Definition.** (Compactness) A set $K \subseteq \mathbf{R}$ is *compact* if every sequence in $K$ has a subsequence that converges to a limit that is also in $K$.
-
----
-
----
-**Theorem.** (Characterization of Compactness) A set $K \subseteq \mathbf{R}$ is compact if and only if it is closed and bounded.
-
----
-
-***Proof.***
 
 
 
