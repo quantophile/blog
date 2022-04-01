@@ -244,3 +244,5 @@ F_X(x) = \begin{cases}
 1 & \text{ if } x \geq n
 \end{cases}
 \end{align\*}
+
+(iii) *Poisson distribution.* A random variable $X$ has Poisson distribution with 

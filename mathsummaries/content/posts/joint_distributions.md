@@ -383,3 +383,12 @@ $$
 f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x,y)dy = \int_{\infty}^{\infty}f_{X|Y}(x|y)f_Y(y)dy
 $$
 
+We now have the versions of the Bayes' rule and LOTP for two discrete random variables and for two continuous random variables. Better yet, there are also versions when we have one discrete random variable and one continuous random variable. After understanding the discrete versions, it is easy to remember and use the other versions since they are analogous, replacing probabilities by density functions. 
+
+---
+**Definition.** (Independence of continuous random variables). Random variables $X$ and $Y$ are independent if for all $x$ and $y$,
+
+$$
+F_{X,Y}(x,y) = F_X(x) \cdot F_Y(y)
+$$
+

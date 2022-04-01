@@ -471,7 +471,7 @@ First of all we have seen that in a complete market, like the binomial model abo
 
 Secondly, we see that the structural reason for the completeness of the binomial market model is the fact that we have two financial instruments at our disposal (the bond and the stock) in order to solve the two equations (one for each possible outcome in the sample space). This fact can be generalized. A model is complete (in the generic case) if the number of underlying assets (including the bank account) equals the number of outcomes in the sample space.
 
-If we would like to make a more realistic multiperiod model of the stock market, then the last remark above seems discouraging. If we make a (non-recombining) tree with $20$ time steps this means that we have $2^20 \approx 10^6$ elementary outcomes, and this number far exceeds by a large margin the number of assets on the existing stock market. It would therefore seem that it is impossible to construct an interesting complete model with a reasonably large number of time steps. Fortunately, the situation is not at all as bad as that; in a multiperiod model we will also have the possibility of considering intermediary trading i.e. we can allow for portfolios which are rebalanced over time. This will give us many more degrees of freedom. 
+If we would like to make a more realistic multiperiod model of the stock market, then the last remark above seems discouraging. If we make a (non-recombining) tree with $20$ time steps this means that we have $2^{20} \approx 10^6$ elementary outcomes, and this number far exceeds by a large margin the number of assets on the existing stock market. It would therefore seem that it is impossible to construct an interesting complete model with a reasonably large number of time steps. Fortunately, the situation is not at all as bad as that; in a multiperiod model we will also have the possibility of considering intermediary trading i.e. we can allow for portfolios which are rebalanced over time. This will give us many more degrees of freedom. 
 
 ## The Multiperiod Model.
 
@@ -486,4 +486,21 @@ B_{n+1} &= (1+r)B_n\\\\
 B_0 &= 1
 \end{align\*}
 
-The 
+The dynamics of the stock price are given by:
+
+\begin{align\*}
+S_{n+1} &= S_n \cdot Z_n\\\\
+S_0 &= S
+\end{align\*}
+
+where $Z_0,\ldots,Z_{T-1}$ are assumed to i.i.d. (independent and identically distributed) stochastic variables, taking only the two values $u$ and $d$ with probabilities
+
+\begin{align\*}
+P(Z_n = u) &= p_u\\\\
+P(Z_n = d) &= p_d
+\end{align\*}
+
+We can illustrate the stock dynamics by means of a tree as shown in the figure below. Note that the tree is recombining in the sense that an up-move followed by a down-move gives us the same result as a down-move followed by an up-move. We now go on to define the concept of a dynamic portfolio strategy.
+
+![](../../static/binomial_model.png)
+
