@@ -502,5 +502,36 @@ P(Z_n = d) &= p_d
 
 We can illustrate the stock dynamics by means of a tree as shown in the figure below. Note that the tree is recombining in the sense that an up-move followed by a down-move gives us the same result as a down-move followed by an up-move. We now go on to define the concept of a dynamic portfolio strategy.
 
-![](../../static/binomial_model.png)
+![Multiperiod Binomial Model](../../static/binomial_model.png)
+
+---
+**Definition.**  A **portfolio strategy** is a stochastic process 
+
+$$ \\{h_t = (x_t,y_t): t=1,\ldots,T \\}$$
+
+such that $h_t$ is a function of $S_0,S_1,\ldots,S_{t-1}$. For a given portfolio strategy $h$, we set $h_0 = h_1$ by convention. The **value process** corresponding to the portfolio $h$ is defined by
+
+$$V_t^h = x_t(1+r) + y_tS_t$$
+
+---
+
+The interpretation of the formal definition is that $x_t$ is the amount of money which we invest in the bank account at time $t-1$ and keep until time $t$. We interpret $y_t$ as the number of shares that we buy at time $t-1$ and keep until time $t$. We allow the portfolio strategy to be a contingent strategy i.e. the portfolio we buy at time $t$ is allowed to depend on all the information we have collected by observing the evolution of the stock price upto time $t$. We are however not allowed to look into the future. The entity $V_t^h$ above is of course the market value of the portfolio $(x_t,y_t)$ (which has been held since $t-1$) at time $t$.
+
+The portfolios which primarily interest us are **self-financing** portfolios, i.e. portfolioss without exogenous infusion or withdrawal of money. In practical terms, this means that in a self-financing portfolio strategy the accession of a new asset has to be financed through the sale of some other asset. The mathematical definition is as follows:
+
+---
+**Definition.** A portfolio strategy $h$ is said to be **self-financing** if the following condition holds for all $t=0,\ldots,T-1$:
+
+$$x_t(1+r) + y_t S_t = x_{t+1} + y_{t+1}S_t$$
+
+The condition above is simply a budget equation. It says that, at each time $t$, the market value of the old portfolio $(x_t,y_t)$ (which was created at time $t-1$) equals the purchase of the new portolio $(x_{t+1},y_{t+1})$, which is formed at $t$ (and held until $t+1$). 
+
+---
+
+We can now define the multiperiod version of an arbitrage possibility.
+
+---
+**Definition.** An **arbitrage** possibility is a self-financing portfolio $h$ with the properties 
+
+
 
