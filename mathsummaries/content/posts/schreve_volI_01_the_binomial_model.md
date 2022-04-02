@@ -533,5 +533,81 @@ We can now define the multiperiod version of an arbitrage possibility.
 ---
 **Definition.** An **arbitrage** possibility is a self-financing portfolio $h$ with the properties 
 
+\begin{align\*}
+V_0^h &= 0 \\\\
+P(V_T^h \geq 0) &= 1 \\\\
+P(V_T^h > 0 ) &> 0
+\end{align\*}
 
+---
+
+If the model is free of arbitrage then the following conditions necessarily must hold:
+
+$$d \leq (1 + r) \leq u$$
+
+The condition above is in fact also sufficient for the absence of arbitrage, but this fact is a little harder to show, and we will prove it later. 
+
+As in the one period model, we will have use for martingale probabilities which are defined and computed exactly as before.
+
+---
+**Definition.** The martingale probabilities $q_u$ and $q_d$ are defined as the probabilities for which the relation
+
+$$s = \frac{1}{1+r}E^Q[S_{t+1}|S_t = s]$$
+
+holds.
+
+---
+
+---
+**Proposition.** The martingale probabilities are given by
+
+\begin{align\*}
+\begin{cases}
+q_u &= \frac{(1+r)-d}{u - d}\\\\
+q_d &= \frac{u - (1+r)}{u - d}
+\end{cases}
+\end{align\*}
+
+---
+
+### Contingent Claims.
+
+We now give the formal definition of a contingent claim (financial derivative contract) in the model.
+
+---
+**Definition.** A **contingent claim** is a stochastic variable $X$ of the form
+
+$$X = \Phi(S_T)$$
+
+where the **contract function** $\Phi$ is some given real valued function.
+
+---
+
+The interpretation is that the holder of the contract receives the stochastic amount $X$ at time $t = T$. Notice, that we are only considering claims that are simple in the sense that the value of the claim only depends on the value $S_T$ of the stock price at the final time $T$. It is also possible to consider stochastic payoffs which depend on the entire path of the price process during the interval $[0,T]$, but then the theory becomes a little more complicated, and in particular the event tree will become non-recombining. 
+
+Our main problem is that of finding a reasonable price process
+
+$$\\{\Pi_t[X];t = 0,\ldots,T\\}$$
+
+for a given claim $X$, and as in the one period case we attack this problem by means of replicating portfolios.
+
+---
+**Definition.** A given contingent claim $X$ is said to be reachable if there exists a self-financing portfolio $h$ such that:
+
+$$V_T^h = X$$
+
+with probability $1$. In that case, we say that the portfolio $h$ is a **hedging** portfolio or a **replicating** portfolio. If all claims can be replicated, we say that the market is (dynamically) **complete**.
+
+---
+
+Again, we have a natural pricing principle for reachable claims. 
+
+---
+**Pricing Principle 2.** If a claim $X$ is reachable with replicating (self-financing) portfolio $h$, the the only reasonable price process for $X$ is given by:
+
+$$\Pi_t[X] = V_t^h, \quad t=0,1,\ldots,T$$
+
+---
+
+Let us go through the argument in some detail. 
 
