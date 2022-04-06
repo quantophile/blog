@@ -71,8 +71,38 @@ is non-empty.
 
 ***Proof.***
 
+Since $K_1, K_2, \ldots, K_n$ are non-empty, there exists elements $x_1\in K_1$, $x_2 \in K_2$ and in general $x_n \in K_n$. Thus, the sequence $(x_n) \in K_1$. Since, $K_1$ is compact, there exists a subsequence of $K_1$, call it $(x_m)$ that converges to a limit in $x$ in $K_1$. Since, $\\{x_m\\}$ belongs to $K_2$, there exists a subsequence of $(x_m)$ that converges to a limit in $K_2$. But subsequence of a convergent sequence approaches the same limit as the original sequence. So, $\lim_{m \to\infty} (x_m)_{m \geq 2} = x \in K_2$. In a similar fashion, we can prove that $x \in K_n$ for all $n \in \mathbf{N}$.
 
+Thus, the set
 
+$$\bigcap_{n=1}^{\infty}K_n \neq \emptyset$$
+
+This closes the proof.
+
+---
+**Definition.** Let $A \subseteq \mathbf{R}$. An open over for $A$ is a (possibly infinite) collection of open sets $\{O_\lambda: \lambda \in \Lambda\}$ whose union contains the set $A$; that is $A \subseteq \bigcup_{\lambda \in \Lambda}O_{\Lambda}$. Given an open cover for $A$, a *finite subcover* is a finite sub-collection of open sets from the original open cover whose union still manages to completely contain $A$.
+
+---
+
+---
+**Example.** Consider the open interval $(0,1)$. For each point $x\in(0,1)$. let $O_x = (x/2,1)$. Taken together, the infinite collection $\{O_x : x \in (0,1)\}$ forms an open cover for the open interval $(0,1)$. Notice, however, that it is impossible to find a finite subcover. Given any proposed finite subcollection
+
+$$\\{O_{x_1}, O_{x_2}, \ldots, O_{x_n}\\}$$
+
+set $x' = \min \\{x_1,x_2,\ldots,x_n\\}$ and observe that any real number $y$ satisfying $0 < y < x'/2$ is not contained in the union $\bigcup_{i=1}^{n}O_{x_i}$.
+
+Now, consider a similar cover for the closed interval $[0,1]$. For $x \in (0,1)$, the sets $O_x = (x/2,1)$ do a fine job of covering $(0,1)$, but in order to have an open cover of the closed interval $[0,1]$,we must also cover the endpoints. To remedy this, we could fix $\epsilon > 0$, and let $O_0 = (-\epsilon,+\epsilon)$ and $O_1=(1-\epsilon,1+\epsilon)$. Then the colection 
+
+$$\\{O_0,O_1,O_x:x\in(0,1)\\}$$
+
+is an open cover for $[0,1]$. But this time, notice that there is a finite subcover. Because of the addition of the set $O_0$, we can choose $x'$ so that $x'/2 < \epsilon$. It follows that $\\{O_0,O_{x'},O_1\\}$ is a finite subcover for the closed interval $[0,1]$.
+
+---
+
+---
+**Theorem.** (Heine-Borel Theorem)
+
+---
 
 **Connected Sets.** Although the two open sets $(1,2)$ and $(2,5)$ have the limit point $x=2$, in common, there is still some space between them in the sense that no limit point of one of these intervals is actually contained in the other. Said another way, the closure of $(1,2)$ is disjoint from $(2,5)$, and the closure of $(2,5)$ does not intersect $(1,2)$. Notice that this same observation cannot be made about $(1,2]$ and $(2,5)$, even though these latter sets are disjoint.
 
