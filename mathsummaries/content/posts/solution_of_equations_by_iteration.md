@@ -100,13 +100,45 @@ is an open cover for $[0,1]$. But this time, notice that there is a finite subco
 ---
 
 ---
-**Theorem.** (Heine-Borel Theorem)
+**Theorem.** (Heine-Borel Theorem) Let $K$ be a subset of $\mathbf{R}$. All of the following statements are equivalent in the sense that any one of them implies the two others:
+
+(i) $K$ is compact.
+
+(ii) $K$ is closed and bounded.
+
+(iii) Every open cover for $K$ has a finite subcover.
 
 ---
+
+***Proof.***
+
+The equivalence of (i) and (ii) is the content of theorem on the characterization of compactness. What remains is to show that (iii) is equivalent to (i) and (ii). Let's first assume (iii), and prove that it implies (ii) (and thus (i) as well).
+
+$\Longleftarrow$ direction.
+
+To show that $K$ is bounded, we construct an open cover for $K$ by defining $O_x = (x - 1, x + 1)$. Clearly, $\bigcup_{x \in K}O_x$ contains $K$. Every open cover for $K$ has a finite subcover. So, there exists a finite subcover $\\{O_{x_1},\ldots,O_{x_N}\\}$ that covers $K$. Then, we have the following bounds for $K$:
+
+$$\min_{1 \leq n \leq N}\\{x_n\\} - 1 < x \leq \max_{1 < n \leq N}\\{x_n\\} + 1$$
+
+for all $x \in K$.
+
+To show that $K$ is closed, we construct another open cover for $K$ as follows. Let $y$ be a limit point of $K$. We are interested to prove that $y \in K$. Define 
+
+$$O_x = \left(x - \frac{|x-y|}{2},x + \frac{|x-y|}{2}\right)$$
+
+Clearly, $\\{O_x:x \in K\\}$ is an open cover for $K$.
+
+Every open cover for $K$ has a finite subcover that completely contains $K$. So, there exists a finite subcover
+
+$$\\{O_{x_1},\ldots,O_{x_N}\\}$$
+
+that completely contains $K$.
+
 
 **Connected Sets.** Although the two open sets $(1,2)$ and $(2,5)$ have the limit point $x=2$, in common, there is still some space between them in the sense that no limit point of one of these intervals is actually contained in the other. Said another way, the closure of $(1,2)$ is disjoint from $(2,5)$, and the closure of $(2,5)$ does not intersect $(1,2)$. Notice that this same observation cannot be made about $(1,2]$ and $(2,5)$, even though these latter sets are disjoint.
 
 ---
+
 **Definition.** (Connected Sets). Two non-empty sets $A,B \subseteq \mathbf{R}$ are separated if $cl(A) \cap B$ and $A \cap cl(B)$ are both empty. A set $E$ is disconnected, if it can be partitioned into two disjoint sets $E = A \cup B$, where $A$ and $B$ are disconnected. A set that is not disconnected is called a connected set.
 
 ---
