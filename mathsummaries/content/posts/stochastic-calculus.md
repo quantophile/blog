@@ -8,4 +8,4 @@ categories: ["Stochastic Calculus"]
 
 ## Stochastic Calculus.
 
-I have been continuously expanding my [notes](./../stochastic_calculus.pdf) on stochastic calculus. Its a great summary of the most important and basic results in financial mathematics.
+I have been continuously expanding my [notes](./../stochastic_calculus.pdf) on stochastic calculus. Its a summary of the most important and basic results in financial mathematics.
