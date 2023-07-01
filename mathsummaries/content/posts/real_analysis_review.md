@@ -70,20 +70,20 @@ This closes the proof.
 
 ---
 
----
+
 **Example.** Consider the open interval $(0,1)$. For each point $x\in(0,1)$. let $O_x = (x/2,1)$. Taken together, the infinite collection $\{O_x : x \in (0,1)\}$ forms an open cover for the open interval $(0,1)$. Notice, however, that it is impossible to find a finite subcover. Given any proposed finite subcollection
 
 $$\\{O_{x_1}, O_{x_2}, \ldots, O_{x_n}\\}$$
 
 set $x' = \min \\{x_1,x_2,\ldots,x_n\\}$ and observe that any real number $y$ satisfying $0 < y < x'/2$ is not contained in the union $\bigcup_{i=1}^{n}O_{x_i}$.
 
-Now, consider a similar cover for the closed interval $[0,1]$. For $x \in (0,1)$, the sets $O_x = (x/2,1)$ do a fine job of covering $(0,1)$, but in order to have an open cover of the closed interval $[0,1]$,we must also cover the endpoints. To remedy this, we could fix $\epsilon > 0$, and let $O_0 = (-\epsilon,+\epsilon)$ and $O_1=(1-\epsilon,1+\epsilon)$. Then the colection 
+Now, consider a similar cover for the closed interval $[0,1]$. For $x \in (0,1)$, the sets $O_x = (x/2,1)$ do a fine job of covering $(0,1)$, but in order to have an open cover of the closed interval $[0,1]$,we must also cover the endpoints. To remedy this, we could fix $\epsilon > 0$, and let $O_0 = (-\epsilon,+\epsilon)$ and $O_1=(1-\epsilon,1+\epsilon)$. Then the collection 
 
 $$\\{O_0,O_1,O_x:x\in(0,1)\\}$$
 
 is an open cover for $[0,1]$. But this time, notice that there is a finite subcover. Because of the addition of the set $O_0$, we can choose $x'$ so that $x'/2 < \epsilon$. It follows that $\\{O_0,O_{x'},O_1\\}$ is a finite subcover for the closed interval $[0,1]$.
 
----
+
 
 ---
 **Theorem.** (Heine-Borel Theorem) Let $K$ be a subset of $\mathbf{R}$. All of the following statements are equivalent in the sense that any one of them implies the two others:
@@ -108,37 +108,34 @@ $$\min_{1 \leq n \leq N}\\{x_n\\} - 1 < x \leq \max_{1 < n \leq N}\\{x_n\\} + 1$
 
 for all $x \in K$.
 
-To show that $K$ is closed, we construct another open cover for $K$ as follows. Let $y$ be a limit point of $K$. We are interested to prove that $y \in K$. Define 
+To show that $K$ is closed, we proceed by contradiction. Let $y$ be an arbitrary limit point of $K$. There exists a sequence $(y_n) \subseteq K$, such that $\lim y_n = y$. To show that $K$ is closed, we must demonstrate that $y \in K$. We assume that $y \notin K$. 
 
-$$O_x = \left(x - \frac{|x-y|}{2},x + \frac{|x-y|}{2}\right)$$
+Since $y \notin K$, every $x$ is some positive distance away from $K$. We construct an open cover by taking $O_x$ to be an interval of radius $|x-y|/2$ around each point $x \in K$. The resulting open cover must have a finite subcover, so there exists $\\{O_{x_1},\ldots,O_{x_N}\\}$ that covers $K$. 
 
-Clearly, $\\{O_x:x \in K\\}$ is an open cover for $K$.
+The contradiction arises, when we realize that this finite subcover cannot contain all the elements of the sequence $(y_n)$. To make this explicit, set:
 
-Every open cover for $K$ has a finite subcover that completely contains $K$. So, there exists a finite subcover
+$$\epsilon_0 = \min \left\\{\frac{|x_i - y|}{2}:1 \leq i \leq N \right\\}$$
 
-$$\\{O_{x_1},\ldots,O_{x_N}\\}$$
+$\epsilon_0$ is the distance of the point $x_i$, $1\leq i \leq N$, that is closest to $y$. Because $(y_n) \to y$, we can certainly find a term $y_N$ satisfying $|y_N - y| < \epsilon_0$. But such a $y_N$ mus tbe necessarily excluded from $\bigcup_{i=1}^{N}O_{x_i}$. This contradicts the fact that $(y_n) \subseteq K$.
 
-that completely contains $K$.
-
+Hence, our initial assumption is false. $y \in K$, and hence $K$ is closed and bounded. This closes the proof.
 
 **Connected Sets.** Although the two open sets $(1,2)$ and $(2,5)$ have the limit point $x=2$, in common, there is still some space between them in the sense that no limit point of one of these intervals is actually contained in the other. Said another way, the closure of $(1,2)$ is disjoint from $(2,5)$, and the closure of $(2,5)$ does not intersect $(1,2)$. Notice that this same observation cannot be made about $(1,2]$ and $(2,5)$, even though these latter sets are disjoint.
 
 ---
 
-**Definition.** (Connected Sets). Two non-empty sets $A,B \subseteq \mathbf{R}$ are separated if $cl(A) \cap B$ and $A \cap cl(B)$ are both empty. A set $E$ is disconnected, if it can be partitioned into two disjoint sets $E = A \cup B$, where $A$ and $B$ are disconnected. A set that is not disconnected is called a connected set.
+**Definition.** (Connected Sets). Two non-empty sets $A,B \subseteq \mathbf{R}$ are separated if $cl(A) \cap B$ and $A \cap cl(B)$ are both empty. A set $E$ is disconnected, if it can be partitioned into two disjoint sets $E = A \cup B$, where $A$ and $B$ are separated. A set that is not disconnected is called a connected set.
 
 ---
 
 **Example.** 
-(i) If we let $A = (1,2)$ and $B=(2,5)$, then it is not difficult to verify that $E = A \cup B$ is disconnected. Notice that the sets $C=(1,2]$ and $D=(2,5)$ are not separated, because $C \cap cl(D) = \\{2\\}$ is not empty. This should be comforthing. The union $C \cap D$  is equal to the interval $(1,5)$ which better not qualify as a disconnected set. We will prove in a moment that every interval is a connected subset of $\mathbf{R}$ and vice versa.
+(i) If we let $A = (1,2)$ and $B=(2,5)$, then it is not difficult to verify that $E = A \cup B$ is disconnected. Notice that the sets $C=(1,2]$ and $D=(2,5)$ are not separated, because $C \cap cl(D) = \\{2\\}$ is not empty. This should be comforting. The union $C \cup D$  is equal to the interval $(1,5)$ which better not qualify as a disconnected set. We will prove in a moment that every interval is a connected subset of $\mathbf{R}$ and vice versa.
 
 (ii) Let's show that the set of rational numbers is disconnected. If we let 
 
 $$A = \mathbf{Q} \cap (-\infty,\sqrt{2}), \quad B = \mathbf{Q} \cap (\sqrt{2},\infty)$$
 
 then we certainly have $\mathbf{Q} = A \cup B$. $A$ and $B$ are non-empty disjoint sets, therefore they are a valid partition of $\mathbf{Q}$. Any limit point of $A$ must necessaily fall in $(-\infty,\sqrt{2}]$ by the order limit theorem. Because this is disjoint from $B$ , we get $cl(A) \cap B = \emptyset$. We can similarly show that $A \cap cl(B) = \emptyset$. Thus, $\mathbf{Q}$ is disconnected.
-
-The definition of connected set is stated as the negation of disconnected set, but a little care with the logical negation of quantitifiers in the above definition results in a positive characterization of connectedness. Essentially, a set $E$ is connected, no matter, how it is partitioned, it is possible to to show that atleast one of the sets contains a limit point of the other.
 
 ---
 **Theorem.** A set $E \subseteq \mathbf{R}$ is connected if and only if, for all non-empty disjoint sets satisfying $E = A \cup B$, there always exists a convergent sequence $(x_n) \to x$, with $(x_n)$ contained in one of $A$ or $B$, and $x$ an element of the other.
@@ -163,13 +160,13 @@ Since, $A$ and $B$ are disjoint non-empty sets, $A \cap B = \emptyset$. So, $x \
 
 (iii) $x \notin A, x \notin B$.
 
-If $x \in A, x \notin B$, then $x \in A \cap cl(B)$ must be true (The other possibility cannot hold). So, $x$ is a limit point of $B$. $x \in cl(B)$. There exists a convergent sequence $(x_n) \subseteq B$, such that $\lim x_n = x$.
+If $x \in A, x \notin B$, then $x \in A \cap cl(B)$ must be true (The other possibility cannot hold). So, $x$ is a limit point of $B$. $x \in cl(B) \setminus B$. There exists a convergent sequence $(x_n) \subseteq B$, such that $\lim x_n = x$.
 
-If $x \notin A, x \in B$, then $x \in cl(A) \cap B$ must be true. So, $x$ is a limit point of $A$. $x \in cl(A)$. There exists a convergent sequence $(x_n) \subseteq A$, such that $\lim x_n = x$.
+If $x \notin A, x \in B$, then $x \in cl(A) \cap B$ must be true. So, $x$ is a limit point of $A$. $x \in cl(A) \setminus A$. There exists a convergent sequence $(x_n) \subseteq A$, such that $\lim x_n = x$.
 
 The third possibility is rejected, because it would mean that $x$ is neither in $cl(A) \cap B$, nor in $A \cap cl(B)$, which is false.
 
-In both cases (i) and (ii), exists a convergent sequence $(x_n) \to x$, with $(x_n)$ contained in one of $A$ or $B$, and $x$ an element of the other.
+In both cases (i) and (ii), there exists a convergent sequence $(x_n) \to x$, with $(x_n)$ contained in one of $A$ or $B$, and $x$ an element of the other.
 
 $\Longleftarrow$ direction.
 
