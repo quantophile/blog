@@ -10,7 +10,7 @@ categories: ["Real Analysis"]
 
 These are unofficial solutions to the undergrad text, *Understanding Analysis* by Stephen Abbott. I started writing these solutions, when I was self-studying and taking a first course in real analysis, and felt that I might as well give the problems an effort by writing out solutions.
  
-[TeX](./../real-analysis.tex) [PDF](./../real-analysis.pdf)
+[TeX](./../real-analysis.tex) &emsp; [PDF](./../real-analysis.pdf)
 
 ### Why should I read this?
 
