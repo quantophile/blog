@@ -128,7 +128,165 @@ This example shows the **effect of a disturbance in one element** on the sequenc
 
 $$\Delta^k (a^x) = (a^h - 1)^k a^x , \quad \nabla^k (a^x) = (1 - a^{-h})^k $$ 
 
+Solution.
 
+We have:
+
+$$
+\begin{aligned}
+  \Delta^k (a^x) &= \Delta^{k-1}(\Delta a^x)\\\\
+  &= \Delta^{k-1} (a^{x+h} - a^{x}) \\\\
+  &= (a^h - 1) \Delta^{k-1} (a^x)
+\end{aligned}
+$$
+
+Applying the above argument repeatedly, it follows that $\Delta^k (a^x) = (a^h - 1)^k a^x$. 
+
+Similarly,
+
+$$
+\begin{aligned}
+  \nabla^k (a^x) &= \nabla^{k-1}(\nabla a^x)\\\\
+  &= \nabla^{k-1} (a^{x} - a^{x-h}) \\\\
+  &= (1-a^{-h}) \nabla^{k-1} (a^x)
+\end{aligned}
+$$
+
+Applying the above argument repeatedly, it follows that $\nabla^k (a^x) = (1 - a^{-h})^k $. 
+
+**Lemma 2.** (Difference of a product). 
+
+$$\Delta (u_n v_n) = u_n \Delta v_n + \Delta u_n v_{n+1}$$
+
+Solution.
+
+The left hand side can be written as :
+
+$$ \Delta (u_n v_n) = u_{n+1} v_{n+1} - u_n v_n$$
+
+The right hand side can be expressed as:
+
+$$u_n \Delta v_n + \Delta u_n v_{n+1} = u_n (v_{n+1} - v_n) + (u_{n+1} - u_n) v_{n+1} = u_{n+1} v_{n+1} - u_n v_n$$
+
+Hence, the identity holds.
+
+### The Calculus of Operators.
+
+Formal calculations with operators, using the rules of algebra and analysis are often an elegant means of assistance in finding approximation formulas that are exact for all polynomials of degree less than (say) $k$, and they should therefore be useful for functions that can be accurately approximated by such a polynomial. Operator calculations also provide error estimates.
+
+Just a small a digression about terminology. An **operator** is a linear transformation from a space $V$ into another linear space $W$. $V$ can be the space of functions, a coordinate space or a space of sequences. The dimension of these spaces can be finite or infinite. For example, the differential operator $D$ maps the infinite dimensional space $C^1 [a,b]$ of functions with a continuous derivative defined on an interval $[a,b]$ to the space of $C[a,b]$ of continuous functions. 
+
+$\mathcal{P}_n$ denotes the space of polynomials of degree less than $n$. $\mathcal{P}_n$ is an $n$-dimensional linear space for which $\{1,x,x^2,\ldots,x^{n-1}\}$ is a basis, called the *power basis*; the coefficients $(c_1,\ldots,c_n)$ are then the coordinates of the polynomial $p$ defined by $p(x) = \sum{i=1}^n c_i x^{i-1}$. We define the following operators:
+
+$$
+\begin{aligned}
+  E f(x) &= f(x + h)	& \text{Shift operator} \\\\
+  \Delta f(x) &= f(x + h) - f(x) & \text{Forward difference operator } \\\\
+  \nabla f(x) &= f(x) - f(x-h) & \text{Backward difference operator } \\\\
+  Df(x) &= f'(x) & \text{Differentiation operator } \\\\
+  \delta f(x) &= f(x + h/2) - f(x - h/2) & \text{Central difference operator}
+\end{aligned}
+$$
+
+These are all linear operators. They are associative, and they distribute well over addition. In addition, they form a commutative ring. So, their products are commutative. 
+
+Now, we shall go outside of polynomial algebra and consider also the infinite series of operators. The Taylor's series:
+
+$$f(x + h) = f(x) + h f'(x) + \frac{h^2}{2!} f''(x) + \frac{h^3}{3!} f'''(x)+\mathcal{O}(h^4)$$
+
+can be written symbolically as:
+
+$$Ef = \left(1 + hD + \frac{(hd)^2}{2!}+ \frac{(hD)^3}{3!} + \right)f$$
+
+**Theorem.** We have:
+
+$$e^{hD} = E = 1 + \Delta, \quad e^{-hD} = E^{-1} = 1 - \nabla$$
+
+$$2 \sin \frac{hD}{2} = e^{hD/2} - e^{-hD/2}$$
+
+$$(1 + \Delta)^{\theta} = (e^{hD})^{\theta} = e^{\theta hD}, \quad \theta \in \mathbf{R}$$
+
+It is an easy exercise to prove these results.
+
+It follows from the power-series expansion, that,
+
+$$(e^{hD})^\theta f(x) = e^{\theta hD} f(x) = f(x + \theta h)$$
+
+Since, $E = e^{hD}$, it is natural to define:
+
+$$E^{\theta} f(x) = f(x + \theta h)$$
+
+### Adam-Moulton's implicit and Adam-Bashforth's explicit formula.
+
+The above ideas can be used to compute the coefficients of the following relations due to John Adams, which are of great interest in the numerical integration of differential equations of the form $y' = f(t,y)$. 
+
+(a) **Adam-Moulton's implicit formula**:
+
+$$y_{n+1} - y_n = h(a_0 y_{n+1}' + a_1 \nabla y_{n+1}' + a_2 \nabla^2 y_{n+1}' + \ldots )$$
+
+We can show that $\nabla = - \log (1 - \nabla) \sum a_i \nabla^ i $, and find a recurrence relation for the coefficients. 
+
+Solution.
+
+We have:
+
+$$
+\begin{aligned}
+  \nabla y_{n+1}  &= h(a_0 D + a_1 h \nabla D + a_2 \nabla^2 D + \ldots ) y_{n+1} \\\\
+  &= hD (a_0 + a_1 \nabla + a_2 \nabla^2 + \ldots ) y_{n+1} \\\\
+  & \\{ \text{ Multiplication is commutative } \\} \\\\
+  &= -\log (1 - \nabla) (a_0 + a_1 \nabla + a_2 \nabla^2 + \ldots ) y_{n+1} 
+\end{aligned}
+$$
+
+Equating both sides, we get:
+
+$$\nabla = \left( \nabla + \frac{\nabla^2}{2} + \frac{\nabla^3}{3} + \frac{\nabla^4}{4} + \ldots \right) (a_0 + a_1 \nabla + a_2 \nabla^2 + \ldots )$$
+
+Collecting the cofficients of $\nabla$, $\nabla^2$, $\nabla^3$, $\nabla^4$, $\ldots$, we have:
+
+$$a_0 = 1$$
+
+$$\frac{a_0}{2} + a_1 = 0$$
+
+$$\frac{a_0}{3} + \frac{a_1}{2} + a_2 = 0$$
+
+In general, we solve the recurrence relation:
+
+$$a_m = -\left(\frac{a_{m-1}}{2} + \frac{a_{m-2}}{3} + \frac{a_{m-3}}{4} + \ldots + \frac{a_{1}}{m-1} + \frac{a_0}{m}\right)$$
+
+for AM($m$).
+
+(b) **Adam-Bashforth's explicit formula**:
+
+$$y_{n+1} - y_n = h(b_0 y_{n}' + b_1 \nabla y_{n}' + b_2 \nabla^2 y_{n}' + \ldots )$$
+
+We can show that $\sum b_i \nabla^i E^{-1} = \sum a_i \nabla ^i $ and that $b_n - b_{n-1} = a_n$.
+
+Solution.
+
+From the previous derivation, it follows that: 
+
+$$y_{n+1} - y_n = hD (a_0 + a_1 \nabla + a_2 \nabla^2 + \ldots ) y_{n+1} = hD (b_0 + b_1 \nabla + b_2 \nabla^2 + \ldots ) E^{-1} y_{n+1}$$
+
+Consequently,
+
+$$(a_0 + a_1 \nabla + a_2 \nabla^2 + \ldots ) = (b_0 + b_1 \nabla + b_2 \nabla^2 + \ldots ) E^{-1}$$
+
+Or,
+
+$$
+\begin{aligned}
+  \sum a_i \nabla^i &= \sum b_i \nabla^i E^{-1} \\\\
+  &= \sum b_i \nabla^i (1 - \nabla) \\\\
+  &= b_0 (1 - \nabla) + b_1 (\nabla - \nabla^2) + b_2 (\nabla^2 - \nabla^3) + \ldots \\\\
+  &= b_0 + (b_1 - b_0) \nabla + (b_2 - b_1) \nabla^2 + (b_3 - b_2) \nabla^3 + \ldots\\\\
+  \sum a_i \nabla^i &= \sum (b_i - b_{i-1}) \nabla_i
+\end{aligned}
+$$
+
+Consequently, $b_0 = a_0 = 1$, $b_i - b_{i-1} = a_i$.
+ 
 ### Implementation.
 
 I coded a few numerical methods from first principles for solving a scalar IVP. The objective is to properly map algorithms to code. 
