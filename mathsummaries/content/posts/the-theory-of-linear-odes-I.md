@@ -1249,20 +1249,22 @@ Since the particular solution $y_{p}=x-1$ satisfies the given differential
 equation:
 
 $$\begin{aligned}
-y_{p}'+xy_{p}^{2}-2x^{2}y_{p}+x^{3} & =x+1
+y_{p}' + xy_{p}^{2} - 2x^{2}y_{p}+x^{3} &= x+1
 \end{aligned}$$
 
 Substituting $y=y_{p}+\frac{1}{z}=(x-1)+\frac{1}{z}$, we get:
 
 $$\begin{aligned}
-y_{p}'-\frac{1}{z^{2}}z'+x\left(y_{p}+\frac{1}{z}\right)^{2}-2x^{2}\left(y_{p}+\frac{1}{z}\right)+x^{3} & =x+1\\\\
+y_{p}'-\frac{1}{z^{2}}z'+x\left(y_{p}+\frac{1}{z}\right)^{2}-2x^{2}\left(y_{p}+\frac{1}{z}\right)+x^{3} &=x+1 \\\\
 z^{2}y_{p}'-z'+x(zy_{p}+1)^{2}-2x^{2}(z^{2}y_{p}+z)+x^{3}z^{2} & =(x+1)z^{2}\\\\
-z^{2}y_{p}'-z'+x(z^{2}y_{p}^{2}+2zy_{p}+1)-2x^{2}z^{2}y_{p}-2x^{2}z+x^{3}z^{2} & =(x+1)z^{2}\\\\
-\\{\text{Collecting terms in }z^{2}\\}\\\\
-z^{2}\underbrace{(y_{p}'+xy_{p}^{2}-2x^{2}y_{p}+x^{3}-(x+1)}_{\text{Equals 0}} & =z'-2xzy_{p}-x+2x^{2}z\\\\
-z'-2x(x-1)z+2x^{2}z & =x\\\\
-z'+2xz & =x
+z^{2}y_{p}'-z'+x(z^{2}y_{p}^{2}+2zy_{p}+1)-2x^{2}z^{2}y_{p}-2x^{2}z+x^{3}z^{2} &=(x+1)z^{2}\\\\
+\\{\text{Collecting terms in }z^{2}\\} \\\\
+z^{2}{(y_{p}'+xy_{p}^{2}-2x^{2}y_{p}+x^{3}-(x+1))} &= z'-2xzy_{p}-x+2x^{2}z \\\\
+\\{ \text{The coefficient of }z^2 \text{ equals 0} \\} \\\\
+z'-2x(x-1)z+2x^{2}z &=x\\\\
+z'+2xz &=x
 \end{aligned}$$
+
 
 The integrating factor $\mu(x)$ for the above differential equation
 is:
@@ -1304,10 +1306,14 @@ Making the substitution $y=y_{p}+1/z$, we get:
 $$\begin{aligned}
 2\left(y_{p}'-\frac{1}{z^{2}}z'\right)-\frac{1}{x^{2}}\left(y_{p}+\frac{1}{z}\right)^{2}-1 & =0\\\\
 2z^{2}y_{p}'-2z'-\frac{1}{x^{2}}(y_{p}z+1)^{2}-z^{2} & =0\\\\
-2z^{2}y_{p}'-2z'-\frac{1}{x^{2}}(y_{p}^{2}z^{2}+2y_{p}z+1)-z^{2} & =0\\\\
-z^{2}\underbrace{\left(2y_{p}'-\frac{y_{p}^{2}}{x^{2}}-1\right)}_{\text{Equals 0}} & =2z'+\frac{2}{x^{2}}y_{p}z+\frac{1}{x^{2}}\\\\
+2z^{2}y_{p}'-2z'-\frac{1}{x^{2}}(y_{p}^{2}z^{2}+2y_{p}z+1)-z^{2} & =0 \\\\
+z^{2}\left(2y_{p}'-\frac{y_{p}^{2}}{x^{2}}-1\right) & =2z'+\frac{2}{x^{2}}y_{p}z+\frac{1}{x^{2}}\\\\
+\\{ \text{The coefficient of }z^2 \text{ equals 0} \\} \\\\
 z'+\frac{1}{x}z & =-\frac{1}{2x^{2}}
 \end{aligned}$$
+
+
+
 
 The integrating factor for the above differential equation is:
 
@@ -1382,10 +1388,15 @@ $$\begin{aligned}
 y_{p}'-\frac{1}{z^{2}}z'-\sin^{2}x\left(y_{p}+\frac{1}{z}\right)^{2}+\frac{1}{\sin x\cos x}\left(y_{p}+\frac{1}{z}\right)+\cos^{2}x & =0\\\\
 z^{2}y_{p}'-z'-\sin^{2}x(y_{p}z+1)^{2}+\frac{1}{\sin x\cos x}(y_{p}z^{2}+z)+z^{2}\cos^{2}x & =0\\\\
 z^{2}y_{p}'-z'-\sin^{2}x(y_{p}^{2}z^{2}+2y_{p}z+1)+\frac{1}{\sin x\cos x}(y_{p}z^{2}+z)+z^{2}\cos^{2}x & =0\\\\
-z^{2}\underbrace{(y_{p}'-\sin^{2}xy_{p}^{2}+\frac{1}{\sin x\cos x}y_{p}+\cos^{2}x)}_{\text{Equals 0}} & =z'+2\sin^{2}xy_{p}z+\sin^{2}x-\frac{1}{\sin x\cos x}z\\\\
+z^{2}(y_{p}'-\sin^{2}xy_{p}^{2}+\frac{1}{\sin x\cos x}y_{p}+\cos^{2}x) & =z'+2\sin^{2}xy_{p}z \\\\
+& + \sin^{2}x-\frac{1}{\sin x\cos x}z\\\\
+\\{ \text{The coefficient of }z^2 \text{ equals 0} \\} \\\\
 z'+\left(2\sin x\cos x-\frac{2}{2\sin x\cos x}\right)\cdot z & =-\sin^{2}x\\\\
 z'+(\sin2x-2cosec(2x))z & =-\sin^{2}x
 \end{aligned}$$
+
+
+
 
 The integrating factor is:
 
@@ -1424,24 +1435,27 @@ where $c$ is an arbitrary constant.
 
 Hint: Consider the expression :
 
-\[
+$$
 \frac{y'-y_{1}'}{y-y_{1}}-\frac{y'-y_{2}'}{y-y_{2}}
-\]
+$$
 
-\emph{Proof.}
+*Proof.*
 
 The Riccati equation is given by:
 
 $$\begin{aligned}
-y'+a_{2}(x)y^{2}+a_{1}(x)y+a_{0}(x) & =0\quad\tag{21}
+y'+a_{2}(x)y^{2}+a_{1}(x)y+a_{0}(x) &=0 \quad\tag{21}
 \end{aligned}$$
 
 Since $y_{1}$ and $y_{2}$ satisfy this differential equation, we
 must have:
 
 $$\begin{aligned}
-y_{1}'+a_{2}(x)y_{1}^{2}+a_{1}(x)y_{1}+a_{0}(x) & =0\quad\tag{22}\\\\
-y_{2}'+a_{2}(x)y_{2}^{2}+a_{1}(x)y_{2}+a_{0}(x) & =0\quad\tag{23}
+y_{1}'+a_{2}(x)y_{1}^{2}+a_{1}(x)y_{1}+a_{0}(x) &=0\quad \tag{22}
+\end{aligned}$$
+
+$$\begin{aligned}
+y_{2}'+a_{2}(x)y_{2}^{2}+a_{1}(x)y_{2}+a_{0}(x) &=0\quad \tag{23}
 \end{aligned}$$
 
 Subtracting (22) and (23) from expression (21), we find that:
@@ -1465,7 +1479,7 @@ $$\begin{aligned}
 \end{aligned}$$
 
 
-\subsubsection*{Existence and uniqueness of solutions; Initial Value Problems(IVP).}
+#### Existence and uniqueness of solutions; Initial Value Problems(IVP).
 
 On the strength of the results of the preceding section, we can assert
 that every first order linear differential equation which is defined
@@ -1530,17 +1544,17 @@ $I$, and let $x_{0}$ be any point in $I=[a,b]$. Then, if $y_{0}$,
 $y_{1}$, $\ldots$, $y_{n-1}$ are arbitrary real numbers, there
 exists one and only one solution $y(x)$ of with the property that 
 
-\[
+$$
 y(x_{0})=y_{0},y'(x_{0})=y_{1},\ldots,y^{(n-1)}(x_{0})=y_{n-1}\quad\tag{25}
-\]
+$$
 
 As in the case of first-order equations, the problem of finding a
 solution of (24) which satisfies the $n$ additional conditions given
 in (25) is called an initial-value problem with initial conditions:
 
-\[
+$$
 y(x_{0})=y_{0},y'(x_{0})=y_{1},\ldots,y^{(n-1)}(x_{0})=y_{n-1}
-\]
+$$
 
 It is also worth noting that the theorem can be phrased in the language
 of linear operators, in which case it assumes the following suggestive
@@ -1556,9 +1570,9 @@ L([G(h)] & =h,\quad\text{for all }h \text{ in }\mathcal{C}([a,b])
 
 and 
 
-\[
+$$
 G(h)(x_{0})=y_{0},G(h)'(x_{0})=y_{1},\ldots,G(h)^{(n-1)}(x_{0})=y_{n-1}
-\]
+$$
 
 When stated in these terms, it is clear that the task of solving an
 initial-value problem for a linear differential equation comes down
@@ -1569,9 +1583,9 @@ $$\begin{aligned}
 Ly & =h
 \end{aligned}$$
 
-\[
+$$
 y(x_{0})=y_{0},y'(x_{0})=y_{1},\ldots,y^{(n-1)}(x_{0})=y_{n-1}
-\]
+$$
 
 can be solved by computing the value of $G(h)$. This point of view
 will be exploited in later chapters where much of our work will be
@@ -1700,13 +1714,15 @@ The integrating factor is:
 
 $$\begin{aligned}
 \mu(x) & =e^{\int p(x)dx}\\\\
- & =\exp\left[-\int\frac{1-x^{2}}{1+x^{2}}dx\right]\\\\
- & =\exp\left[-\int\left\{ -1+\frac{2}{1+x^{2}}\right\} dx\right]\\\\
- & =\exp\left[\int dx-\int\frac{2dx}{1+x^{2}}\right]\\\\
+ & =\exp\left\[-\int\frac{1-x^{2}}{1+x^{2}}dx\right\]\\\\
+ & =\exp\left\[-\int \left \\{-1 + \frac{2}{1+x^2} \right \\} dx \right\] \\\\
+ & =\exp\left\[ \int dx - \int \frac{2dx}{1+x^{2}} \right\] 
  & =\exp(x-2\arctan x)\\\\
  & =\frac{e^{x}}{e^{2\arctan x}}
 \end{aligned}$$
 
+
+ 
 Multiplying both sides of the differential equation by $\mu(x)$,
 we get:
 
@@ -1722,7 +1738,7 @@ y & =e^{-x}(ce^{2\arctan x}-\frac{1}{2})
 \end{aligned}$$
 
 
-###Dimensions of the solution space.}
+### Dimensions of the solution space.
 
 We cna use the existence and the uniqueness theorem to give a simple
 and elegant proof of the fact, that the dimension of the solution
@@ -1738,20 +1754,20 @@ a_{n}(x)\frac{d^{n}y}{dx^{n}}+\ldots+a_{0}(x)y & =0\quad\tag{26}
 
 defined on an interval $I=[a,b]$ is an n-dimensional subspace of
 $\mathcal{C}([a,b])$.
-\end{thm*}
-\emph{Proof.}
+
+*Proof.*
 
 Let $x_{0}$ be a fixed point in $I=[a,b]$. Then, by the existence
 and uniqueness theorem, we know that this equation admits the unique
 solutions $y_{1}(x),y_{2}(x),\ldots,y_{n}(x_{0})$ satisfying the
 initial conditions:
 
-$\begin{array}{cccc}
+$$\begin{array}{cccc}
 y_{1}(x_{0})=1, & y_{1}'(x_{0})=0, & \ldots, & y_{1}^{(n-1)}(x_{0})=0\\\\
 y_{2}(x_{0})=0, & y_{2}'(x_{0})=1, & \ldots, & y_{2}^{(n-1)}(x_{0})=0\\\\
 \vdots\\\\
 y_{n}(x_{0})=0, & y_{n}'(x_{0})=0 & \ldots, & y_{n}^{(n-1)}(x_{0})=1
-\end{array}\quad\tag{27}$
+\end{array}\quad\tag{27}$$
 
 In other words, $y_{1}(x),\ldots,y_{n}(x)$ have the property that
 the vectors 
@@ -1817,6 +1833,7 @@ $(y_{i}(x_{0}),y_{i}'(x_{0}),\ldots,y_{i}^{(n-1)}(x_{0}))=\mathbf{e}_{i}$
 must be of the form $\sum\gamma_{i}y_{i}(x)$. 
 
 This closes the proof.
+
 **Example.**
 The second-order equation
 
@@ -1828,15 +1845,15 @@ has a $2$-dimensional solution space. It is easy to see that $y_{1}(x)=\frac{e^{
 and $y_{2}(x)=\frac{e^{x}-e^{-x}}{2}$ are solutions to the initial
 value problems:
 
-\[
+$$
 y(0)=1,\quad y'(0)=0\quad\tag{34}
-\]
+$$
 
 and 
 
-\[
+$$
 y(0)=0,\quad y'(0)=1\quad\tag{35}
-\]
+$$
 
 Thus, $y_{1}(x)$ and $y_{2}(x)$ form a basis for the solution space
 of the differential equation. Hence, the general solution to (33)
@@ -1877,22 +1894,22 @@ each of which possesses derivatives upto order $n-1$ everywhere in
 $[a,b]$ and suppose that at some point $x_{0}$ in $[a,b]$, the
 vectors:
 
-\[
+$$
 y_{i}(x_{0}),y_{i}'(x_{0}),\ldots,y_{i}^{(n-1)}(x_{0}),\quad i=1,2,\ldots,n
-\]
+$$
  are linearly independent in $\mathbf{R}^{n}$. Then, $y_{1}(x),y_{2}(x),\ldots,y_{n}(x)$
 are linearly independent in $\mathcal{C}[a,b]$.
 \end{cor*}
 
-###The Wronskian.}
+### The Wronskian.
 
 In the preceding section, we proved that $y_{1},y_{2},\ldots,y_{n}$
 are linearly independent functions in $\mathcal{C}^{n-1}[a,b]$ whenever
 there exists a point $x_{0}$ in $[a,b]$ such that the vectors 
 
-\[
+$$
 y_{i}(x_{0}),y_{i}'(x_{0}),\ldots,y_{i}^{(n-1)}(x_{0}),\quad i=1,2,\ldots,n\quad\tag{36}
-\]
+$$
 
 are linearly independent in $\mathbf{R}^{n}$. For our present purposes,
 this result can be stated more conveniently in terms of the determinant
@@ -1901,14 +1918,14 @@ of a certain matrix, as follows :
 Let $y_{1},y_{2},\ldots,y_{n}$ be arbitrary functions in $\mathcal{C}^{n-1}[a,b]$
 and for each $x\in[a,b]$, consider the matrix :
 
-\[
+$$
 \left[\begin{array}{cccc}
 y_{1}(x) & y_{2}(x) & \ldots & y_{n}(x)\\\\
 y_{1}'(x) & y_{2}'(x) & \ldots & y_{n}'(x)\\\\
 \vdots &  & \ddots\\\\
 y_{1}^{(n-1)}(x) & y_{2}^{(n-1)}(x) & \ldots & y_{n}^{(n-1)}(x)
 \end{array}\right]\quad\tag{37}
-\]
+$$
 
 Then, (37) defines a function on the interval $[a,b]$ whose value
 at $x$ is the indicated matrix, and by forming the determinant of
@@ -1974,7 +1991,7 @@ e^{x} & -e^{-x}
 
 the functions $e^{x}$ and $e^{-x}$ are linearly independent in $\mathbf{R}$.
 
-%
+
 **Example.**
 The functions $x$, $x^{1/2}$, $x^{3/2}$ are linearly independent
 on $\mathcal{C}[a,b]$ for any subinterval $[a,b]$ of the positive
@@ -2014,12 +2031,12 @@ will imply linear dependence. This can in fact be done simply by requiring
 that the functions be solutions of a homogenous linear differential
 equation. 
 
-\begin{thm*}
+**Theorem.**
 Let $y_{1},\ldots,y_{n}$ be solutions of a $n$th order homogeonous
 linear differential equation
 
 $$\begin{aligned}
-Ly=\left[a_{n}(x)\frac{d^{n}}{dx^{n}}+\ldots+a_{0}(x)\right](y) & =0\quad\tag{39}
+Ly=\left \[ a_{n}(x)\frac{d^{n}}{dx^{n}} +\ldots+a_{0}(x)\right \](y) &= 0\quad\tag{39}
 \end{aligned}$$
 
 on the interval $I=[a,b]$ and suppose that $W[y_{1},\ldots,y_{n}]$
@@ -2030,12 +2047,12 @@ are linearly dependent in $\mathcal{C}[a,b]$.
 
 Let $x_{0}$ be any point in $[a,b]$ and consider the system of equations:
 
-$\begin{array}{cc}
+$$\begin{array}{cc}
 c_{1}y_{1}(x_{0})+\ldots+c_{n}y_{n}(x_{0}) & =0\\\\
 c_{1}y_{1}'(x_{0})+\ldots+c_{n}y_{n}'(x_{0}) & =0\\\\
 \vdots\\\\
 c_{1}y_{1}^{(n-1)}(x_{0})+\ldots+c_{n}y_{n}^{(n-1)}(x_{0}) & =0
-\end{array}\quad\tag{40}$
+\end{array}\quad\tag{40}$$
 
 in the unknowns $c_{1},c_{2},\ldots,c_{n}$. Since the Wronskian of
 $y_{1},\ldots,y_{n}$ vanishes on $[a,b]$, the determinant of (40)
@@ -2091,9 +2108,9 @@ and moreover from (40) it follows that, they satisfy
 
 the initial conditions:
 
-\[
+$$
 y(x_{0})=0,y'(x_{0})=0,\ldots,y^{(n-1)}(x_{0})=0\quad\tag{44}
-\]
+$$
 
 Hence, $y(x)$ is unique. But, the zero function is also a solution
 to the problem and hence $y(x)$ must be equal to zero for all $x$.
@@ -2227,7 +2244,8 @@ W[e^{ax}\sin bx,e^{ax}\cos bx] & =\left|\begin{array}{cc}
 e^{ax}\sin bx & e^{ax}\cos bx\\\\
 ae^{ax}\sin bx+be^{ax}\cos bx & ae^{ax}\cos bx-be^{ax}\sin bx
 \end{array}\right|\\\\
- & =e^{ax}\sin bx(ae^{ax}\cos bx-be^{ax}\sin bx)-e^{ax}\cos bx(ae^{ax}\sin bx+be^{ax}\cos bx)\\\\
+ & =e^{ax}\sin bx(ae^{ax}\cos bx-be^{ax}\sin bx) \\\\
+ & -e^{ax}\cos bx(ae^{ax}\sin bx+be^{ax}\cos bx)\\\\
  & =e^{2ax}[a\sin bx\cos bx-b\sin^{2}bx-a\cos bx\sin bx-b\cos^{2}bx]\\\\
  & =-be^{2ax}(\sin^{2}bx+\cos^{2}bx)\\\\
  & =-be^{2ax}
@@ -2530,6 +2548,7 @@ W[f(x),g(x)] & =f(x)g'(x)-g(x)f'(x)\\\\
 Since $f$ and $g$ are the solutions of the differential equation
 $d(u/v)=0$, and their Wronskian is identically equal to zero, the
 functions $f(x)$ and $g(x)$ are linearly dependent.
+
 **Exercise.**
 (a) Show that:
 
@@ -2566,8 +2585,8 @@ W[y_{1}(x),\ldots,y_{n}(x)] & =ce^{-\int[a_{n-1}(x)/a_{n}(x)]dx}
 \end{aligned}$$
 
 This result is known as Abel's formula for the Wronskian.
-\end{thm*}
-\emph{Proof.}
+
+*Proof.*
 
 In order to avoid using the properties of determinants, we shall prove
 only in the case $n=2$. The general proof is identical, except that
@@ -2588,7 +2607,8 @@ y_{1}'(x) & y_{2}'(x)
  & =\frac{d}{dx}(y_{1}(x)y_{2}'(x)-y_{2}(x)y_{1}'(x))\\\\
  & =y_{1}'(x)y_{2}'(x)+y_{1}(x)y_{2}''(x)-y_{2}'(x)y_{1}'(x)-y_{2}(x)y_{1}''(x)\\\\
  & =y_{1}(x)y_{2}''(x)-y_{2}(x)y_{1}''(x)\\\\
- & =y_{1}(x)\left[-\frac{a_{1}(x)}{a_{2}(x)}y_{2}'(x)-\frac{a_{0}(x)}{a_{2}(x)}y_{2}(x)\right]-y_{2}(x)\left[-\frac{a_{1}(x)}{a_{2}(x)}y_{1}'(x)-\frac{a_{0}(x)}{a_{2}(x)}y_{1}(x)\right]\\\\
+ & =y_{1}(x)\left[-\frac{a_{1}(x)}{a_{2}(x)}y_{2}'(x)-\frac{a_{0}(x)}{a_{2}(x)}y_{2}(x)\right] \\\\
+ &- y_{2}(x)\left[-\frac{a_{1}(x)}{a_{2}(x)}y_{1}'(x)-\frac{a_{0}(x)}{a_{2}(x)}y_{1}(x)\right]\\\\
  & =-\frac{a_{1}(x)}{a_{2}(x)}(y_{1}(x)y_{2}'(x)-y_{2}(x)y_{1}'(x))\\\\
  & -\frac{a_{1}(x)}{a_{2}(x)}W[y_{1}(x),y_{2}(x)]
 \end{aligned}$$
