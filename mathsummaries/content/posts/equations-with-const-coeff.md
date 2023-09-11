@@ -253,7 +253,7 @@ $e^{-i\beta x}=\cos\beta x-i\sin\beta x$. Substituting these in (20), we
 get:
 
 $$\begin{aligned}
-y & =e^{\alpha x}\[(c_{1}'+c_{2}')\cos\beta x+(c_{1}'-c_{2}')i\sin\beta x\]\quad\tag{21}
+y & =e^{\alpha x}[(c_{1}'+c_{2}')\cos\beta x+(c_{1}'-c_{2}')i\sin\beta x]\quad\tag{21}
 \end{aligned}$$
 
 We may now replace the constants $c_{1}'+c_{2}'=c_{1}$ and
@@ -270,11 +270,13 @@ $$\begin{aligned}
 c_{1}\cos\beta x+c_{2}\sin\beta x & =\sqrt{c_{1}^{2}+c_{2}^{2}}\left(\frac{c_{1}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\cos\beta x+\frac{c_{2}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\sin\beta x\right)\quad\tag{23}
 \end{aligned}$$
 
+![image](../img01.svg)
 
 From the above figure, we see that
 
-$$
-\sin\delta = \frac{c_{1}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}, \quad \cos\delta=\frac{c_{2}}{\sqrt{c_{1}^{2}+c_{2}^{2}}} \tag{24}$$
+$$\begin{aligned}
+\sin\delta & =\frac{c_{1}}{\sqrt{c_{1}^{2}+c_{2}^{2}}},\quad\cos\delta=\frac{c_{2}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\quad\tag{24}
+\end{aligned}$$
 
 The susbstitution of these values in the right hand side of (23) gives:
 
@@ -332,3 +334,750 @@ y & =e^{x}(c_{1}\cos x+c_{2}\sin x)\\\\
 \end{aligned}$$
 
 If the linear differential equation
+
+$$\begin{aligned}
+a_{4}y^{(4)}+a_{3}y'''+a_{2}y''+a_{1}y'+a_{0} & =0,\quad a_{4}\neq0
+\end{aligned}$$ has a conjugate pair of repeated imaginary roots, i.e.
+if $\alpha+i\beta$ and $\alpha-i\beta$ each occurs twice as a root, then
+by case II, the general solution is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{(\alpha+i\beta)x}+(c_{3}+c_{4}x)e^{(\alpha-i\beta)x}\quad\tag{30}
+\end{aligned}$$
+
+The equivalent forms are:
+
+$$\begin{aligned}
+y & =e^{\alpha x}[(c_{1}+c_{2}x)e^{i\beta x}+(c_{3}+c_{4}x)e^{-i\beta x}]\\\\
+ & =e^{\alpha x}[(c_{1}+c_{2}x)\cos\beta x+(c_{3}+c_{4}x)\sin\beta x]\\\\
+ & =e^{\alpha x}(c_{1}\sin(\beta x+\delta_{1})+c_{2}x\sin(\beta x+\delta_{2}))\\\\
+ & =e^{\alpha x}(c_{1}\cos(\beta x-\delta_{1})+c_{2}x\cos(\beta x-\delta_{2}))
+\end{aligned}$$
+
+::: example*
+** 3**. Find the general solution of:
+
+$$\begin{aligned}
+y^{(4)}+2y''+1 & =0
+\end{aligned}$$
+:::
+
+*Solution.*
+
+The roots of the characteristic equation are:
+
+$$\begin{aligned}
+D^{4}+2D^{2}+1 & =0\\\\
+(D^{2}+1)^{2} & =0
+\end{aligned}$$
+
+This equation has the complex conjugates $i$ and $-i$ as roots, with
+multiplicity $2$. Hence, the general solution of the differential
+equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)\cos x+(c_{3}+c_{4}x)\sin x
+\end{aligned}$$
+
+Find the general solutions of each of the following equations.
+
+**Example.**
+** 1**. $y''+y'-2y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}+m-2 & =0\\\\
+m^{2}+2m-m-2 & =0\\\\
+m(m+2)-1(m+2) & =0\\\\
+(m-1)(m+2) & =0
+\end{aligned}$$
+
+The roots of this equation are $\alpha_{1}=1$ and $\alpha_{2}=-2$.
+Hence, the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{x}+c_{2}e^{-2x}
+\end{aligned}$$
+
+**Example.**
+** 2**. $3y''-5y'+2y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+3m^{2}-5m+2 & =0\\\\
+3m^{2}-3m-2m+2 & =0\\\\
+3m(m-1)-2(m-1) & =0\\\\
+(3m-2)(m-1) & =0
+\end{aligned}$$
+
+The roots of this equation are $\alpha_{1}=\frac{2}{3}$, $\alpha_{2}=1$.
+Hence, the general solution of the differential equation is given by:
+
+$$\begin{aligned}
+y & =c_{1}e^{\frac{2x}{3}}+c_{2}e^{x}
+\end{aligned}$$
+
+**Example.**
+** 3**. $8y''+14y'-15y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+8m^{2}+14m-15 & =0\\\\
+8m^{2}+20m-6m-15 & =0\\\\
+4m(2m+5)-3(2m+5) & =0\\\\
+(4m-3)(2m+5) & =0
+\end{aligned}$$
+
+The roots of this equation are $\alpha_{1}=\frac{3}{4}$,
+$\alpha_{2}=-\frac{2}{5}$. Hence, the general solution of the
+differential equation is given by:
+
+$$\begin{aligned}
+y & =c_{1}e^{\frac{3x}{4}}+c_{2}e^{-\frac{2x}{5}}
+\end{aligned}$$
+
+**Example.**
+** 4**. $y''-2y'=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}-2m & =0\\\\
+m(m-2) & =0
+\end{aligned}$$
+
+The roots of this equation are $\alpha_{1}=0$ and $\alpha_{2}=2$. Hence,
+the general solution of the differential equation is given by:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}e^{2x}
+\end{aligned}$$
+
+**Example.**
+** 5**. $y''+4y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}+4 & =0
+\end{aligned}$$
+
+The roots of this equation are the complex conjugates $z_{1}=2i$ and
+$z_{2}=-2i$. Hence, the general solution of the differential equation
+is:
+
+$$\begin{aligned}
+y & =c_{1}\cos2x+c_{2}\sin2x
+\end{aligned}$$
+
+**Example.**
+** 6**. $3y''+2y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+3m^{2}+2 & =0\\\\
+m^{2}+\frac{2}{3} & =0
+\end{aligned}$$
+
+The roots of this equation are the complex conjugates
+$z_{1}=\frac{2}{3}i$ and $z_{2}=-\frac{2}{3}i$. Hence, the general
+solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}\cos\frac{2}{3}x+c_{2}\sin\frac{2}{3}x
+\end{aligned}$$
+
+**Example.**
+** 7**. $y''+4y'+8y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}+4m+8 & =0\\\\
+(m+2)^{2}+4 & =0
+\end{aligned}$$
+
+The roots of this equation are the complex conjugates
+$\alpha\pm i\beta=-2\pm2i$. Hence, the general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =e^{-2x}(c_{1}\cos2x+c_{2}\sin2x)
+\end{aligned}$$
+
+**Example.**
+** 8**. $4y''-4y'+3y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+4m^{2}-4m+3 & =0\\\\
+(2m-1)^{2}+2 & =0\\\\
+(2m-1)^{2}-(\sqrt{2}i)^{2} & =0\\\\
+(2m-1+\sqrt{2}i)(2m-1-\sqrt{2}i) & =0
+\end{aligned}$$
+
+The roots of this equation are the complex conjugates
+$\alpha\pm\beta i=1\pm\sqrt{2}i$. Hence, the general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =e^{x}(c_{1}\cos\sqrt{2}x+c_{2}\sin\sqrt{2}x)
+\end{aligned}$$
+
+**Example.**
+** 9**. $y''-2y'+2y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}-2m+2 & =0\\\\
+(m-1)^{2}+1 & =0\\\\
+(m-1)^{2}-(i)^{2} & =0\\\\
+(m-1+i)(m-1-i) & =0
+\end{aligned}$$
+
+The roots of this equation are the complex conjugates
+$\alpha\pm\beta i=1\pm i$. Hence, the general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =e^{x}(c_{1}\cos x+c_{2}\sin x)
+\end{aligned}$$
+
+**Example.**
+** 10**. $9y''-12y+4y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+9m^{2}-12m+4 & =0\\\\
+(3m-2)^{2} & =0
+\end{aligned}$$
+
+The roots of this equation are $\alpha=\frac{2}{3}$ with multiplicity
+$2$. Hence, the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{\frac{2x}{3}}
+\end{aligned}$$
+
+**Example.**
+** 11**. $y''+2y'+4y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}+2m+4 & =0\\\\
+(m+1)^{2}+3 & =0\\\\
+(m+1)^{2}-(\sqrt{3}i)^{2} & =0\\\\
+(m+1+\sqrt{3}i)(m+1-\sqrt{3}i) & =0
+\end{aligned}$$
+
+The roots of this equation are the complex conjugates $-1+\sqrt{3}i$ and
+$-1-\sqrt{3}i$. Hence, the solution of the differential equation is:
+
+$$\begin{aligned}
+y & =e^{-x}(c_{1}\cos\sqrt{3}x+c_{2}\sin\sqrt{3}x)
+\end{aligned}$$
+
+**Example.**
+** 12**. $2y''-2\sqrt{2}y'+y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+2m^{2}-2\sqrt{2}m+1 & =0\\\\
+(\sqrt{2}m-1)^{2} & =0
+\end{aligned}$$
+
+The roots of this equation are $\alpha=\frac{1}{\sqrt{2}}$ with
+multiplicity $2$. Hence, the solution of the differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{\frac{x}{\sqrt{2}}}
+\end{aligned}$$
+
+**Example.**
+** 13**. $2y''-5\sqrt{3}y'+6y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+2m^{2}-5\sqrt{3}m+6 & =0
+\end{aligned}$$
+
+By the quadratic formula, the roots of the equation are:
+
+$$\begin{aligned}
+x & =\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}\\\\
+ & =\frac{5\sqrt{3}\pm\sqrt{75-48}}{4}\\\\
+ & =\frac{5\sqrt{3}\pm3\sqrt{3}}{4}
+\end{aligned}$$
+
+So, $\alpha_{1}=2\sqrt{3}$ and $\alpha_{2}=\frac{\sqrt{3}}{2}$.
+
+Hence, the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{2\sqrt{3}x}+c_{2}e^{\frac{\sqrt{3}}{2}x}
+\end{aligned}$$
+
+**Example.**
+** 14**. $9y''+6y'+y=0$.
+:::
+
+*Solution.*
+
+The characteristic equationis:
+
+$$\begin{aligned}
+9m^{2}+6m+1 & =0\\\\
+(3m+1)^{2} & =0
+\end{aligned}$$
+
+The roots of the equation are $\alpha=-\frac{1}{3}$ with multiplicity
+$2$. Hence, the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{-\frac{x}{3}}
+\end{aligned}$$
+
+**Example.**
+** 15**. $64y''-48y'+17y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+64m^{2}-48m+17 & =0\\\\
+(8m-3)^{2}+8 & =0\\\\
+(8m-3)-(2\sqrt{2}i)^{2} & =0\\\\
+(8m-3+2\sqrt{2}i)(8m-3-2\sqrt{2}i) & =0
+\end{aligned}$$
+
+Hence, the roots of the equation are the complex conjugates
+$\alpha+\beta i=3+2\sqrt{2}i$ and $\alpha-\beta i=3-2\sqrt{2}i$. Hence,
+the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =e^{3x}(c_{1}\cos2\sqrt{2}x+c_{2}\sin2\sqrt{2}x)
+\end{aligned}$$
+
+Find the solutions of the initial value problems.
+
+**Example.**
+** 16**. $2y''-y'-3y=0$; $y(0)=2$, $y'(0)=-\frac{7}{2}$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+2m^{2}-m-3 & =0\\\\
+2m^{2}-3m+2m-3 & =0\\\\
+m(2m-3)+1(2m-3) & =0\\\\
+(m+1)(2m-3) & =0
+\end{aligned}$$
+
+The roots of the equation are $\alpha_{1}=-1$ and
+$\alpha_{2}=\frac{3}{2}$. Hence, the general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{-x}+c_{2}e^{\frac{3x}{2}}
+\end{aligned}$$
+
+Moreover, the initial conditions are $y(0)=2$ and $y'(0)=-7/2$. Since we
+are interesting in seeking a particular $y$ that satisfies the initial
+conditions, we have:
+
+$$\begin{aligned}
+c_{1}+c_{2} & =2\\\\
+-c_{1}+\frac{3}{2}c_{2} & =-7/2
+\end{aligned}$$
+
+We have:
+
+$$\begin{aligned}
+\left|\begin{array}{cc}
+1 & 1\\\\
+-1 & 3/2
+\end{array}\right| & =\frac{3}{2}+1=\frac{5}{2}
+\end{aligned}$$
+
+So, $c_{1}=\frac{\left|\begin{array}{cc}
+2 & 1\\\\
+-7/2 & 3/2
+\end{array}\right|}{(5/2)}=\frac{13}{5}$ and
+$c_{2}=\frac{\left|\begin{array}{cc}
+1 & 2\\\\
+-1 & -7/2
+\end{array}\right|}{(5/2)}=-\frac{3}{5}$. Hence, the solution to the
+given IVP is:
+
+$$\begin{aligned}
+y & =\frac{13}{5}e^{-x}-\frac{3}{5}e^{\frac{3x}{2}}
+\end{aligned}$$
+
+**Example.**
+** 17**. $y''-8y'+16y=0$, $y(0)=\frac{1}{2}$, $y'(0)=-\frac{1}{3}$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}-8m+16 & =0\\\\
+(m-4)^{2} & =0
+\end{aligned}$$
+
+The roots of the equation are $\alpha=4$ with multiplicity $2$. Hence,
+the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{4x}
+\end{aligned}$$
+
+We have:
+
+$$\begin{aligned}
+y' & =4c_{1}e^{4x}+c_{2}e^{4x}+4c_{2}xe^{4x}\\\\
+ & =e^{4x}(4c_{1}+c_{2}+4c_{2}x)
+\end{aligned}$$
+
+Since we are interesting in seeking a particular $y$ that satisfies the
+initial conditions, we must have:
+
+$$\begin{aligned}
+c_{1} & =\frac{1}{2},\quad4c_{1}+c_{2}=-\frac{1}{3}
+\end{aligned}$$
+
+Consequently,
+
+$$c_{1}=\frac{1}{2},c_{2}=-\frac{7}{3}$$
+
+Hence, the solution to the given IVP is:
+
+$$\begin{aligned}
+y & =\left(\frac{1}{2}-\frac{7x}{3}\right)e^{4x}
+\end{aligned}$$
+
+**Example.**
+** 18**. $4y''-12y'+9y=0$, $y(0)=1$ $y'(0)=\frac{7}{2}$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+4m^{2}-12m+9 & =0\\\\
+(2m-3)^{2} & =0
+\end{aligned}$$
+
+The roots of the equation are $\alpha=\frac{3}{2}$ with a multiplicity
+of $2$. Hence, the general solution to the differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{\frac{3x}{2}}
+\end{aligned}$$
+
+Also, we have:
+
+$$\begin{aligned}
+y' & =\frac{3}{2}c_{1}e^{\frac{3x}{2}}+c_{2}e^{\frac{3x}{2}}+\frac{3}{2}c_{2}xe^{\frac{3x}{2}}
+\end{aligned}$$
+
+Since we are interesting in seeking a particular $y$ that satisfies the
+initial conditions, we must have:
+
+$$\begin{aligned}
+c_{1} & =1\\\\
+\frac{3}{2}c_{1}+c_{2} & =\frac{7}{2}
+\end{aligned}$$
+
+and so $c_{2}=2$. Thus, the solution to the given IVP is:
+
+$$\begin{aligned}
+y & =(1+2x)e^{\frac{3x}{2}}
+\end{aligned}$$
+
+**Example.**
+** 19**. $y''+2y=0$, $y(0)=2$, $y'(0)=2\sqrt{2}$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}+2 & =0
+\end{aligned}$$
+
+The roots of the equation are $m=\pm\sqrt{2}i$. The general solution of
+the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}\cos\sqrt{2}x+c_{2}\sin\sqrt{2}x
+\end{aligned}$$
+
+Also, we have:
+
+$$\begin{aligned}
+y' & =-c_{1}\sqrt{2}\sin\sqrt{2}x+\sqrt{2}c_{2}\cos\sqrt{2}x
+\end{aligned}$$
+
+Since we are interested in seeking a particular $y$ that satisfies the
+initial conditions, we let:
+
+$$\begin{aligned}
+c_{1}+c_{2} & =2\\\\
+-c_{1}+c_{2} & =2\sqrt{2}
+\end{aligned}$$
+
+Consequently,
+
+$$c_{1}=1-\sqrt{2},\quad c_{2}=1+\sqrt{2}$$
+
+So, the desired solution to the IVP is:
+
+$$\begin{aligned}
+y= & (1-\sqrt{2})\cos\sqrt{2}x+(1+\sqrt{2})\sin\sqrt{2}x
+\end{aligned}$$
+
+**Example.**
+** 20**. $4y''-4y'+5y=0$, $y(0)=\frac{1}{2}$, $y'(0)=1$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+4m^{2}-4m+5 & =0\\\\
+(2m-1)^{2}+4 & =0\\\\
+(2m-1-\sqrt{2}i)(2m-1+\sqrt{2}i) & =0
+\end{aligned}$$
+
+The complex conjugates $\alpha+\beta i=1+\sqrt{2}i$ and
+$\alpha-\beta i=1-\sqrt{2}i$ are the roots of the characteristic
+equation. Hence, the general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =e^{x}(c_{1}\cos\sqrt{2}x+c_{2}\sin\sqrt{2}x)
+\end{aligned}$$
+
+Also, we have:
+
+$$\begin{aligned}
+y' & =c_{1}e^{x}\cos\sqrt{2}x-\sqrt{2}c_{1}e^{x}\sin\sqrt{2}x+c_{2}e^{x}\sin\sqrt{2}x+\sqrt{2}c_{2}e^{x}\cos\sqrt{2}x
+\end{aligned}$$
+
+Since we are interested in seeking a particular $y$ that satisfies the
+initial conditions, we let:
+
+$$\begin{aligned}
+c_{1} & =\frac{1}{2}\\\\
+c_{1}+\sqrt{2}c_{2} & =1
+\end{aligned}$$
+
+and hence $c_{2}=\frac{1}{2\sqrt{2}}.$ So, the desired solution to the
+IVP is:
+
+$$\begin{aligned}
+y & =e^{x}\left[\frac{1}{2}\cos\sqrt{2}x+\frac{1}{2\sqrt{2}}\sin\sqrt{2}x\right]
+\end{aligned}$$
+
+**Example.**
+** 21**. $y''+4y'+13y=0$, $y(0)=0$ and $y'(0)=-2$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{2}+4m+13 & =0\\\\
+(m+2)^{2}+3^{2} & =0\\\\
+(m+2+3i)(m+2-3i) & =0
+\end{aligned}$$
+
+The roots of the characteristic equation are complex conjugates
+$\alpha+i\beta=-2+3i$ and $\alpha-i\beta=-2-3i$. Hence, the general
+solution to the differential equation is:
+
+$$\begin{aligned}
+y & =e^{-2x}(c_{1}\cos3x+c_{2}\sin3x)
+\end{aligned}$$
+
+Also, we have:
+
+$$\begin{aligned}
+y' & =-2c_{1}e^{-2x}\cos3x-3c_{1}e^{-2x}\sin3x-2c_{2}e^{-2x}\sin3x+3c_{2}e^{-2x}\cos3x
+\end{aligned}$$
+
+We are interested in seeking a particular solution that satisfies the
+IVP, so subbing the initial values in the above equation, we find:
+
+$$\begin{aligned}
+c_{1} & =0\\\\
+-2c_{1}+3c_{2} & =-2
+\end{aligned}$$
+
+Hence, the desired particular solution is
+
+$$\begin{aligned}
+y= & -\frac{2}{3}e^{-2x}\sin3x
+\end{aligned}$$
+
+**Example.**
+** 22**. $9y''-3y'-2y=0$, $y(0)=3$, $y'(0)=-2$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+9m^{2}-3m-2 & =0\\\\
+9m^{2}-6m+3m-2 & =0\\\\
+3m(3m-2)+1(3m-2) & =0\\\\
+(3m-2)(3m+1) & =0
+\end{aligned}$$
+
+The roots of the equation are $\alpha_{1}=\frac{2}{3}$ and
+$\alpha_{2}=-\frac{1}{3}$. Hence, the general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{\frac{2x}{3}}+c_{2}e^{-\frac{x}{3}}
+\end{aligned}$$
+
+Also, we have:
+
+$$\begin{aligned}
+y' & =\frac{2}{3}c_{1}e^{2x/3}-\frac{1}{3}c_{2}e^{-x/3}
+\end{aligned}$$
+
+We are interested in seeking a particular solution $y$ that satisfies
+the initial conditions. We have:
+
+$$\begin{aligned}
+c_{1}+c_{2} & =3\\\\
+2c_{1}-c_{2} & =-6
+\end{aligned}$$
+
+We find $c_{1}=-1$ and $c_{2}=4$. Hence, the particular solution to the
+IVP is:
+
+$$\begin{aligned}
+y & =-e^{2x/3}+4e^{-x/3}
+\end{aligned}$$
+
+**Example.**
+** 23**. Find the general solution of
+
+$$\begin{aligned}
+(D^{3}+1)y & =0
+\end{aligned}$$
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{3}+1 & =0\\\\
+(m+1)(m^{2}-m+1) & =0\\\\
+(m+1)[(m-\frac{1}{2})^{2}+\left(\frac{\sqrt{3}}{2}\right)^{2}] & =0\\\\
+(m+1)(m-\frac{1}{2}+\frac{\sqrt{3}}{2}i)(m-\frac{1}{2}-\frac{\sqrt{3}}{2}i) & =0
+\end{aligned}$$
+
+So, the roots of the equation are $-1$, $\frac{1-\sqrt{3}i}{2}$ and
+$\frac{1+\sqrt{3}i}{2}$. The general solution of the differential
+equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{-x}+e^{\frac{x}{2}}(c_{1}\cos\frac{\sqrt{3}}{2}x+c_{2}\sin\frac{\sqrt{3}}{2}x)
+\end{aligned}$$
+
+**Example.**
+** 24**. Solve
+
+$$\begin{aligned}
+y^{(7)}-2y^{(5)}+y^{(3)} & =0
+\end{aligned}$$
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{7}-2m^{5}+m^{3} &=0\\\\
+m^{3}(m^{2}-2m+1) & =0\\\\
+m^{3}(m-1)^{2} & =0
+\end{aligned}$$
+
+So, the equation has roots $0$ with multiplicity $3$ and $1$ with
+multiplicity $2$. The general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}x+c_{3}x^{2}+(c_{4}+c_{5}x)e^{x}
+\end{aligned}$$
+
+**Example.**
+** 25**. $y'''+3y''-y'-3y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
