@@ -1,5 +1,5 @@
 ---
-title: "The Theory of Linear Odes I"
+title: "[ODE-01] The Theory of Linear Odes I"
 date: 2023-09-11T08:06:54+02:00
 math: true
 tags: ["linear-odes"]
