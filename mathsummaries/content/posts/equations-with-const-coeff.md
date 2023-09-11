@@ -1062,7 +1062,7 @@ y^{(7)}-2y^{(5)}+y^{(3)} & =0
 The characteristic equation is:
 
 $$\begin{aligned}
-m^{7}-2m^{5}+m^{3} &=0\\\\
+m^{7}-2m^{5}+m^{3} & =0\\\\
 m^{3}(m^{2}-2m+1) & =0\\\\
 m^{3}(m-1)^{2} & =0
 \end{aligned}$$
@@ -1081,3 +1081,386 @@ y & =c_{1}+c_{2}x+c_{3}x^{2}+(c_{4}+c_{5}x)e^{x}
 *Solution.*
 
 The characteristic equation is:
+
+$$\begin{aligned}
+m^{3}+3m^{2}-m-3 & =0\\\\
+m^{2}(m+3)-(m+3) & =0\\\\
+(m^{2}-1)(m+3) & =0\\\\
+(m-1)(m+1)(m+3) & =0
+\end{aligned}$$
+
+The roots of the characteristic equation are $1$, $-1$ and $-3$. The
+general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{x}+c_{2}e^{-x}+c_{3}e^{-3x}
+\end{aligned}$$
+
+**Example.**
+** 26**. $y'''+5y''-8y'-12y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{3}+5m^{2}-8m-12 & =0\\\\
+(m+1)(m^{2}+4m-12) & =0\\\\
+(m+1)(m^{2}+6m-2m-12) & =0\\\\
+(m+1)(m(m+6)-2(m+6)) & =0\\\\
+(m+1)(m-2)(m+6) & =0
+\end{aligned}$$
+
+The roots of the characteristic equation are $-1$, $-6$ and $2$. The
+general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{-x}+c_{2}e^{-6x}+c_{3}e^{x}
+\end{aligned}$$
+
+**Example.**
+** 27**. $4y'''+12y''+9y'=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+4m^{3}+12m^{2}+9m & =0\\\\
+m(2m+3)^{2} & =0
+\end{aligned}$$
+
+The roots of the characteristic equation are $0$ and $-3/2$ having
+multiplicity $2$. The general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}+(c_{2}+c_{3}x)e^{-3x/2}
+\end{aligned}$$
+
+**Example.**
+** 28**. $y'''+6y''+13y'=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{3}+6m^{2}+13m & =0\\\\
+m(m^{2}+6m+13) & =0\\\\
+m((m+3)^{2}+2^{2}) & =0\\\\
+m((m+3)+\sqrt{2}i)((m+3)-\sqrt{2}i) & =0
+\end{aligned}$$
+
+The roots of the characteristic equation are $0$, $-3+\sqrt{2}i$ and
+$-3-\sqrt{2}i$. The general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}+e^{-3x}(c_{2}\cos\sqrt{2}x+c_{3}\sin\sqrt{2}x)
+\end{aligned}$$
+
+**Example.**
+** 29**. $2y'''+y''-8y'-4y=0$
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+2m^{3}+m^{2}-8m-4 & =0\\\\
+(m+2)(2m^{2}-3m-2) & =0\\\\
+(m+2)(2m^{2}-4m+m-2) & =0\\\\
+(m+2)(2m(m-2)+(m-2)) & =0\\\\
+(m+2)(m-2)(2m+1) & =0
+\end{aligned}$$
+
+The roots of the equation are $-2$, $-\frac{1}{2}$ and $2$. The general
+solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{-2x}+c_{2}e^{-x/2}+c_{3}e^{2x}
+\end{aligned}$$
+
+**Example.**
+** 30**. $y'''+3y''+y'+3y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{3}+3m^{2}+m+3 & =0\\\\
+(m^{2}+1)(m+3) & =0
+\end{aligned}$$
+
+The roots of the equation are $-3$, $i$ and $-i$. The general solution
+of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}e^{-3x}+(c_{2}\cos x+c_{3}\sin x)
+\end{aligned}$$
+
+**Example.**
+** 31**. $y^{(4)}+y^{(2)}=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{4}+m^{2} & =0\\\\
+m^{2}(m^{2}+1) & =0
+\end{aligned}$$
+
+The roots of the equation are $0$ having multiplicity $2$ and the
+complex conjugates $i$ and $-i$. The general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}x+c_{3}\cos x+c_{4}\sin x
+\end{aligned}$$
+
+**Example.**
+** 32**. $y^{(4)}-8y^{(2)}+16y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{4}-8m^{2}+16 & =0\\\\
+(m^{2}-4)^{2} & =0\\\\
+(m-2)^{2}(m+2)^{2} & =0
+\end{aligned}$$
+
+The roots of the equation are $-2$ and $2$ both having algebraic
+multiplicity $2$ each. The general solution of the differential equation
+is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)e^{-2x}+(c_{3}+c_{4}x)e^{2x}
+\end{aligned}$$
+
+**Example.**
+** 33**. $y^{(4)}+18y''+81y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{4}+18m^{2}+81 & =0\\\\
+(m^{2}+9)^{2} & =0\\\\
+(m+3i)^{2}(m-3i)^{2} & =0
+\end{aligned}$$
+
+The roots of the equation are the complex conjugates $-3i$ and $+3i$
+with algebraic multiplicity $2$ each. The general solution of the
+differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x)\cos3x+(c_{3}+c_{4}x)\sin3x
+\end{aligned}$$
+
+**Example.**
+** 34**. $4y^{(4)}-8y'''-y''+2y'=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+4m^{4}-8m^{3}-m^{2}+2m & =0\\\\
+m(4m^{3}-8m^{2}-m+2) & =0\\\\
+m(4m^{2}(m-2)-(m-2)) & =0\\\\
+m(m-2)(4m^{2}-1) & =0\\\\
+m(m-2)(2m-1)(2m+1) & =0
+\end{aligned}$$
+
+The roots of the equation are $0$, $-\frac{1}{2}$, $\frac{1}{2}$ and
+$2$. The general solution is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}e^{-x/2}+c_{3}e^{x/2}+c_{4}e^{2x}
+\end{aligned}$$
+
+**Example.**
+** 35**. $y^{(4)}+y'''+y''=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{4}+m^{3}+m^{2} & =0\\\\
+m^{2}(m^{2}+m+1) & =0\\\\
+m^{2}\left[\left(m+\frac{1}{2}\right)^{2}+\left(\frac{\sqrt{3}}{2}\right)^{2}\right] & =0
+\end{aligned}$$
+
+The roots of the equation are $0$ having algebraic multiplicity $2$ and
+the complex conjugates $\frac{-1+\sqrt{3}}{2}$, $\frac{-1-\sqrt{3}}{2}$.
+The general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}x+e^{-x/2}(c_{3}\cos\frac{\sqrt{3}}{2}x+c_{4}\sin\frac{\sqrt{3}}{2}x)
+\end{aligned}$$
+
+**Example.**
+** 36**. $y^{(4)}=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+m^{4} & =0
+\end{aligned}$$
+
+So, it has the trivial root $0$ with algbraic multiplicity $4$. The
+general solution of the differential equation is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}x+c_{3}x^{2}+c_{4}x^{3}
+\end{aligned}$$
+
+**Example.**
+** 37**. $y^{(4)}-4y'''+6y''-4y'+y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+(m-1)^{4} & =0
+\end{aligned}$$
+
+So, it has a root $1$ with algebraic multiplicity $4$. The general
+solution of the differential equation is:
+
+$$\begin{aligned}
+y & =(c_{1}+c_{2}x+c_{3}x^{2}+c_{4}x^{3})e^{x}
+\end{aligned}$$
+
+**Example.**
+** 38**. Find the general solution of $(D^{4}+1)y=0$.
+:::
+
+*Solution.*
+
+The characteristic equation is:
+
+$$\begin{aligned}
+(m^{4}+1) & =0\\\\
+((m^{2})-i^{2}) & =0\\\\
+(m^{2}-i)(m^{2}+i) & =0
+\end{aligned}$$
+
+We know that:
+
+$$\begin{aligned}
+\cos(2n\pi+\pi/2)+i\sin(2n\pi+\pi/2) & =i\\\\
+\cos(2n\pi+\pi/2)-i\sin(2n\pi+\pi/2) & =-i
+\end{aligned}$$
+
+By De-Moivre's law,
+$(\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta$. Hence:
+
+$$\begin{aligned}
+\cos(n\pi+\pi/4)+i\sin(n\pi+\pi/4) & =(i)^{1/2}\\\\
+\cos(n\pi+\pi/4)-i\sin(n\pi+\pi/4) & =(-i)^{1/2}
+\end{aligned}$$
+
+So, the roots of the characteristic equation are $\frac{1+i}{\sqrt{2}}$,
+$\frac{-1-i}{\sqrt{2}}$, $\frac{1-i}{\sqrt{2}}$ and
+$\frac{-1+i}{\sqrt{2}}$. The general solution of the differential
+equation is:
+
+$$\begin{aligned}
+y & =e^{x/\sqrt{2}}(c_{1}\cos\frac{x}{\sqrt{2}}+c_{2}\sin\frac{x}{\sqrt{2}})+e^{-x/\sqrt{2}}(c_{3}\cos\frac{x}{\sqrt{2}}+c_{4}\sin\frac{x}{\sqrt{2}})
+\end{aligned}$$
+
+**Example.**
+** 39**. Find the constant coefficient linear differential equation
+which has $e^{2x}$ and $xe^{-3x}$ among its solutions.
+:::
+
+*Solution.*
+
+In this case, we must find a constant coefficient linear differential
+operator $L$ with the property that $Le^{2x}=0$ and $Le^{-3x}=0$ (In
+more picturesque terminology, it is sometimes said that $L$ annihilates
+these functions.) Clearly, any operator which contains the factors
+$(D-2)$ and $(D+3)^{2}$ will answer the problem and hence,
+
+$$\begin{aligned}
+(D-2)(D+3)^{2}y & =0
+\end{aligned}$$
+
+will be an equation of the required type.
+
+**Example.**
+** 40**. Find a constant coefficient linear differential operator $L$
+which, when applied to the equation
+
+$$\begin{aligned}
+(D^{2}+1)(D-1)y & =e^{x}+2-7x\sin x
+\end{aligned}$$
+
+produces the homogenous equation
+
+$$\begin{aligned}
+L(D^{2}+1)(D-1)y & =0
+\end{aligned}$$
+:::
+
+*Solution.*
+
+Since $L$ must annihilate the functions $e^{x}$, $2$ and $x\sin x$, it
+must contain the factors $(D-1)$, $D$ and $(D^{2}+1)^{2}$. Therefore, we
+can set, $L=D(D-1)(D^{2}+1)^{2}$.
+
+## Solution of a Nonhomogenous linear differential equation with constant coefficients.  {#solution-of-a-nonhomogenous-linear-differential-equation-with-constant-coefficients. .unnumbered}
+
+### The Method of Undetermined Coefficients. {#the-method-of-undetermined-coefficients. .unnumbered}
+
+The general solution of the nonhomogenous differential equation:
+
+$$\begin{aligned}
+Ly=a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\ldots+a_{1}y'+a_{0}y & =h(x)\quad\tag{31}
+\end{aligned}$$
+
+is given by
+
+$$\begin{aligned}
+y & =y_{h}(x)+y_{p}(x)\quad\tag{32}
+\end{aligned}$$
+
+where $y_{h}(x)$ is the general solution of the associated homogenous
+equation of (31) and $y_{p}(x)$ is a particular solution of (31). We
+have already seen, how to find the general solution of $Ly=0$. There
+remains the problem of finding $y_{p}$.
+
+The procedure we are about to describe for finding $y_{p}$ is called the
+**method of undetermined coefficients**. It can be used only if the
+right hand side consists of a sum of terms each of which has finite
+number of linearly independent derivatives. This restriction implies
+that $h(x)$ can only contain terms such $a$, $x^{k}$, $e^{ax}$,
+$\sin ax$, $\cos ax$ and combinations of such terms. For example, the
+successive derivatives of $\sin2x$ are :
+
+$$2\cos2x,-4\sin2x,-8\cos2x,16\sin2x,\ldots$$
+
+However, only the set consisting of $\sin2x$ and $2\cos2x$ is linearly
+independent. The addition of any succeeding derivative makes the set
+linearly dependent.
