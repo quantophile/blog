@@ -381,7 +381,7 @@ y & =(c_{1}+c_{2}x)\cos x+(c_{3}+c_{4}x)\sin x
 
 Find the general solutions of each of the following equations.
 
-**Example.**
+**Exercise.**
 ** 1**. $y''+y'-2y=0$.
 :::
 
@@ -403,7 +403,7 @@ $$\begin{aligned}
 y & =c_{1}e^{x}+c_{2}e^{-2x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 2**. $3y''-5y'+2y=0$.
 :::
 
@@ -425,7 +425,7 @@ $$\begin{aligned}
 y & =c_{1}e^{\frac{2x}{3}}+c_{2}e^{x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 3**. $8y''+14y'-15y=0$.
 :::
 
@@ -448,7 +448,7 @@ $$\begin{aligned}
 y & =c_{1}e^{\frac{3x}{4}}+c_{2}e^{-\frac{2x}{5}}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 4**. $y''-2y'=0$.
 :::
 
@@ -468,7 +468,7 @@ $$\begin{aligned}
 y & =c_{1}+c_{2}e^{2x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 5**. $y''+4y=0$.
 :::
 
@@ -488,7 +488,7 @@ $$\begin{aligned}
 y & =c_{1}\cos2x+c_{2}\sin2x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 6**. $3y''+2y=0$.
 :::
 
@@ -509,7 +509,7 @@ $$\begin{aligned}
 y & =c_{1}\cos\frac{2}{3}x+c_{2}\sin\frac{2}{3}x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 7**. $y''+4y'+8y=0$.
 :::
 
@@ -530,7 +530,7 @@ $$\begin{aligned}
 y & =e^{-2x}(c_{1}\cos2x+c_{2}\sin2x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 8**. $4y''-4y'+3y=0$.
 :::
 
@@ -553,7 +553,7 @@ $$\begin{aligned}
 y & =e^{x}(c_{1}\cos\sqrt{2}x+c_{2}\sin\sqrt{2}x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 9**. $y''-2y'+2y=0$.
 :::
 
@@ -576,7 +576,7 @@ $$\begin{aligned}
 y & =e^{x}(c_{1}\cos x+c_{2}\sin x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 10**. $9y''-12y+4y=0$.
 :::
 
@@ -596,7 +596,7 @@ $$\begin{aligned}
 y & =(c_{1}+c_{2}x)e^{\frac{2x}{3}}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 11**. $y''+2y'+4y=0$.
 :::
 
@@ -618,7 +618,7 @@ $$\begin{aligned}
 y & =e^{-x}(c_{1}\cos\sqrt{3}x+c_{2}\sin\sqrt{3}x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 12**. $2y''-2\sqrt{2}y'+y=0$.
 :::
 
@@ -638,7 +638,7 @@ $$\begin{aligned}
 y & =(c_{1}+c_{2}x)e^{\frac{x}{\sqrt{2}}}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 13**. $2y''-5\sqrt{3}y'+6y=0$.
 :::
 
@@ -666,7 +666,7 @@ $$\begin{aligned}
 y & =c_{1}e^{2\sqrt{3}x}+c_{2}e^{\frac{\sqrt{3}}{2}x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 14**. $9y''+6y'+y=0$.
 :::
 
@@ -686,7 +686,7 @@ $$\begin{aligned}
 y & =(c_{1}+c_{2}x)e^{-\frac{x}{3}}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 15**. $64y''-48y'+17y=0$.
 :::
 
@@ -711,7 +711,7 @@ y & =e^{3x}(c_{1}\cos2\sqrt{2}x+c_{2}\sin2\sqrt{2}x)
 
 Find the solutions of the initial value problems.
 
-**Example.**
+**Exercise.**
 ** 16**. $2y''-y'-3y=0$; $y(0)=2$, $y'(0)=-\frac{7}{2}$.
 :::
 
@@ -766,7 +766,7 @@ $$\begin{aligned}
 y & =\frac{13}{5}e^{-x}-\frac{3}{5}e^{\frac{3x}{2}}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 17**. $y''-8y'+16y=0$, $y(0)=\frac{1}{2}$, $y'(0)=-\frac{1}{3}$.
 :::
 
@@ -810,7 +810,7 @@ $$\begin{aligned}
 y & =\left(\frac{1}{2}-\frac{7x}{3}\right)e^{4x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 18**. $4y''-12y'+9y=0$, $y(0)=1$ $y'(0)=\frac{7}{2}$.
 :::
 
@@ -850,7 +850,7 @@ $$\begin{aligned}
 y & =(1+2x)e^{\frac{3x}{2}}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 19**. $y''+2y=0$, $y(0)=2$, $y'(0)=2\sqrt{2}$.
 :::
 
@@ -893,7 +893,7 @@ $$\begin{aligned}
 y= & (1-\sqrt{2})\cos\sqrt{2}x+(1+\sqrt{2})\sin\sqrt{2}x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 20**. $4y''-4y'+5y=0$, $y(0)=\frac{1}{2}$, $y'(0)=1$.
 :::
 
@@ -936,7 +936,7 @@ $$\begin{aligned}
 y & =e^{x}\left[\frac{1}{2}\cos\sqrt{2}x+\frac{1}{2\sqrt{2}}\sin\sqrt{2}x\right]
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 21**. $y''+4y'+13y=0$, $y(0)=0$ and $y'(0)=-2$.
 :::
 
@@ -978,7 +978,7 @@ $$\begin{aligned}
 y= & -\frac{2}{3}e^{-2x}\sin3x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 22**. $9y''-3y'-2y=0$, $y(0)=3$, $y'(0)=-2$.
 :::
 
@@ -1022,7 +1022,7 @@ $$\begin{aligned}
 y & =-e^{2x/3}+4e^{-x/3}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 23**. Find the general solution of
 
 $$\begin{aligned}
@@ -1049,7 +1049,7 @@ $$\begin{aligned}
 y & =c_{1}e^{-x}+e^{\frac{x}{2}}(c_{1}\cos\frac{\sqrt{3}}{2}x+c_{2}\sin\frac{\sqrt{3}}{2}x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 24**. Solve
 
 $$\begin{aligned}
@@ -1074,7 +1074,7 @@ $$\begin{aligned}
 y & =c_{1}+c_{2}x+c_{3}x^{2}+(c_{4}+c_{5}x)e^{x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 25**. $y'''+3y''-y'-3y=0$.
 :::
 
@@ -1096,7 +1096,7 @@ $$\begin{aligned}
 y & =c_{1}e^{x}+c_{2}e^{-x}+c_{3}e^{-3x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 26**. $y'''+5y''-8y'-12y=0$.
 :::
 
@@ -1119,7 +1119,7 @@ $$\begin{aligned}
 y & =c_{1}e^{-x}+c_{2}e^{-6x}+c_{3}e^{x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 27**. $4y'''+12y''+9y'=0$.
 :::
 
@@ -1139,7 +1139,7 @@ $$\begin{aligned}
 y & =c_{1}+(c_{2}+c_{3}x)e^{-3x/2}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 28**. $y'''+6y''+13y'=0$.
 :::
 
@@ -1161,7 +1161,7 @@ $$\begin{aligned}
 y & =c_{1}+e^{-3x}(c_{2}\cos\sqrt{2}x+c_{3}\sin\sqrt{2}x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 29**. $2y'''+y''-8y'-4y=0$
 :::
 
@@ -1184,7 +1184,7 @@ $$\begin{aligned}
 y & =c_{1}e^{-2x}+c_{2}e^{-x/2}+c_{3}e^{2x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 30**. $y'''+3y''+y'+3y=0$.
 :::
 
@@ -1204,7 +1204,7 @@ $$\begin{aligned}
 y & =c_{1}e^{-3x}+(c_{2}\cos x+c_{3}\sin x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 31**. $y^{(4)}+y^{(2)}=0$.
 :::
 
@@ -1225,7 +1225,7 @@ $$\begin{aligned}
 y & =c_{1}+c_{2}x+c_{3}\cos x+c_{4}\sin x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 32**. $y^{(4)}-8y^{(2)}+16y=0$.
 :::
 
@@ -1247,7 +1247,7 @@ $$\begin{aligned}
 y & =(c_{1}+c_{2}x)e^{-2x}+(c_{3}+c_{4}x)e^{2x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 33**. $y^{(4)}+18y''+81y=0$.
 :::
 
@@ -1269,7 +1269,7 @@ $$\begin{aligned}
 y & =(c_{1}+c_{2}x)\cos3x+(c_{3}+c_{4}x)\sin3x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 34**. $4y^{(4)}-8y'''-y''+2y'=0$.
 :::
 
@@ -1292,7 +1292,7 @@ $$\begin{aligned}
 y & =c_{1}+c_{2}e^{-x/2}+c_{3}e^{x/2}+c_{4}e^{2x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 35**. $y^{(4)}+y'''+y''=0$.
 :::
 
@@ -1314,7 +1314,7 @@ $$\begin{aligned}
 y & =c_{1}+c_{2}x+e^{-x/2}(c_{3}\cos\frac{\sqrt{3}}{2}x+c_{4}\sin\frac{\sqrt{3}}{2}x)
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 36**. $y^{(4)}=0$.
 :::
 
@@ -1333,7 +1333,7 @@ $$\begin{aligned}
 y & =c_{1}+c_{2}x+c_{3}x^{2}+c_{4}x^{3}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 37**. $y^{(4)}-4y'''+6y''-4y'+y=0$.
 :::
 
@@ -1352,7 +1352,7 @@ $$\begin{aligned}
 y & =(c_{1}+c_{2}x+c_{3}x^{2}+c_{4}x^{3})e^{x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 38**. Find the general solution of $(D^{4}+1)y=0$.
 :::
 
@@ -1390,7 +1390,7 @@ $$\begin{aligned}
 y & =e^{x/\sqrt{2}}(c_{1}\cos\frac{x}{\sqrt{2}}+c_{2}\sin\frac{x}{\sqrt{2}})+e^{-x/\sqrt{2}}(c_{3}\cos\frac{x}{\sqrt{2}}+c_{4}\sin\frac{x}{\sqrt{2}})
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 39**. Find the constant coefficient linear differential equation
 which has $e^{2x}$ and $xe^{-3x}$ among its solutions.
 :::
@@ -1409,7 +1409,7 @@ $$\begin{aligned}
 
 will be an equation of the required type.
 
-**Example.**
+**Exercise.**
 ** 40**. Find a constant coefficient linear differential operator $L$
 which, when applied to the equation
 
@@ -1582,7 +1582,7 @@ y_{p} & =x^{2}e^{2x}+\frac{3}{25}\cos x-\frac{4}{25}\sin x
 Use the method of undetermined coefficients to find a particular
 solution for each of the following differential equations.
 
-**Example.**
+**Exercise.**
 ** 41**. $D(D+1)y=2x+3e^{x}$.
 :::
 
@@ -1631,7 +1631,7 @@ $$\begin{aligned}
 y_{p} & =-2x+x^{2}+\frac{3}{2}e^{x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 42**. $D(D+1)y=2+e^{-x}$.
 :::
 
@@ -1681,7 +1681,7 @@ $$\begin{aligned}
 y_{p} & =2x-xe^{-x}
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 43**. $D(D-1)y=\sin x$.
 :::
 
@@ -1735,7 +1735,7 @@ $$\begin{aligned}
 y_{p} & =\frac{1}{2}\cos x-\frac{1}{2}\sin x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 44**. $(D^{2}+1)y=3\cos x$.
 :::
 
@@ -1777,7 +1777,7 @@ $$\begin{aligned}
 y_{p} & =\frac{3x}{2}\sin x
 \end{aligned}$$
 
-**Example.**
+**Exercise.**
 ** 45**. $(D^{2}+4D+2)y=xe^{-2x}$
 :::
 
