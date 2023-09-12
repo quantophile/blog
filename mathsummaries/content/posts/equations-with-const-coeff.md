@@ -270,7 +270,7 @@ $$\begin{aligned}
 c_{1}\cos\beta x+c_{2}\sin\beta x & =\sqrt{c_{1}^{2}+c_{2}^{2}}\left(\frac{c_{1}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\cos\beta x+\frac{c_{2}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\sin\beta x\right)\quad\tag{23}
 \end{aligned}$$
 
-![image](../img01.svg)
+![image](img01)
 
 From the above figure, we see that
 
@@ -1452,15 +1452,373 @@ have already seen, how to find the general solution of $Ly=0$. There
 remains the problem of finding $y_{p}$.
 
 The procedure we are about to describe for finding $y_{p}$ is called the
-**method of undetermined coefficients**. It can be used only if the
-right hand side consists of a sum of terms each of which has finite
-number of linearly independent derivatives. This restriction implies
-that $h(x)$ can only contain terms such $a$, $x^{k}$, $e^{ax}$,
-$\sin ax$, $\cos ax$ and combinations of such terms. For example, the
-successive derivatives of $\sin2x$ are :
+**method of undetermined coefficients**.
 
-$$2\cos2x,-4\sin2x,-8\cos2x,16\sin2x,\ldots$$
+Consider the constant coefficient equation in (31) again:
 
-However, only the set consisting of $\sin2x$ and $2\cos2x$ is linearly
-independent. The addition of any succeeding derivative makes the set
-linearly dependent.
+$$\begin{aligned}
+Ly & =h\quad\tag{33}
+\end{aligned}$$
+
+Suppose $h$ itself is a solution of a linear differential equation with
+constant coefficients. Then, we can find a linear differential operator
+$L_{1}$ which annihilates $h$ (such that $L_{1}h=0$) and it follows that
+every solution of (33) is also a solution of the homogenous equation
+
+$$\begin{aligned}
+L_{1}Ly & =0\quad\tag{34}
+\end{aligned}$$
+
+Thus, we can obtain a particular solution for (33) by appropriately
+determining the constants in the general solution of (34). A few
+examples will suffice to demonstrate this technique.
+
+::: example*
+** 4**. Since $D^{3}$ annihilates the right-hand side of the equation
+
+$$\begin{aligned}
+(D^{2}+1)y & =3x^{2}+4\quad\tag{35}
+\end{aligned}$$
+
+a particular solution can be found amongst the solutions of the
+homogenous equation:
+
+$$\begin{aligned}
+D^{3}(D^{2}+1)y & =0\quad\tag{36}
+\end{aligned}$$
+
+In other words (35) has a particular solution of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{1}+c_{2}x+c_{3}x^{2}+(c_{4}\cos x+c_{5}\sin x)\quad\tag{37}
+\end{aligned}$$
+
+for suitable values of $c_{1},\ldots,c_{5}$. In fact, we can say even
+more than this, if we observe that $c_{4}\cos x+c_{5}\sin x$ is the
+general solution of the homogenous equation $(D^{2}+1)y=0$. For then, it
+is clear that the last two terms will be annihilated when substituted in
+(35). So, rather than mindlessly dragging them through our computations
+only to see them disappear in the process, we can begin by setting :
+
+$$\begin{aligned}
+y_{p} & =c_{1}+c_{2}x+c_{3}x^{2}\quad\tag{38}
+\end{aligned}$$
+
+Substituting this expression in (35), we obtain:
+
+$$\begin{aligned}
+(D^{2}+1)(c_{1}+c_{2}x+c_{3}x^{2}) & =3x^{2}+4\\\\
+2c_{3}+(c_{1}+c_{2}x+c_{3}x^{2}) & =3x^{2}+4\\\\
+c_{3}x^{2}+c_{2}x+(c_{1}+2c_{3}) & =3x^{2}+4
+\end{aligned}$$
+
+Comparing the coefficients, we find that:
+
+$$c_{3}=3,\quad c_{2}=0,\quad c_{1}+2c_{3}=4$$
+
+Hence, $c_{1}=-2$, $c_{2}=0$ and $c_{3}=3$. Hence, the particular
+solution of (35) is:
+
+$$\begin{aligned}
+y_{p} & =3x^{2}-2
+\end{aligned}$$
+:::
+
+::: example*
+** 5**. We are interested to find a particular solution of :
+
+$$\begin{aligned}
+(D^{2}-4D+4)y & =2e^{2x}+\cos x\quad\tag{39}
+\end{aligned}$$
+
+We apply the operator $(D-2)(D^{2}+1)$ to the equation (39) and obtain:
+
+$$\begin{aligned}
+(D-2)^{3}(D^{2}+1) & =0\quad\tag{40}
+\end{aligned}$$
+
+The general solution of this last differential equation (40) is:
+
+$$\begin{aligned}
+y & =c_{1}e^{2x}+c_{2}xe^{2x}+c_{3}x^{2}e^{2x}+(c_{4}\cos x+c_{5}\sin x)
+\end{aligned}$$
+
+Since the first two terms of this expression are annihilated by the
+operator $(D-2)^{2}$, we look for a particular solution of (39) of the
+form:
+
+$$\begin{aligned}
+y_{p} & =c_{3}x^{2}e^{2x}+c_{4}\cos x+c_{5}\sin x
+\end{aligned}$$
+
+In this case,
+
+$$\begin{aligned}
+y_{p}' & =2c_{3}xe^{2x}+2c_{3}x^{2}e^{2x}-c_{4}\sin x+c_{5}\cos x\\\\
+y_{p}'' & =2c_{3}e^{2x}+4c_{3}xe^{2x}+4c_{3}xe^{2x}+4c_{3}x^{2}e^{2x}-c_{4}\cos x-c_{5}\sin x
+\end{aligned}$$
+
+Thus,
+
+$$\begin{aligned}
+y_{p}''-4y_{p}'+4 & =2c_{3}e^{2x}+8c_{3}xe^{2x}+4c_{3}x^{2}e^{2x}-c_{4}\cos x-c_{5}\sin x\\\\
+ & -4(2c_{3}xe^{2x}+2c_{3}x^{2}e^{2x}-c_{4}\sin x+c_{5}\cos x)\\\\
+ & +4(c_{3}x^{2}e^{2x}+c_{4}\cos x+c_{5}\sin x)\\\\
+ & =2c_{3}e^{2x}+(3c_{4}+4c_{5})\cos x+(4c_{4}+3c_{5})\sin x
+\end{aligned}$$
+
+Comparing with the right hand side, we find that:
+
+$$c_{3}=1,\quad3c_{4}-4c_{5}=1,\quad4c_{4}+3c_{5}=0$$
+
+Therefore, $c_{3}=1$, $c_{4}=\frac{3}{25}$ and $c_{5}=-\frac{4}{25}$.
+So, the desired particular solution to (39) is:
+
+$$\begin{aligned}
+y_{p} & =x^{2}e^{2x}+\frac{3}{25}\cos x-\frac{4}{25}\sin x
+\end{aligned}$$
+:::
+
+Use the method of undetermined coefficients to find a particular
+solution for each of the following differential equations.
+
+**Example.**
+** 41**. $D(D+1)y=2x+3e^{x}$.
+:::
+
+*Solution.*
+
+We apply the operator $D^{2}(D-1)$ to the given differential equation
+and obtain:
+
+$$\begin{aligned}
+D^{3}(D^{2}-1)y & =0\quad\tag{41}
+\end{aligned}$$
+
+The general solution of the last differential equation (41) is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}x+c_{3}x^{2}+c_{4}e^{-x}+c_{5}e^{x}
+\end{aligned}$$
+
+Since the terms $c_{1}$ and $c_{4}e^{-x}$ are annihilated by the
+operator $D(D+1)$, we look for a particular solution of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{2}x+c_{3}x^{2}+c_{5}e^{x}
+\end{aligned}$$
+
+Differentiating twice, we get:
+
+$$\begin{aligned}
+y_{p}' & =c_{2}+2c_{3}x+c_{5}e^{x}\\\\
+y_{p}'' & =2c_{3}+c_{5}e^{x}
+\end{aligned}$$
+
+Subbing these in the original equation, we get:
+
+$$\begin{aligned}
+2c_{3}+c_{5}e^{x}+c_{2}+2c_{3}x+c_{5}e^{x} & =2x+3e^{x}\\\\
+(c_{2}+2c_{3})+2c_{3}x+2c_{5}e^{x} & =2x+3e^{x}
+\end{aligned}$$
+
+Comparing these, we have $c_{2}+2c_{3}=0$, $2c_{3}=2$ and $2c_{5}=3$.
+Consequently, $c_{2}=-2$, $c_{3}=1$ and $c_{5}=\frac{3}{2}$.
+
+So, the desired particular solution to the given nonhomogenous ODE is:
+
+$$\begin{aligned}
+y_{p} & =-2x+x^{2}+\frac{3}{2}e^{x}
+\end{aligned}$$
+
+**Example.**
+** 42**. $D(D+1)y=2+e^{-x}$.
+:::
+
+*Solution.*
+
+We apply the operator $D^{2}(D+1)$ to the given differential equation
+and obtain:
+
+$$\begin{aligned}
+D^{3}(D+1)^{2}y & =0\quad\tag{42}
+\end{aligned}$$
+
+The general solution to the last ODE is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}x+c_{3}x^{2}+c_{4}e^{-x}+c_{5}xe^{-x}
+\end{aligned}$$
+
+Since the terms $c_{1}$ and $c_{4}e^{-x}$ are annihilated by the
+operator $D(D+1)$, we look for a particular solution of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{2}x+c_{3}x^{2}+c_{5}xe^{-x}
+\end{aligned}$$
+
+Differentiating twice we have:
+
+$$\begin{aligned}
+y_{p}' & =c_{2}+2c_{3}x+c_{5}e^{-x}-c_{5}xe^{-x}\\\\
+y_{p}'' & =2c_{3}-c_{5}e^{-x}-c_{5}e^{-x}+c_{5}xe^{-x}
+\end{aligned}$$
+
+Subbing these in the original equation, we get:
+
+$$\begin{aligned}
+c_{2}+2c_{3}+2c_{3}x-c_{5}e^{-x} & =2+e^{-x}
+\end{aligned}$$
+
+Comparing these, we get:
+
+$$c_{2}+2c_{3}=2,\quad c_{3}=0,\quad-c_{5}=1$$
+
+So, $c_{2}=2$, $c_{3}=0$ and $c_{5}=-1$. The desired particular solution
+to the nonhomogenous ODE is:
+
+$$\begin{aligned}
+y_{p} & =2x-xe^{-x}
+\end{aligned}$$
+
+**Example.**
+** 43**. $D(D-1)y=\sin x$.
+:::
+
+*Solution.*
+
+We apply the operator $(D^{2}+1)$ to the given differential equation and
+obtain:
+
+$$\begin{aligned}
+D(D-1)(D^{2}+1)y & =0
+\end{aligned}$$
+
+The general solution to the last ODE is:
+
+$$\begin{aligned}
+y & =c_{1}+c_{2}e^{x}+c_{3}\cos x+c_{4}\sin x
+\end{aligned}$$
+
+Since the terms $c_{1}$, $c_{2}e^{x}$ are annihilated by the operator
+$D(D-1)$ we are seeking a particular solution of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{3}\cos x+c_{4}\sin x
+\end{aligned}$$
+
+Also we have:
+
+$$\begin{aligned}
+y_{p}' & =-c_{3}\sin x+c_{4}\cos x\\\\
+y_{p}'' & =-c_{3}\cos x-c_{4}\sin x
+\end{aligned}$$
+
+Thus,
+
+$$\begin{aligned}
+y_{p}''-y_{p}' & =\sin x\\\\
+(-c_{3}-c_{4})\cos x+(c_{3}-c_{4})\sin x & =\sin x
+\end{aligned}$$
+
+Comparing we get:
+
+$$\begin{aligned}
+c_{3}+c_{4} & =0\\\\
+c_{3}-c_{4} & =1
+\end{aligned}$$
+
+We have: $c_{3}=\frac{1}{2}$, $c_{4}=-\frac{1}{2}$. The desired
+particular solution is:
+
+$$\begin{aligned}
+y_{p} & =\frac{1}{2}\cos x-\frac{1}{2}\sin x
+\end{aligned}$$
+
+**Example.**
+** 44**. $(D^{2}+1)y=3\cos x$.
+:::
+
+*Solution.*
+
+We apply the operator $(D^{2}+1)$ to the given differential equation and
+obtain:
+
+$$\begin{aligned}
+(D^{2}+1)^{2}y & =0
+\end{aligned}$$
+
+The general solution to the last ODE is:
+
+$$\begin{aligned}
+y & =c_{1}\cos x+c_{2}x\cos x+c_{3}\sin x+c_{4}x\sin x
+\end{aligned}$$
+
+Since the terms $c_{1}\cos x$ and $c_{3}\sin x$ are annihilated by the
+operator $(D^{2}+1)$, we seek a particular solution of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{2}x\cos x+c_{4}x\sin x\\\\
+y_{p}' & =c_{2}\cos x-c_{2}x\sin x+c_{4}\sin x+c_{4}x\cos x\\\\
+y_{p}'' & =-c_{2}\sin x-c_{2}\sin x-c_{2}x\cos x+c_{4}\cos x+c_{4}\cos x-c_{4}x\sin x
+\end{aligned}$$
+
+So we have:
+
+$$\begin{aligned}
+y_{p}''+y_{p} & =3\cos x\\\\
+-2c_{2}\sin x+2c_{4}\cos x & =3\cos x
+\end{aligned}$$
+
+Comparing these, we find that $-2c_{2}=0$ and $2c_{4}=3$. So, $c_{2}=0$,
+$c_{4}=\frac{3}{2}$. The desired particular solution is:
+
+$$\begin{aligned}
+y_{p} & =\frac{3x}{2}\sin x
+\end{aligned}$$
+
+**Example.**
+** 45**. $(D^{2}+4D+2)y=xe^{-2x}$
+:::
+
+*Soution.*
+
+We apply the operator $(D+2)^{2}$ to the given differential equation to
+obtain:
+
+$$\begin{aligned}
+(D+2)^{2}(D^{2}+4D+2y) & =0
+\end{aligned}$$
+
+The general solution to the last ODE is:
+
+$$\begin{aligned}
+y & =c_{1}e^{-2x}+c_{2}xe^{-2x}+c_{3}e^{(-2+\sqrt{2})x}+c_{4}e^{(-2-\sqrt{2})x}
+\end{aligned}$$
+
+Since the last two terms are annihilated by the operator $D^{2}+4D+2$,
+we are seeking a particular solution of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{1}e^{-2x}+c_{2}xe^{-2x}\\\\
+y_{p}' & =-2c_{1}e^{-2x}+c_{2}e^{-2x}-2c_{2}xe^{-2x}\\\\
+y_{p}'' & =-2(-2c_{1}+c_{2})e^{-2x}-2c_{2}e^{-2x}+4c_{2}xe^{-2x}\\\\
+ & =(4c_{1}-4c_{2})e^{-2x}+4c_{2}xe^{-2x}
+\end{aligned}$$
+
+We have:
+
+$$\begin{aligned}
+xe^{-2x} & =y_{p}''+4y_{p}'+2y_{p}\\\\
+ & =((4c_{1}-4c_{2})+4c_{2}x\\\\
+ & +4(-2c_{1}+c_{2})-8c_{2}x\\\\
+ & +2c_{1}+2c_{2}x)e^{-2x}\\\\
+ & =-2c_{1}e^{-2x}-2c_{2}xe^{-2x}
+\end{aligned}$$
+
+Comparing we get $c_{1}=0$, $c_{2}=-\frac{1}{2}$. The desired particular
+solution is:
+
+$$\begin{aligned}
+y_{p} & =-\frac{x}{2}e^{-2x}
+\end{aligned}$$
