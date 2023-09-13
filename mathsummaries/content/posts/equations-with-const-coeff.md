@@ -270,7 +270,7 @@ $$\begin{aligned}
 c_{1}\cos\beta x+c_{2}\sin\beta x & =\sqrt{c_{1}^{2}+c_{2}^{2}}\left(\frac{c_{1}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\cos\beta x+\frac{c_{2}}{\sqrt{c_{1}^{2}+c_{2}^{2}}}\sin\beta x\right)\quad\tag{23}
 \end{aligned}$$
 
-![image](img01)
+![image](../img01.svg)
 
 From the above figure, we see that
 
@@ -1916,31 +1916,31 @@ $$\begin{aligned}
 y_{p}''+a_{1}y_{p}'+a_{0}y_{p} & =h
 \end{aligned}$$
 
-$$\begin{split}c_{1}''y_{1}+2c_{1}'y_{1}'+c_{1}y_{1}''+c_{2}''y_{2}+2c_{2}'y_{2}'+c_{2}y_{2}''\\\\
+$$\begin{aligned}c_{1}''y_{1}+2c_{1}'y_{1}'+c_{1}y_{1}''+c_{2}''y_{2}+2c_{2}'y_{2}'+c_{2}y_{2}''\\\\
 +a_{1}(c_{1}'y_{1}+c_{1}y_{1}'+c_{2}'y_{2}+c_{2}y_{2}')\\\\
 +a_{2}(c_{1}y_{1}+c_{2}y_{2}) & =h
-\end{split}$$
+\end{aligned}$$
 
 We can re-group the above terms as follows:
 
-$$\begin{split}c_{1}(y_{1}''+a_{1}y_{1}'+a_{2}y_{1})+c_{2}(y_{2}''+a_{1}y_{2}'+a_{2}y_{2})\\\\
+$$\begin{aligned}c_{1}(y_{1}''+a_{1}y_{1}'+a_{2}y_{1})+c_{2}(y_{2}''+a_{1}y_{2}'+a_{2}y_{2})\\\\
 +c_{1}''y_{1}+c_{1}'y_{1}'+c_{2}''y_{2}+c_{2}'y_{2}'\\\\
 +a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h
-\end{split}$$
+\end{aligned}$$
 
 Since $(c_{i}'y_{i})'=c_{i}''y_{i}+c_{i}'y_{i}'$, we can write:
 
-$$\begin{split}c_{1}(y_{1}''+a_{1}y_{1}'+a_{2}y_{1})+c_{2}(y_{2}''+a_{1}y_{2}'+a_{2}y_{2})\\\\
+$$\begin{aligned}c_{1}(y_{1}''+a_{1}y_{1}'+a_{2}y_{1})+c_{2}(y_{2}''+a_{1}y_{2}'+a_{2}y_{2})\\\\
 +(c_{1}'y_{1}+c_{2}'y_{2})'\\\\
 +a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h
-\end{split}
+\end{aligned}
 \quad\tag{46}$$
 
 Since $y_{1}$ and $y_{2}$ are the solutions of the homogenous equation
 $y''+a_{1}y_{1}'+a_{2}=0$, the first two terms in (46) vanish, and we
 have:
 
-$$\begin{split}(c_{1}'y_{1}+c_{2}'y_{2})'+a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h\end{split}
+$$\begin{aligned}(c_{1}'y_{1}+c_{2}'y_{2})'+a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h\end{aligned}
 \quad\tag{47}$$
 
 This identity which must hold if $y_{p}$ is the particular solution of
