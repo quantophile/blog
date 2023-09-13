@@ -1822,3 +1822,125 @@ solution is:
 $$\begin{aligned}
 y_{p} & =-\frac{x}{2}e^{-2x}
 \end{aligned}$$
+
+## Nonhomogenous equations - Method of the Variation of Parameters. {#nonhomogenous-equations---method-of-the-variation-of-parameters. .unnumbered}
+
+Consider again the non-homogenous linear differential equation:
+
+$$\begin{aligned}
+Ly & =h\quad\tag{41}
+\end{aligned}$$
+
+Using the language of linear operators, the problem of finding the
+particular solution of (41), consists of finding exactly one function in
+$\mathcal{C}^{n}[a,b]$ which satisfies that equation. This as we know,
+is equivalent to the problem of constructing a right inverse for $L$;
+meaning of course a linear transformation
+$G:\mathcal{C}[a,b]\to\mathcal{C}^{n}[a,b]$ such that $LG(h)=h$ for all
+$h$ in $\mathcal{C}[a,b]$.
+
+The existence theorem guarantees that the equation (41) has solutions
+for every $h$ in $\mathcal{C}[a,b]$, and the only open question is how
+to go about selecting a particular inverse for $L$ from the infinitely
+many that exist. In other words, how do we impose conditions on (41) to
+ensure that it has a unique solution for each $h$ in $\mathcal{C}[a,b]$.
+When asked in these terms, an answer is obvious: we require that the
+solution satisfy a "complete" set of initial conditions at some point
+$x_{0}$ in the interval $[a,b]$. Since the particular solution obtained
+is quite immaterial, we choose the simplest of all possible initial
+conditions:
+
+$$y(x_{0})=0,y'(x_{0})=0,\ldots,y^{(n-1)}(x_{0})=0\quad\tag{42}$$
+
+And with this, we have in fact defined the right inverse $G$ for the
+operator $L$. Specifically, $G$ can be described as the linear mapping
+from $\mathcal{C}[a,b]$ to $\mathcal{C}^{n}[a,b]$ which sends each
+function $h$ in $\mathcal{C}[a,b]$ onto the solution of (41) which
+satisfies the initial conditions above. In this section, we shall obtain
+an explicit formula for $G$ in terms of a basis for the solution space
+of the homogenous equation $Ly=0$ when $L$ is an operator for order $2$.
+In the next section, these results will be generalized to linear
+operators of an arbitrary order, and once this has been done, the study
+of linear differential equations will have been reduced to the
+homogenous case.
+
+Thus, we begin by considering a second-order linear differential
+equation:
+
+$$\begin{aligned}
+\frac{d^{2}y}{dx^{2}}+a_{1}(x)\frac{dy}{dx}+a_{0}(x)y & =h(x)\quad\tag{43}
+\end{aligned}$$
+
+defined on an interval $[a,b]$ of the $x$-axis.
+
+Let $y_{h}$be the general solution of its associated homogenous
+equation. $y_{h}$ can be written as:
+
+$$\begin{aligned}
+y_{h} & =c_{1}y_{1}(x)+c_{2}y_{2}(x)\quad\tag{44}
+\end{aligned}$$
+
+We seek a particular solution $y_{p}$ of (43) such that:
+
+$$\begin{aligned}
+y_{p}(x_{0}) & =0\\\\
+y_{p}'(x_{0}) & =0
+\end{aligned}$$
+
+where $x_{0}$ is a fixed but otherwise arbitrary point in $[a,b]$.
+
+The construction of $y_{p}$ is begun by making the unjustified but
+unreasonable assumption that any particular solution of (43) ought to be
+related to the expression for $y_{h}$, and therefore we attempt to alter
+$y_{h}$ in such a way that it becomes the solution of the given
+equation. One way of doing this is to allow the parameters $c_{1}$ and
+$c_{2}$ in (44) to vary with $x$ in the hope of finding a solution of
+(43) of the form:
+
+$$\begin{aligned}
+y_{p} & =c_{1}(x)y_{1}(x)+c_{2}(x)y_{2}(x)\quad\tag{45}
+\end{aligned}$$
+
+Differentiating using the Leibnitz rule, we have:
+
+$$\begin{aligned}
+y_{p}' & =c_{1}'y_{1}+c_{1}y_{1}'+c_{2}'y_{2}+c_{2}y_{2}'\\\\
+y_{p}'' & =c_{1}''y_{1}+2c_{1}'y_{1}'+c_{1}y_{1}''\\\\
+ & +c_{2}''y_{2}+2c_{2}'y_{2}'+c_{2}y_{2}''
+\end{aligned}$$
+
+If (45) is substituted in (43), and the notation simplified by
+supressing mention of the variable $x$, we obtain:
+
+$$\begin{aligned}
+y_{p}''+a_{1}y_{p}'+a_{0}y_{p} & =h
+\end{aligned}$$
+
+$$\begin{split}c_{1}''y_{1}+2c_{1}'y_{1}'+c_{1}y_{1}''+c_{2}''y_{2}+2c_{2}'y_{2}'+c_{2}y_{2}''\\\\
++a_{1}(c_{1}'y_{1}+c_{1}y_{1}'+c_{2}'y_{2}+c_{2}y_{2}')\\\\
++a_{2}(c_{1}y_{1}+c_{2}y_{2}) & =h
+\end{split}$$
+
+We can re-group the above terms as follows:
+
+$$\begin{split}c_{1}(y_{1}''+a_{1}y_{1}'+a_{2}y_{1})+c_{2}(y_{2}''+a_{1}y_{2}'+a_{2}y_{2})\\\\
++c_{1}''y_{1}+c_{1}'y_{1}'+c_{2}''y_{2}+c_{2}'y_{2}'\\\\
++a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h
+\end{split}$$
+
+Since $(c_{i}'y_{i})'=c_{i}''y_{i}+c_{i}'y_{i}'$, we can write:
+
+$$\begin{split}c_{1}(y_{1}''+a_{1}y_{1}'+a_{2}y_{1})+c_{2}(y_{2}''+a_{1}y_{2}'+a_{2}y_{2})\\\\
++(c_{1}'y_{1}+c_{2}'y_{2})'\\\\
++a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h
+\end{split}
+\quad\tag{46}$$
+
+Since $y_{1}$ and $y_{2}$ are the solutions of the homogenous equation
+$y''+a_{1}y_{1}'+a_{2}=0$, the first two terms in (46) vanish, and we
+have:
+
+$$\begin{split}(c_{1}'y_{1}+c_{2}'y_{2})'+a_{1}(c_{1}'y_{1}+c_{2}'y_{2})+(c_{1}'y_{1}'+c_{2}'y_{2}') & =h\end{split}
+\quad\tag{47}$$
+
+This identity which must hold if $y_{p}$ is the particular solution of
