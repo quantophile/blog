@@ -1,0 +1,49 @@
+baseurl: "https://quantophile.github.io/mathsummaries/"
+languageCode: "en-us"
+title: "Math Summaries"
+theme: "contrast-hugo"
+googleAnalytics: ""
+disqusShortname: ""
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
+preserveTaxonomyNames: true
+footnotereturnlinkcontents: "↩"
+hasCJKLanguage: true
+enableEmoji: true
+paginate: 6
+
+permalinks:
+  post: "/post/:year/:month/:day/:slug/"
+
+menu:
+  main:
+    - name: Home
+      url: ""
+      weight: 1
+    - name: About
+      url: about/
+      weight: 2
+    - name: Categories
+      url: categories/
+      weight: 3
+    - name: Tags
+      url: tags/
+      weight: 4
+    - name: Subscribe
+      url: index.xml
+
+params:
+  minimal: false
+  excerpts : false
+  description: "A website built through Hugo and blogdown."
+
+  text:
+    back: "&larr; Back to Home"
+    edit: "Edit this page &rarr;"
+    truncated: "&hellip;"
+
+markup:
+  highlight:
+    codeFences: true
+  goldmark:
+    renderer:
+      unsafe: true

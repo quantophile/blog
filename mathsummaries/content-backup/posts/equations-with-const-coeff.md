@@ -12,7 +12,7 @@ Linear differential equations with constant coefficients, that is
 equations of the form:
 
 $$\begin{aligned}
-a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\ldots+a_{0}y & =h(x)\quad\tag{1}
+a_{n}y^{(n)}+a_{n-1}y^{(n-1)}+\ldots+a_{0}y &=h(x)\quad\tag{1}
 \end{aligned}$$
 
 in which $a_{0},a_{1},\ldots,a_{n}\neq0$ are real constants, are in many

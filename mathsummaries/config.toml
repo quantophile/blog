@@ -1,4 +1,0 @@
-baseURL = 'https://quantophile.github.io/mathsummaries/'
-languageCode = 'en-us'
-title = "Math Summaries"
-theme = 'contrast-hugo'
