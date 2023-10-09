@@ -8,5 +8,5 @@ categories: ["Partial Differential Equations"]
 
 These are my notes on analytic methods to solve linear second order partial differential equations, heavily based on text *Partial Differential Equations: An introduction* by Walter, Strauss.
 
-[PDE01-Gauss's and Stoke's theorem](./../gauss-and-stokes-theorem.pdf)
+[PDE01-Gauss's and Stoke's theorem](./../../../../gauss-and-stokes-theorem.pdf)
 
