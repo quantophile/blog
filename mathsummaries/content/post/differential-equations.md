@@ -328,5 +328,3 @@ def adamsBashforth2(funct, x_0, startTime, endTime, h, epsilon):
 
     return t, x, f
 ```
-
-![Adams-Bashforth](../adams-bashforth2.png)
