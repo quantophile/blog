@@ -2,3 +2,6 @@
 	path = mathsummaries/public
 	url = https://github.com/quantophile/mathsummaries.git
 	branch = main
+[submodule "mathsummaries/themes/black-and-light"]
+	path = mathsummaries/themes/black-and-light
+	url = https://github.com/davidhampgonsalves/hugo-black-and-light-theme.git

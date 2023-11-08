@@ -32,9 +32,9 @@ menu:
       url: index.xml
 
 params:
-  minimal: false
+  minimal: true
   excerpts : false
-  description: "A website built through Hugo and blogdown."
+  description: "Math Summaries"
 
   text:
     back: "&larr; Back to Home"
@@ -46,4 +46,4 @@ markup:
     codeFences: true
   goldmark:
     renderer:
-      unsafe: true
+      unsafe: false

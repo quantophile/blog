@@ -1,7 +1,7 @@
 ---
 title: "Numerical methods for ODEs"
 date: 2023-09-09T11:33:41+02:00
-math: true
+math: katex
 categories: ["Differential Equations"]
 ---
 
