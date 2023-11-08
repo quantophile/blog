@@ -33,10 +33,10 @@ The natural interpretation of a risk-free asset is that it corresponds to a bank
 The Black-Scholes model consists of two assets with dynamics given by:
 
 $$
-\begin{align}
+\begin{align*}
 dB(t) &= r(t)B(t)dt\\\\
 dS(t) &= \mu S(t)dt+ \sigma S(t)dW(t)
-\end{align}
+\end{align*}
 $$
 
 We setup a self-financing portfolio $\Pi$ that is comprised of one option and an amount $\Delta(t)$ of the underlying stock. 
@@ -73,7 +73,7 @@ We set $\Delta(t) = \frac{\partial V}{\partial x}$, thereby eliminating the rand
 $$
 \begin{align*}
 d\Pi(t) 
-&=\left[\frac{\partial V}{\partial t} + \frac{1}{2} \sigma^2 S_t^2 \frac{\partial^2 V}{\partial x^2}\right]dt  
+&=\left\[\frac{\partial V}{\partial t} + \frac{1}{2} \sigma^2 S_t^2 \frac{\partial^2 V}{\partial x^2}\right\]dt  
 \end{align*}
 $$
 
