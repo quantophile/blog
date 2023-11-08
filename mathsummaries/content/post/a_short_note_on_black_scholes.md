@@ -72,8 +72,7 @@ We set $\Delta(t) = \frac{\partial V}{\partial x}$, thereby eliminating the rand
 
 $$
 \begin{align*}
-d\Pi(t) 
-&=\left\[\frac{\partial V}{\partial t} + \frac{1}{2} \sigma^2 S_t^2 \frac{\partial^2 V}{\partial x^2}\right\]dt  
+d\Pi(t) &= \left\[\frac{\partial V}{\partial t} + \frac{1}{2} \sigma^2 S_t^{2} \frac{\partial^2 V}{\partial x^2} \right\] dt
 \end{align*}
 $$
 
