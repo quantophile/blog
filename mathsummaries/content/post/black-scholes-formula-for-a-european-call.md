@@ -49,10 +49,8 @@ The domain of integration is all $z$ satisfying:
 
 $$
 \begin{align*}
-S(t)\exp \left\[ \left(r - \frac{\sigma^2}{2}\right)\tau - \sigma \sqrt{\tau}Z\right\] &> \log K\\\\\\\\
-\log S(t) + \left\[ \left(r - \frac{\sigma^2}{2}\right)\tau - \sigma \sqrt{\tau}Z\right\] &> \log K \\\\\\\\
-\log \frac{S(t)}{K} +(r-\sigma^2/2)\tau &> \sigma \sqrt{\tau}Z \\\\\\\\
-\frac{\log \frac{S(t)}{K} +(r-\sigma^2/2)\tau}{\sigma\sqrt{\tau}} &> Z
+S(t)\exp \left\[ \left(r - \frac{\sigma^2}{2}\right)\tau - \sigma \sqrt{\tau}Z\right\] &>  K\\\\
+\log \frac{S(t)}{K} + \left(r - \frac{\sigma^2}{2}\right)\tau  &> \sigma \sqrt{\tau}Z 
 \end{align*}
 $$
 
