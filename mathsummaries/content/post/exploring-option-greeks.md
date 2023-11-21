@@ -40,7 +40,7 @@ Whether a call or a put, it is an option to exchange $K$ units of the domestic c
 If we want to express the above as a CCY1/CCY1 price, the conversion is easy : we just take the CCY2/CCY1 price above and convert the CCY2 value into CCY1 terms using today's spot rate $S_0$:
 
 $$
-V\_{\text{\\% f}} = \frac{\omega}{S\_0}e^{-r\_{DOM}T}\left\[F\Phi(\omega d\_{+}) - K\Phi(\omega d\_{-})\right\] = \frac{V\_{d/f}}{S\_0}
+V_{\text{\\% f}} = \frac{\omega}{S_0}e^{-r_{DOM}T}[F\Phi(\omega d_{+}) - K\Phi(\omega d_{-})] = \frac{V_{d/f}}{S_0}
 $$
 
 For the %CCY2 price, we start with the CCY2/CCY1 price, this being the price in CCY2 of an option with a unit notional in the foreign currency. Since the strike is predetermined, it is also the price in CCY2 of an option with a notional of $K$ in CCY2. So, the CCY1/CCY2 price divided by $K$, is the $%ccy2$ price i.e. the percentage domestic price:
@@ -53,7 +53,7 @@ $$V_{f/d} = \frac{V_{\\% d}}{S_0} = \frac{V_{d/f}}{S_0 K}$$
 
 The four prices above are relative to the notionals of $K$ in the domestic currency and $1$ in the foreign currency. If the actual notionals are $N_d$ and $N_f$ in domestic and foreign currencies where $N_d = K \cdot N_f$, then we scale accordingly.
 
-#### Implementing the analytic BS-formula
+### Implementing the Bl Calculator and Option Greeks.
 
 
 ```python
@@ -101,7 +101,7 @@ def PV(S_t,K,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut):
 
 
 ```python
-S_t=1.40 ; K=1.45 ; t=0.0 ;T=1.0 ; r_DOM=0.04 ; r_FOR=0.06 ; sigma=0.08 ; CCY1Notional=1.00
+S_t=1.0549 ; K=1.0710 ; t=0.0 ;T=1.0 ; r_DOM=0.041039868 ; r_FOR= 0.025860353; sigma=0.08971 ; CCY1Notional=100.00
 
 ATMForward = atTheMoneyForward(S_t,K,t,T,r_DOM,r_FOR,sigma)
 
@@ -116,9 +116,9 @@ print(f"Call Price = {call_price} USD")
 print(f"Put Price = {put_price} USD")
 ```
 
-    At the money forward = 1.3722781426294575 USD
-    Call Price = 0.01578455115811581 USD
-    Put Price = 0.09045889091103623 USD
+    At the money forward = 1.0710350214586397 USD
+    Call Price = 3.679399488751329 USD
+    Put Price = 3.676038161145839 USD
     
 
 #### Plotting the option price against the CCY1CCY2 spot
@@ -129,20 +129,14 @@ import matplotlib.pyplot as plt
 
 plt.grid(True)
 plt.title('Plot of EUR Call/USD Put Option price')
-S_t = np.linspace(1.35,1.55,101)
+S_t = np.linspace(0.90,1.24,201)
+CCY1Notional = 1.00
+
 call_price_1y = PV(S_t,K,t,1.0,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
-call_price_9m = PV(S_t,K,t,0.75,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
-call_price_6m = PV(S_t,K,t,0.50,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
-call_price_3m = PV(S_t,K,t,0.25,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
-call_price_1d = PV(S_t,K,t,(1.0/365.00),r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
 
 plt.xlabel(r'EURUSD FX spot')
 plt.xlabel(r'Option price (USD)')
 plt.plot(S_t,call_price_1y)
-plt.plot(S_t,call_price_9m)
-plt.plot(S_t,call_price_6m)
-plt.plot(S_t,call_price_3m)
-plt.plot(S_t,call_price_1d)
 
 plt.show()
 
@@ -150,7 +144,7 @@ plt.show()
 
 
     
-![png](../../../../exploring-option-greeks01.png)
+![png](./../../../../exploring-option-greeks01.png)
     
 
 
@@ -162,29 +156,21 @@ plt.grid(True)
 plt.title('Plot of EUR Put/USD Call Option price')
 
 put_price_1y = PV(S_t,K,t,1.0,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION)
-put_price_9m = PV(S_t,K,t,0.75,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION)
-put_price_6m = PV(S_t,K,t,0.50,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION)
-put_price_3m = PV(S_t,K,t,0.50,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION)
-put_price_1d = PV(S_t,K,t,1/365,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION)
+
 
 plt.xlabel(r'EURUSD FX spot')
 plt.xlabel(r'Option price (USD)')
 
 plt.plot(S_t,put_price_1y)
-plt.plot(S_t,put_price_9m)
-plt.plot(S_t,put_price_6m)
-plt.plot(S_t,put_price_3m)
-plt.plot(S_t,put_price_1d)
+
 plt.show()
 ```
 
 
     
-![png](../../../../exploring-option-greeks02.png)
+![png](./../../../../exploring-option-greeks02.png)
     
 
-
-## Option Greeks.
 
 To derive the deltas, we use the following propositions, which are really easy to prove.
 
@@ -237,7 +223,7 @@ $$
 
 $$
 \begin{align*}
-\frac{\phi(\omega d_{+})}{\phi(\omega d_{-})} &= \exp\left\[-\omega^2\left(\frac{d_{+}^2-d_{-}^2}{2}\right)\right\]\\\\
+\frac{\phi(\omega d_{+})}{\phi(\omega d_{-})} &= \exp\left[-\omega^2\left(\frac{d_{+}^2-d_{-}^2}{2}\right)\right]\\\\
 &= \exp\left\[-\omega^2(\log (S_0/K) + (r_{DOM} - r_{FOR})T)\right\]\\\\
 &= \exp\left\[\omega^2((r_{FOR} - r_{DOM})T)\right\](K/S_0)^{\omega^2}
 \end{align*}
@@ -276,13 +262,13 @@ def analyticDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CA
 
 
 ```python
-S_t=1.40 ; K=1.45 ; t=0.0 ;T=1.0 ; r_DOM=0.04 ; r_FOR=0.06 ; sigma=0.08 ; CCY1Notional=1.00
+S_t=1.0549 ; CCY1Notional=100.00
 
 pips_spot_delta = analyticDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
 print(f"Spot Delta = {pips_spot_delta} EUR")
 ```
 
-    Spot Delta = 0.24324371203694523 EUR
+    Spot Delta = 50.48090225276146 EUR
     
 
 #### Plotting the Analytic Delta of call options
@@ -296,36 +282,246 @@ plt.title('Plot of Analytic delta of the European call')
 plt.xlabel('EURUSD spot price')
 plt.ylabel(r'$\frac{\partial V}{\partial S}$')
 
-S_t = np.linspace(1.35,1.55,101)
+S_t = np.linspace(0.90,1.24,201)
+CCY1Notional = 1.00
 delta = analyticDelta(S_t,K,t,1.0,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
 plt.plot(S_t,delta,label='T=1Y')
-delta = analyticDelta(S_t,K,t,0.75,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
-plt.plot(S_t,delta,label='T=9M')
-delta = analyticDelta(S_t,K,t,0.50,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
-plt.plot(S_t,delta,label='T=6M')
-delta = analyticDelta(S_t,K,t,0.25,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
-plt.plot(S_t,delta,label='T=3M')
-delta = analyticDelta(S_t,K,t,1/365.0,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
-plt.plot(S_t,delta,label='T=1D')
 plt.legend(loc="upper left")
 plt.show()
 ```
 
 
     
-![png](../../../../exploring-option-greeks03.png)
+![png](./../../../../exploring-option-greeks03.png)
     
 
 
 ### Forward Delta
 
-The interpretation of the foward delta is the number of units of FOR of forward contracts a trader needs to buy to delta hedge a short option position. 
+The interpretation of the foward delta is the number of units of FOR of forward contracts a trader needs to buy to delta hedge a short option position. According to Wystup, if we translate this hedge ratio in calculus, it means that we need to compute (for a call)
 
+$$
+\frac{\partial v_{\text{option}}}{\partial v_{\text{forward}}}
+$$
 
+The value of a forward contract $v_{\text{forward}}$ for an agreed forward exchange rate $K$ is:
+
+$$
+\begin{align*}
+v_{\text{forward}} &= e^{-r_{DOM}T}\mathbb{E}^{\mathbb{Q}^d}[R_T - K]\\\\
+&= e^{-r_{DOM}T}(R_0 \mathbb{E}^{\mathbb{Q}^d}[e^{(r_{DOM} - r_{FOR} - (\sigma^2/2))T + \sigma \sqrt{T} Z}] - K)\\\\
+&= e^{-r_{DOM}T}(R_0 e^{(r_{DOM} - r_{FOR})T} - K)\\\\
+&= R_0 e^{- r_{FOR}T} - K e^{-r_{DOM}T}
+\end{align*}
+$$
+
+So, the derivative of the value of the forward contract with respect to the spot is:
+
+$$\frac{\partial v_{\text{forward}}}{\partial R_0} = e^{-r_{FOR}T}$$
+
+Using the chain rule and the derivative of the inverse function, we obtain the forward delta:
+
+$$
+\begin{align*}
+\frac{\partial v_{\text{option}}}{\partial v_{\text{forward}}} &= \frac{\partial v_{\text{option}}}{\partial v_{R_0}} \times \frac{\partial v_{R_0}}{\partial v_{\text{forward}}}\\\\
+&=\omega e^{-r_{FOR}T}\Phi(\omega d_{+}) \times e^{r_{FOR}T}\\\\
+&= \omega \Phi(\omega d_{+})
+\end{align*}
+$$
 
 
 ```python
-
+def forwardDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION):
+    omega = callPut.value
+    d_plus = dPlus(S_t,K,t,T,r_DOM,r_FOR,sigma)
+    return omega  * norm.cdf(omega * d_plus) * CCY1Notional
 ```
+
+
+```python
+S_t=1.0549 ; CCY1Notional=100.00
+
+forward_delta = forwardDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
+print(f"Forward Delta = {forward_delta} EUR of forward contracts")
+```
+
+    Forward Delta = 51.803382405811725 EUR of forward contracts
+    
+
+## Gamma.
+
+$$
+\begin{align*}
+\frac{\partial^2 V}{\partial S_0^2} &= \omega e^{-r_{FOR}T} \frac{\partial}{\partial S_0}\Phi(\omega d_{+}) \\\\
+&= \omega e^{-r_{FOR}T} \phi(\omega d_{+}) \frac{\omega}{\sigma S_0 \sqrt{T}}\\\\
+&= e^{-r_{FOR}T} \frac{\phi(\omega d_{+})}{\sigma S_0 \sqrt{T}}
+\end{align*}
+$$
+
+The interpretation of the gamma is the change of the delta as the spot changes. A high gamma means that the delta hedge must be adapted very frequently and will cause transaction costs. Gamma is typically high when the spot is near a strike of a barrier, generally, whenever the payoff has a kink or dramatically a jump. Trading systems usually quote gamma as a *trader's gamma*, using a one percent relative change in the spot price. 
+
+
+```python
+def analyticGamma(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION):
+    omega = callPut.value
+    d_plus = dPlus(S_t,K,t,T,r_DOM,r_FOR,sigma)
+    return np.exp(-r_FOR * (T-t)) * norm.cdf(omega * d_plus) / (sigma * S_t * np.sqrt(T-t)) * CCY1Notional
+```
+
+
+```python
+gamma = analyticGamma(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
+print(f"Analytic Gamma = {gamma} EUR")
+```
+
+    Analytic Gamma = 533.4269573839681 EUR
+    
+
+### Theta.
+
+Let $\tau = T- t$, $\frac{\partial \tau}{\partial t} = -1$. 
+
+We first observe that:
+
+$$
+\begin{align*}
+d_{-} &= d_{+} - \sigma\sqrt{\tau}\\\\
+\frac{\partial d_{-}}{\partial t} &= \frac{\partial d_{+}}{\partial t} + \frac{\sigma}{2\sqrt{\tau}}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+\phi (d_{-}) &= \exp\left[-\frac{1}{2}(d_{+} - \sigma \sqrt{\tau})^2\right]\\\\
+&= \exp\left[-\frac{1}{2}(d_{+}^2 -2 d_{+}\sigma\sqrt{\tau} + \sigma^2 \tau)\right]\\\\
+&= \exp\left(-\frac{1}{2}d_{+}^2\right) \exp(d_{+}\sigma\sqrt{\tau}) \exp(-\frac{1}{2} \sigma^2 \tau)\\\\
+&= \phi(d_{+}) \exp\left(\log \frac{S_0}{K} + (r_{DOM} - r_{FOR} + \frac{\sigma^2}{2})\tau\right) \exp(-\frac{1}{2} \sigma^2 \tau)\\\\
+&= \phi(d_{+}) \frac{S_0}{K} \exp((r_{DOM} - r_{FOR})\tau)\exp(\frac{\sigma^2 \tau}{2}) \exp(-\frac{1}{2} \sigma^2 \tau)\\\\
+&= \frac{S_0}{K} \cdot \phi(d_{+}) e^{(r_{DOM} - r_{FOR})\tau}
+\end{align*}
+$$
+
+And since $\phi(\omega d_{\pm}) = \phi(d_{\pm})$, we can write:
+
+$$\phi(\omega d_{-})= \frac{S_0}{K} \phi(\omega d_{+}) e^{(r_{DOM} - r_{FOR})\tau}$$
+
+The value function of a vanilla European option is:
+
+$$v_{\text{option}} = \omega [S_0 e^{-r_{FOR}\tau} \Phi(\omega d_{+}) - K e^{-r_{DOM}\tau} \Phi(\omega d_{-})]$$
+
+
+Differentiating with respect to $t$, we get:
+
+$$\frac{\partial v_{\text{option}}}{\partial t} = \omega[S_0 \frac{\partial }{\partial t}e^{-r_{FOR}\tau}\Phi(\omega d_{+}) - K \frac{\partial }{\partial t} e^{-r_{DOM}\tau}\Phi(\omega d_{-})]$$
+
+The first term can be expressed as:
+
+$$
+\begin{align*}
+\frac{\partial }{\partial t} e^{-r_{FOR}\tau} \Phi(\omega d_{+}) &= r_{FOR}e^{-r_{FOR}\tau}\Phi(\omega d_{+}) + \omega e^{-r_{FOR}\tau} \phi(\omega d_{+}) \frac{\partial d_{+}}{\partial t}
+\end{align*}
+$$
+
+The second term can be expressed as:
+
+$$
+\begin{align*}
+\frac{\partial }{\partial t} e^{-r_{DOM}\tau}\Phi(\omega d_{-}) &= r_{DOM}e^{-r_{DOM}\tau}\Phi(\omega d_{-}) + \omega  e^{-r_{DOM}\tau}\phi(\omega d_{-}) \frac{\partial d_{-}}{\partial t}\\\\
+&=r_{DOM}e^{-r_{DOM}\tau}\Phi(\omega d_{-}) + \omega \cdot \frac{S_0}{K}  e^{-r_{DOM}\tau}\phi(\omega d_{+}) e^{(r_{DOM} - r_{FOR})\tau}\left(\frac{\partial d_{+}}{\partial t} + \frac{\sigma}{2\sqrt{\tau}}\right)\\\\
+&=r_{DOM}e^{-r_{DOM}\tau}\Phi(\omega d_{-}) + \omega \cdot \frac{S_0}{K}  e^{-r_{FOR}\tau}\phi(\omega d_{+}) \left(\frac{\partial d_{+}}{\partial t} + \frac{\sigma}{2\sqrt{\tau}}\right)\\\\
+\end{align*}
+$$
+
+Collecting the two terms we have:
+
+$$
+\begin{align*}
+&S_0 \frac{\partial }{\partial t} e^{-r_{FOR}\tau} \Phi(\omega d_{+}) - K \frac{\partial }{\partial t} e^{-r_{DOM}\tau}\Phi(\omega d_{-}) \\\\
+=& S_0 r_{FOR}e^{-r_{FOR}\tau}\Phi(\omega d_{+}) + \omega S_0 e^{-r_{FOR}\tau} \phi(\omega d_{+}) \frac{\partial d_{+}}{\partial t}\\\\
+-& K r_{DOM}e^{-r_{DOM}\tau}\Phi(\omega d_{-}) - \omega S_0  e^{-r_{FOR}\tau}\phi(\omega d_{+}) \left(\frac{\partial d_{+}}{\partial t} + \frac{\sigma}{2\sqrt{\tau}}\right)\\\\
+=& S_0 r_{FOR}e^{-r_{FOR}\tau}\Phi(\omega d_{+}) - K r_{DOM}e^{-r_{DOM}\tau}\Phi(\omega d_{-}) - \omega S_0  e^{-r_{FOR}\tau}\phi(\omega d_{+}) \frac{\sigma}{2\sqrt{\tau}}
+\end{align*}
+$$
+
+Therefore,
+
+$$
+\begin{align*}
+\frac{\partial v_{\text{option}}}{\partial t} &= \omega [S_0 r_{FOR}e^{-r_{FOR}\tau}\Phi(\omega d_{+}) - K r_{DOM}e^{-r_{DOM}\tau}\Phi(\omega d_{-})] \\\\
+&- S_0  e^{-r_{FOR}\tau}\phi(\omega d_{+}) \frac{\sigma}{2\sqrt{\tau}}
+\end{align*}
+$$
+
+
+```python
+def analyticTheta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION):    
+    
+    omega = callPut.value
+    FOR_df = np.exp(-r_FOR*(T-t)); DOM_df =np.exp(-r_DOM*(T-t));
+    dplus = dPlus(S_t,K,t,T,r_DOM,r_FOR,sigma); dminus = dMinus(S_t,K,t,T,r_DOM,r_FOR,sigma);
+    Nd1 = norm.cdf(omega * dplus); Nd2 = norm.cdf(omega * dminus)
+    
+    theta = (omega * (S_t * r_FOR * FOR_df * Nd1 - K * r_DOM * DOM_df * Nd2) 
+            - S_t * FOR_df * Nd1 * (sigma / (2 * np.sqrt(T-t)))) * CCY1Notional
+    
+    return theta
+```
+
+
+```python
+S_t=1.0549 ; CCY1Notional=100.00
+
+theta = analyticTheta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
+print(f"Analytic Theta = {theta} USD")
+```
+
+    Analytic Theta = -3.04597416111385 USD
+    
+
+Theta reflects the change of the option value as the clock ticks. The *trader's theta* in a risk-management system refers to the change in the option value in one day, i.e. it can be approximated by $365 \frac{\partial v}{\partial t}$.
+
+### Vega.
+
+$$
+\begin{align*}
+\frac{\partial v}{\partial \sigma} &= \omega[S_0 e^{-r_{FOR}\tau} \frac{\partial}{\partial \sigma}\Phi(\omega d_{+}) - K e^{-r_{DOM}\tau} \frac{\partial}{\partial \sigma}\Phi(\omega d_{-})]\\\\
+ &= \omega[S_0 e^{-r_{FOR}\tau} \phi(\omega d_{+})\frac{\partial d_{+}}{\partial \sigma} - K e^{-r_{DOM}\tau} \phi(\omega d_{-}) \frac{\partial d_{-}}{\partial \sigma}]
+\end{align*}
+$$
+
+Note that, $d_{-} = d_{+} - \sigma\sqrt{\tau}$, so $\frac{\partial d_{-}}{\partial \sigma} = \frac{\partial d_{+}}{\partial \sigma} - \sqrt{\tau}$. 
+
+Also, $\phi(\omega d_{-})=\frac{K}{S_0}e^{(r_{DOM} - r_{FOR})\tau}\phi(\omega d_{+})$.
+
+Plugging these two facts in the expression for option vega, we get:
+
+$$
+\begin{align*}
+\frac{\partial v}{\partial \sigma}  &= \omega[S_0 e^{-r_{FOR}\tau} \phi(\omega d_{+})\frac{\partial d_{+}}{\partial \sigma} \\\\
+&- K e^{-r_{DOM}\tau} \frac{K}{S_0}e^{(r_{DOM} - r_{FOR})\tau}\phi(\omega d_{+}) \left(\frac{\partial d_{+}}{\partial \sigma} - \sqrt{\tau}\right)]\\\\
+&= S_0 e^{-r_{FOR}\tau} \phi(\omega d_{+}) \sqrt{\tau}
+\end{align*}
+$$
+
+### Vanna.
+
+The vanna is *dvega/dspot*. It reflects the change in the vega as the spot moves.
+
+$$
+\begin{align*}
+\frac{\partial^2 v}{\partial \sigma \partial S_0} &= \frac{\partial}{\partial S_0} \left(\frac{\partial v}{\partial \sigma}\right)\\\\
+&= e^{-r_{FOR}\tau} \sqrt{\tau}\cdot \frac{\partial}{\partial S_0}(S_0\phi(\omega d_{+}))\\\\
+&= e^{-r_{FOR}\tau} \sqrt{\tau}(\phi(\omega d_{+}) + S_0 \frac{\partial}{\partial S_0}\phi(\omega d_{+}))\\\\
+&= e^{-r_{FOR}\tau} \sqrt{\tau}(\phi(\omega d_{+}) + \omega S_0 \frac{\partial}{\partial d_{+}}\phi(\omega d_{+})\cdot \frac{\partial d_{+}}{\partial S_0})\\\\
+&= e^{-r_{FOR}\tau} \sqrt{\tau}(\phi(\omega d_{+}) + \omega S_0\frac{1}{\sqrt{2\pi}} \cdot\frac{\partial}{\partial d_{+}}\exp(-d_{+}^2/2)\cdot \frac{1}{\sigma S_0 \sqrt{\tau}})\\\\
+&= e^{-r_{FOR}\tau} \sqrt{\tau}(\phi(\omega d_{+}) + \omega \frac{1}{\sqrt{2\pi}}e^{-d_{+}^2/2} (-d_{+})\cdot \frac{1}{\sigma \sqrt{\tau}})\\\\
+&= e^{-r_{FOR}\tau} \sqrt{\tau}\phi(\omega d_{+})(1 -  \frac{d_{+}}{\sigma \sqrt{\tau}})\\\\
+&= -e^{-r_{FOR}\tau} \phi(\omega d_{+})\frac{d_{-}}{\sigma}
+\end{align*}
+$$
+
+### Volga.
+
+The volga is *dvega/dvol*. It reflects the change in the vega as the vol moves.
 
 
