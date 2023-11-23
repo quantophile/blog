@@ -223,9 +223,58 @@ $$
 
 $$
 \begin{align*}
-\frac{\phi(\omega d_{+})}{\phi(\omega d_{-})} &= \exp\left[-\omega^2\left(\frac{d_{+}^2-d_{-}^2}{2}\right)\right]\\\\
+\frac{\phi(\omega d_{+})}{\phi(\omega d_{-})} &= \exp\left\[-\omega^2\left(\frac{d_{+}^2-d_{-}^2}{2}\right)\right\]\\\\
 &= \exp\left\[-\omega^2(\log (S_0/K) + (r_{DOM} - r_{FOR})T)\right\]\\\\
 &= \exp\left\[\omega^2((r_{FOR} - r_{DOM})T)\right\](K/S_0)^{\omega^2}
+\end{align*}
+$$
+
+Also,
+
+$$S_0 e^{-r_{FOR}\tau} \phi(d_{+}) = K e^{-r_{DOM}\tau} \phi(d_{-})$$
+
+***Proposition.*** The following recurring identities hold:
+
+(a) $\frac{\partial d_{+}}{\partial \sigma} = -\frac{d_{\mp}}{\sigma}$
+
+***Proof.***
+
+We have:
+
+$$
+\begin{align*}
+\frac{\partial d_{\pm}}{\partial \sigma} &= \frac{\partial}{\partial \sigma}\left(\frac{\log (F/K)}{\sigma \sqrt{\tau}} + \frac{1}{2}\sigma{\sqrt{\tau}}\right)\\\\
+&= \left(\frac{-\log (F/K)}{\sigma^2 \sqrt{\tau}} \pm \frac{1}{2}{\sqrt{\tau}}\right)\\\\
+&= -\left(\frac{\log (F/K)}{\sigma^2 \sqrt{\tau}} \mp \frac{\frac{\sigma^2}{2}\tau}{\sigma^2 \sqrt{\tau}}\right)\\\\
+&= -\frac{1}{\sigma}\left(\frac{\log (F/K) \mp \frac{\sigma^2}{2}\tau}{\sigma \sqrt{\tau}}\right)\\\\
+&= -\frac{d_{\mp}}{\sigma}
+\end{align*}
+$$
+
+(b) $\frac{\partial d_{\pm}}{\partial r_{DOM}} = \frac{\sqrt{\tau}}{\sigma}$
+
+***Proof.***
+
+We have:
+
+$$
+\begin{align*}
+\frac{\partial d_{\pm}}{\partial r_{DOM}} &= \frac{\partial }{\partial r_{DOM}}\frac{\log (S_0/K) + (r_{DOM} - r_{FOR})\tau \pm (\sigma^2/2)\tau}{\sigma \sqrt{\tau}}\\\\
+&= \frac{\tau}{\sigma \sqrt{\tau}}\frac{\partial}{\partial {r_{DOM}}}(r_{DOM} - r_{FOR})\\\\
+&= \frac{\sqrt{\tau}}{\sigma}
+\end{align*}
+$$
+
+(c) $\frac{\partial d_{\pm}}{\partial r_{FOR}}= - \frac{\sqrt{\tau}}{\sigma}$
+
+***Proof.***
+
+We have:
+
+$$
+\begin{align*}
+\frac{\partial d_{\pm}}{\partial r_{FOR}} &= \frac{\sqrt{\tau}}{\sigma}\frac{\partial}{\partial {r_{FOR}}} (r_{DOM} - r_{FOR})\\\\
+&= -\frac{\sqrt{\tau}}{\sigma}
 \end{align*}
 $$
 
@@ -524,4 +573,29 @@ $$
 
 The volga is *dvega/dvol*. It reflects the change in the vega as the vol moves.
 
+We have:
+
+$$
+\begin{align*}
+\frac{d^2 v}{d\sigma^2} &= \frac{\partial}{\partial \sigma} \left(S_0 e^{-r_{FOR}\tau} \phi(\omega d_{+}) \sqrt{\tau}\right)\\\\
+&=S_0 e^{-r_{FOR}\tau} \sqrt{\tau} \cdot \frac{\partial}{\partial \sigma} \phi(\omega d_{+})\\\\
+&=S_0 e^{-r_{FOR}\tau} \sqrt{\tau} \cdot \frac{\partial}{\partial d_{+}}(\phi(\omega d_{+}))\cdot \frac{\partial}{\partial \sigma} d_{+}\\\\
+&=S_0 e^{-r_{FOR}\tau} \sqrt{\tau} \cdot (-d_{+})\phi(\omega d_{+})\cdot \frac{-d_{-}}{\sigma}\\\\
+&=S_0 e^{-r_{FOR}\tau} \sqrt{\tau} \phi(\omega d_{+})\frac{d_{+}d_{-}}{\sigma}
+\end{align*}
+$$
+
+## Rho.
+
+$$
+\begin{align*}
+\frac{\partial v}{\partial r_{DOM}} &= \omega \frac{\partial}{\partial r_{DOM}}\left(S_0 e^{-r_{FOR} \tau} \Phi(\omega d_{+}) - K e^{-r_{DOM}\tau} \Phi(\omega d_{-})\right)\\\\
+&= \omega \left[S_0\right]
+\end{align*}
+$$
+
+
+```python
+
+```
 
