@@ -18,9 +18,8 @@ This value $\sigma_{\text{imp}}$ implied from the market price of the option is 
 
 Thus, although the BS model suffers from flaws, it is mainly used as a quote converter. In the FX options market, option prices are quoted in terms of implied volatilities. The BS formula is used to convert implied vols $\sigma_{\text{imp}}$ to prices and vice versa. The delta hedge to be exchanged between counterparties is calculated according to the BS formula, and this is also true for the Vega hedge of various exotic options. In many cases, the model is also used to run trading books. 
 
-Market conventions used in the FX markets are usually specified in terms of the price and vol attributes of options with various delta characteristics. So, it's nice to explore the intricacies of various types of FX delta and how they are used in the description of market volatility surfaces. The entire concept of the FX volatility smile is based on the parametrization with respect to delta. 
 
-I walk-through the various market conventions used in practice.
+In this note, I explore various delta conventions and derive the greeks. Check out [FX Vol smile](https://mathfinance.com/wp-content/uploads/2017/06/CPQF_Arbeits20_neu2.pdf) by Wyestup! The entire concept of the FX volatility smile is based on the parametrization with respect to delta.
 
 ## Quote style conversions.
 
@@ -62,6 +61,7 @@ The four prices above are relative to the notionals of $K$ in the domestic curre
 
 import numpy as np
 from scipy.stats import norm
+from enum import Enum
 
 # An FX option is the right to exchange 1 unit notional of the 
 # foreign currency for K units of the domestic currency at time T. 
@@ -101,9 +101,10 @@ def PV(S_t,K,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut):
 
 
 ```python
-S_t=1.0549 ; K=1.0710 ; t=0.0 ;T=1.0 ; r_DOM=0.041039868 ; r_FOR= 0.025860353; sigma=0.08971 ; CCY1Notional=100.00
+S_t=1.0549 ; K=1.0710350214586397 ; t=0.0 ;T=1.0 ; 
+r_DOM=0.041039868 ; r_FOR= 0.025860353; sigma=0.08971 ; CCY1Notional=100.00
 
-ATMForward = atTheMoneyForward(S_t,K,t,T,r_DOM,r_FOR,sigma)
+forward = atTheMoneyForward(S_t,K,t,T,r_DOM,r_FOR,sigma)
 
 call_price = PV(S_t,K,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
 put_price = PV(S_t,K,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION)
@@ -111,14 +112,37 @@ put_price = PV(S_t,K,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_O
 
 
 ```python
-print(f"At the money forward = {ATMForward} USD")
-print(f"Call Price = {call_price} USD")
-print(f"Put Price = {put_price} USD")
+print(f"Notional = {CCY1Notional} EUR")
+
+print(f"\nAt the money forward = {forward} USD")
+print(f"\nCall Price = {call_price} USD pips")
+print(f"Put Price = {put_price} USD pips")
+
+print(f"\nCall price = {call_price/S_t} % EUR")
+print(f"Put price = {put_price/S_t} % EUR")
+
+print(f"\nCall price = {call_price/K} % USD")
+print(f"Put price = {put_price/K} % USD")
+
+print(f"\nCall price = {call_price/(S_t * K)} EUR pips")
+print(f"Put price = {put_price/(S_t * K)} EUR pips")
 ```
 
+    Notional = 100.0 EUR
+    
     At the money forward = 1.0710350214586397 USD
-    Call Price = 3.679399488751329 USD
-    Put Price = 3.676038161145839 USD
+    
+    Call Price = 3.6777787101031754 USD pips
+    Put Price = 3.6777787101031754 USD pips
+    
+    Call price = 3.4863766329540007 % EUR
+    Put price = 3.4863766329540007 % EUR
+    
+    Call price = 3.4338547633058893 % USD
+    Put price = 3.4338547633058893 % USD
+    
+    Call price = 3.2551471829613132 EUR pips
+    Put price = 3.2551471829613132 EUR pips
     
 
 #### Plotting the option price against the CCY1CCY2 spot
@@ -130,12 +154,12 @@ import matplotlib.pyplot as plt
 plt.grid(True)
 plt.title('Plot of EUR Call/USD Put Option price')
 S_t = np.linspace(0.90,1.24,201)
-CCY1Notional = 1.00
+CCY1Notional = 100.00
 
 call_price_1y = PV(S_t,K,t,1.0,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
 
 plt.xlabel(r'EURUSD FX spot')
-plt.xlabel(r'Option price (USD)')
+plt.xlabel(r'Call option price (USD pips)')
 plt.plot(S_t,call_price_1y)
 
 plt.show()
@@ -159,7 +183,7 @@ put_price_1y = PV(S_t,K,t,1.0,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.
 
 
 plt.xlabel(r'EURUSD FX spot')
-plt.xlabel(r'Option price (USD)')
+plt.ylabel(r'Put option price (USD pips)')
 
 plt.plot(S_t,put_price_1y)
 
@@ -171,6 +195,39 @@ plt.show()
 ![png](./../../../../exploring-option-greeks02.png)
     
 
+
+## Outright forward rate.
+
+Consider a contract with payoff at time $T$, $V_T = R_T - K$. The value of this claim at time zero is:
+
+$$
+\begin{align*}
+v_0 &= e^{-r_{DOM}T}\mathbb{E}^{\mathbb{Q}^d}[R_T - K]\\\\
+&= e^{-r_{DOM}T}(R_0 \mathbb{E}^{\mathbb{Q}^d}[e^{(r_{DOM} - r_{FOR} - (\sigma^2/2))T + \sigma \sqrt{T} Z}] - K)\\\\
+&= e^{-r_{DOM}T}(R_0 e^{(r_{DOM} - r_{FOR})T} - K)\\\\
+&= R_0 e^{- r_{FOR}T} - K e^{-r_{DOM}T}
+\end{align*}
+$$
+
+The forward price(strike) $K=F_{0,T}$ is set such that, the value of the contract at time zero is $0$. So,
+
+$$
+F_{0,T} = K =R_0 e^{(r_{DOM}-r_{FOR})T}
+$$
+
+## Put call parity.
+
+We know that, 
+
+$$(S_T - K)^{+} - (K - S_T)^{+} = (S_T - K)$$
+
+By the risk-neutral-pricing formula:
+
+$$\mathbb{E}^{\mathbb{Q}^d}[e^{-r_{DOM}T}(S_T - K)^{+}|\mathcal{F_t}] - \mathbb{E}^{\mathbb{Q}^d}[e^{-r_{DOM}T}(K - S_T)^{+}|\mathcal{F_t}] = \mathbb{E}^{\mathbb{Q}^d}[e^{-r_{DOM}T}(S_T - K)|\mathcal{F_t}]$$
+
+Thus,
+
+$$V_{\text{call}}(t,T) - V_{\text{put}}(t,T) = e^{-r_{FOR}T}S_t - e^{-r_{DOM}T} K = F(t,T)$$
 
 To derive the deltas, we use the following propositions, which are really easy to prove.
 
@@ -278,6 +335,10 @@ $$
 \end{align*}
 $$
 
+## Delta
+
+The delta of an option is the percentage of the foreign notional one must buy when you have a short position in an FX option. For instance, a delta of 0.35 indicates buying $35\%$ of the foreign notional to delta hedge the short position. In FX markets, we distinguish between spot delta for a hedge in the spot market and forward delta for a hedge in the outright forward markets. 
+
 ### Pips Spot Delta
 
 The pips spot delta is simply the derivative of the option price with respect to the spot rate - both expressed in ccy2/ccy1 terms.
@@ -311,13 +372,15 @@ def analyticDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CA
 
 
 ```python
-S_t=1.0549 ; CCY1Notional=100.00
+S_t=1.0549 ; CCY1Notional=100.0
 
 pips_spot_delta = analyticDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
-print(f"Spot Delta = {pips_spot_delta} EUR")
+print(f"Call option Spot Delta = {pips_spot_delta} EUR")
+print(f"Spot Delta in percentage = {pips_spot_delta/CCY1Notional * 100} percent")
 ```
 
-    Spot Delta = 50.48090225276146 EUR
+    Call option Spot Delta = 50.466746420569166 EUR
+    Spot Delta in percentage = 50.466746420569166 percent
     
 
 #### Plotting the Analytic Delta of call options
@@ -345,35 +408,26 @@ plt.show()
     
 
 
-### Forward Delta
+### Pips Forward Delta
 
-The interpretation of the foward delta is the number of units of FOR of forward contracts a trader needs to buy to delta hedge a short option position. According to Wystup, if we translate this hedge ratio in calculus, it means that we need to compute (for a call)
+The interpretation of the foward delta is the number of units of FOR of forward contracts a trader needs to buy to delta hedge a short option position. 
 
-$$
-\frac{\partial v_{\text{option}}}{\partial v_{\text{forward}}}
-$$
-
-The value of a forward contract $v_{\text{forward}}$ for an agreed forward exchange rate $K$ is:
+It is the ratio of the change in the FV of the option with respect to the change in value of the outright forward. 
 
 $$
-\begin{align*}
-v_{\text{forward}} &= e^{-r_{DOM}T}\mathbb{E}^{\mathbb{Q}^d}[R_T - K]\\\\
-&= e^{-r_{DOM}T}(R_0 \mathbb{E}^{\mathbb{Q}^d}[e^{(r_{DOM} - r_{FOR} - (\sigma^2/2))T + \sigma \sqrt{T} Z}] - K)\\\\
-&= e^{-r_{DOM}T}(R_0 e^{(r_{DOM} - r_{FOR})T} - K)\\\\
-&= R_0 e^{- r_{FOR}T} - K e^{-r_{DOM}T}
-\end{align*}
+\Delta_{\text{F;pips}}=e^{r_{DOM}T}\frac{\partial v_{\text{option}}}{\partial F_{0,T}}
 $$
 
 So, the derivative of the value of the forward contract with respect to the spot is:
 
-$$\frac{\partial v_{\text{forward}}}{\partial R_0} = e^{-r_{FOR}T}$$
+$$\frac{\partial F_{0,T}}{\partial R_0} = e^{(r_{DOM} - r_{FOR})T}$$
 
 Using the chain rule and the derivative of the inverse function, we obtain the forward delta:
 
 $$
 \begin{align*}
-\frac{\partial v_{\text{option}}}{\partial v_{\text{forward}}} &= \frac{\partial v_{\text{option}}}{\partial v_{R_0}} \times \frac{\partial v_{R_0}}{\partial v_{\text{forward}}}\\\\
-&=\omega e^{-r_{FOR}T}\Phi(\omega d_{+}) \times e^{r_{FOR}T}\\\\
+e^{r_{DOM}T}\frac{\partial v_{\text{option}}}{\partial F_{0,T}} &= e^{r_{DOM}T}\frac{\partial v_{\text{option}}}{\partial R_0} \times \frac{\partial R_0}{\partial F_{0,T}}\\\\
+&=e^{r_{DOM}T} \cdot \omega e^{-r_{FOR}T}\Phi(\omega d_{+}) \times e^{(r_{FOR}- r_{DOM})T}\\\\
 &= \omega \Phi(\omega d_{+})
 \end{align*}
 $$
@@ -391,10 +445,37 @@ def forwardDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CAL
 S_t=1.0549 ; CCY1Notional=100.00
 
 forward_delta = forwardDelta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPut.CALL_OPTION)
-print(f"Forward Delta = {forward_delta} EUR of forward contracts")
+print(f"Forward Delta = {forward_delta } EUR of forward contracts")
 ```
 
-    Forward Delta = 51.803382405811725 EUR of forward contracts
+    Forward Delta = 51.78885572432219 EUR of forward contracts
+    
+
+### Percentage Spot (Premium-adjusted) Delta.
+
+The percentage spot delta is the ratio of the change in the PV of the option expressed in FOR currency terms - to the change in the spot - expressed in FOR currency terms. 
+
+$$
+\begin{align*}
+\Delta_{S;\\%} &= \frac{\partial V_{\\% f}}{(\partial S_0)/S_0}\\\\
+&= S_0 \times \frac{\partial}{\partial S_0}\left(\frac{V_{\text{d;pips}}}{S_0}\right)\\\\
+&= S_0 \times \frac{S_0 \frac{\partial V_{\text{d;pips}}}{\partial S_0} - V_{\text{d;pips}} \frac{\partial (S_0)}{\partial S_0}}{S_0^2}\\\\
+&= \frac{(\partial V_{\text{d;pips}}/\partial S_0)S_0 -  V_{\text{d;pips}}}{S_0}\\\\
+&= \frac{\partial V_{\text{d;pips}}}{\partial S_0} - \frac{V_{\text{d;pips}}}{S_0}\\\\
+&= \Delta_{\text{S;pips}} - V_{\\% f}
+\end{align*}
+$$
+
+
+
+
+```python
+premiumAdjustedDelta = pips_spot_delta - (call_price/S_t)
+
+print(f"Premium Adjusted Delta = {premiumAdjustedDelta} percent")
+```
+
+    Premium Adjusted Delta = 46.98036978761517 percent
     
 
 ## Gamma.
@@ -594,8 +675,84 @@ $$
 \end{align*}
 $$
 
+## At-The-Money Definitions
+
+The At-the-Money option, as the name suggests, is meant to correspond to, being midway between in-the-money and out-of-the-money. In practice, this is not as obvious:
+
+ATM-Spot : 
+
+$$K = S_0$$
+
+ATM Forward : 
+
+$$K = F_{0,T}$$
+
+ATM value neutral straddle : 
+
+$$K \text{ such that call value = put value}$$
+
+ATM delta neutral straddle :
+
+$$K \text{ such that call delta = -put delta}$$
+
+Since $V_{call} = V_{put}$, when $K = F_{0,T}$, **ATM-value neutral** is equivalent to **ATMF**.
+
+### At-the-money DNS(Delta-neutral-strike)
+
+A more natural way to define an ATM strike is the strike $K_{ATM}$ for which it possible to buy a straddle (long call + long put with strike $K_{ATM}$) that  correponds to a pure long vega position with no net delta. This is called the **Delta-Neutral-Straddle** (DNS) and has the advantage that such a trade can be effected without and spot or forward hedge being needed.
+
+The **Delta-Neutral-Straddle** is defined by $K_{ATM} = K_{DNS}$ where $K_{DNS}$ is chosen such that:
+
+$$ \Delta_{Q}(\text{Call Option}) + \Delta_{Q}(\text{Put Option}) = 0$$
+
+or equivalently,
+
+$$ \Delta_{Q}(\omega=+1,K_{DNS},T,\sigma_{ATM}) + \Delta_{Q}(\omega=-1,K_{DNS},T,\sigma_{ATM}) = 0$$
+
+where $Q$ is the quote convention for the option delta. Now, the deltas can be quoted as spot delta, forward delta, percentage spot delta or percentage forward delta. 
+
+Let's actually solve $K_{DNS}$ analytically in the simplest case of spot and foward delta.
+
+We attempt to solve:
+
+$$
+(+1)\Phi\left(+\frac{\log(F/K) + (\sigma_{ATM}^2/2)T}{\sigma\sqrt{T}}\right) + (-1)\Phi\left(-\frac{\log(F/K) + (\sigma_{ATM}^2/2)T}{\sigma\sqrt{T}}\right)=0 
+$$
+
+$$
+\Phi\left(+\frac{\log(F/K) + (\sigma_{ATM}^2/2)T}{\sigma\sqrt{T}}\right) =\Phi\left(-\frac{\log(F/K) + (\sigma_{ATM}^2/2)T}{\sigma\sqrt{T}}\right) 
+$$
+
+Since $\ln(\cdot)$ is monotonic, it follows that:
+
+$$
+\begin{align*}
+2\log(F/K) + 2(\sigma_{ATM}^2/2)T &= 0\\\\
+\log(F/K) &= - (\sigma_{ATM}^2/2)T \\\\
+\log(K/F) &= (\sigma_{ATM}^2/2)T\\\\
+K_{DNS} &= F_{0,T} e^{\frac{\sigma_{\text{ATM}}^2}{2}T}
+\end{align*}
+$$
+
+
+```python
+K_DNS = forward * np.exp(((sigma**2)/2)*T)
+
+print(f"ATM delta-neutral Strike = {K_DNS}")
+```
+
+    ATM delta-neutral Strike = 1.0753534871192036
+    
+
+## Market Strangles
+
+Suppose that we neglect the effect of volatility skew and presume that volatility, while non-constant across various strikes, is basically symmetric. The concept of the market strangle is that we buy an out-of-the-money put and an out-of-the-money call with strikes placed a similar distance away from the at-the-money strike in moneyness terms. For clarity, let's suppose, we are talking about the 25-delta market strangle, though the market strangle for any delta is pretty similar. 
+
+The idea here is that, without needing to know the actual volatility smile, we can estimate the volatility that is needed to price a market strangle instrument consistently with the market, by taking the at-the-money volatility and adding a strangle premium $\sigma_{25-d-ms}$ to it. The premium thus added, in volatility terms, is called the market strangle.
+
+The important point to make is that the strikes for calls and puts are both calculated subject to the Black-Scholes model with constant volatility of $\sigma_{ATM} + \sigma_{25-d-ms}$; these strikes are known as market strangle strikes $K_{25-d-c-ms}$ and $K_{25-d-p-ms}$. With that, we obtain strikes for calls and puts that have deltas of $+0.25$ and $-0.25$ respectively.
+
 
 ```python
 
 ```
-
