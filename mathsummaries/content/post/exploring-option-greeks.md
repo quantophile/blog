@@ -101,8 +101,8 @@ def PV(S_t,K,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut):
 
 
 ```python
-S_t=1.0549 ; K=1.0710350214586397 ; t=0.0 ;T=1.0 ; 
-r_DOM=0.041039868 ; r_FOR= 0.025860353; sigma=0.08971 ; CCY1Notional=100.00
+S_t=1.0549 ; K=1.0710350214586397 ; t=0.0 ;T=1.0 ; r_DOM=0.041039868 ; 
+r_FOR= 0.025860353; sigma=0.08971 ; CCY1Notional=100.00
 
 forward = atTheMoneyForward(S_t,K,t,T,r_DOM,r_FOR,sigma)
 
@@ -159,7 +159,7 @@ CCY1Notional = 100.00
 call_price_1y = PV(S_t,K,t,1.0,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION)
 
 plt.xlabel(r'EURUSD FX spot')
-plt.xlabel(r'Call option price (USD pips)')
+plt.ylabel(r'Call option price (USD pips)')
 plt.plot(S_t,call_price_1y)
 
 plt.show()
@@ -349,11 +349,11 @@ Thus,
 
 $$
 \begin{align*}
-\frac{\partial V_{\text{d;pips}}}{\partial S_0} &= \omega\frac{\partial }{\partial S_0} \left[(S_0 e^{-r_{FOR}T} \Phi(\omega d_{+}) - K e^{-r_{DOM}T}\Phi(\omega d_{-})\right)]\\\\
-&= \omega \left[e^{-r_{FOR}T} \Phi(\omega d_{+}) + S_0 e^{-r_{FOR}T} \phi (\omega d_{+})\frac{\omega}{\sigma S_0 \sqrt{T}} - K e^{-r_{DOM}T}\phi (\omega d_{-})\frac{\omega}{\sigma S_0 \sqrt{T}}\right]\\\\
-&= \omega e^{-r_{FOR}T} \Phi(\omega d_{+}) + \frac{\omega^2}{\sigma S_0 \sqrt{T}}\left[S_0 e^{-r_{FOR}T} \phi(\omega d_{+}) - K e^{-r_{DOM}T}\phi(\omega d_{-})\right]\\\\
-&= \omega e^{-r_{FOR}T} \Phi(\omega d_{+}) + \frac{\omega^2}{\sigma S_0 \sqrt{T}}\left[S_0 e^{-r_{FOR}T} e^{(r_{FOR} - r_{DOM})T}\frac{K}{S_0}\phi(\omega d_{-}) - K e^{-r_{DOM}T}\phi(\omega d_{-})\right]\\\\
-&= \omega e^{-r_{FOR}T} \Phi(\omega d_{+}) + \frac{\omega^2}{\sigma S_0 \sqrt{T}}\left[K e^{-r_{DOM}T}\phi(\omega d_{-}) - K e^{-r_{DOM}T}\phi(\omega d_{-})\right]\\\\
+\frac{\partial V_{\text{d;pips}}}{\partial S_0} &= \omega\frac{\partial }{\partial S_0} \left\[(S_0 e^{-r_{FOR}T} \Phi(\omega d_{+}) - K e^{-r_{DOM}T}\Phi(\omega d_{-})\right)]\\\\
+&= \omega \left\[e^{-r_{FOR}T} \Phi(\omega d_{+}) + S_0 e^{-r_{FOR}T} \phi (\omega d_{+})\frac{\omega}{\sigma S_0 \sqrt{T}} - K e^{-r_{DOM}T}\phi (\omega d_{-})\frac{\omega}{\sigma S_0 \sqrt{T}}\right\]\\\\
+&= \omega e^{-r_{FOR}T} \Phi(\omega d_{+}) + \frac{\omega^2}{\sigma S_0 \sqrt{T}}\left\[S_0 e^{-r_{FOR}T} \phi(\omega d_{+}) - K e^{-r_{DOM}T}\phi(\omega d_{-})\right\]\\\\
+&= \omega e^{-r_{FOR}T} \Phi(\omega d_{+}) + \frac{\omega^2}{\sigma S_0 \sqrt{T}}\left\[S_0 e^{-r_{FOR}T} e^{(r_{FOR} - r_{DOM})T}\frac{K}{S_0}\phi(\omega d_{-}) - K e^{-r_{DOM}T}\phi(\omega d_{-})\right\]\\\\
+&= \omega e^{-r_{FOR}T} \Phi(\omega d_{+}) + \frac{\omega^2}{\sigma S_0 \sqrt{T}}\left\[K e^{-r_{DOM}T}\phi(\omega d_{-}) - K e^{-r_{DOM}T}\phi(\omega d_{-})\right\]\\\\
 &= \omega e^{-r_{FOR}T} \Phi(\omega d_{+})
 \end{align*}
 $$
@@ -504,7 +504,7 @@ gamma = analyticGamma(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPu
 print(f"Analytic Gamma = {gamma} EUR")
 ```
 
-    Analytic Gamma = 533.4269573839681 EUR
+    Analytic Gamma = 533.2773740334613 EUR
     
 
 ### Theta.
@@ -522,8 +522,8 @@ $$
 
 $$
 \begin{align*}
-\phi (d_{-}) &= \exp\left[-\frac{1}{2}(d_{+} - \sigma \sqrt{\tau})^2\right]\\\\
-&= \exp\left[-\frac{1}{2}(d_{+}^2 -2 d_{+}\sigma\sqrt{\tau} + \sigma^2 \tau)\right]\\\\
+\phi (d_{-}) &= \exp\left\[-\frac{1}{2}(d_{+} - \sigma \sqrt{\tau})^2\right\]\\\\
+&= \exp\left\[-\frac{1}{2}(d_{+}^2 -2 d_{+}\sigma\sqrt{\tau} + \sigma^2 \tau)\right\]\\\\
 &= \exp\left(-\frac{1}{2}d_{+}^2\right) \exp(d_{+}\sigma\sqrt{\tau}) \exp(-\frac{1}{2} \sigma^2 \tau)\\\\
 &= \phi(d_{+}) \exp\left(\log \frac{S_0}{K} + (r_{DOM} - r_{FOR} + \frac{\sigma^2}{2})\tau\right) \exp(-\frac{1}{2} \sigma^2 \tau)\\\\
 &= \phi(d_{+}) \frac{S_0}{K} \exp((r_{DOM} - r_{FOR})\tau)\exp(\frac{\sigma^2 \tau}{2}) \exp(-\frac{1}{2} \sigma^2 \tau)\\\\
@@ -605,7 +605,7 @@ theta = analyticTheta(S_t,K,t,T,r_DOM,r_FOR,sigma,CCY1Notional, callPut = CallPu
 print(f"Analytic Theta = {theta} USD")
 ```
 
-    Analytic Theta = -3.04597416111385 USD
+    Analytic Theta = -3.0451441830007884 USD
     
 
 Theta reflects the change of the option value as the clock ticks. The *trader's theta* in a risk-management system refers to the change in the option value in one day, i.e. it can be approximated by $365 \frac{\partial v}{\partial t}$.
@@ -671,7 +671,7 @@ $$
 $$
 \begin{align*}
 \frac{\partial v}{\partial r_{DOM}} &= \omega \frac{\partial}{\partial r_{DOM}}\left(S_0 e^{-r_{FOR} \tau} \Phi(\omega d_{+}) - K e^{-r_{DOM}\tau} \Phi(\omega d_{-})\right)\\\\
-&= \omega \left[S_0\right]
+&= \omega \left\[S_0\right\]
 \end{align*}
 $$
 
@@ -751,6 +751,119 @@ Suppose that we neglect the effect of volatility skew and presume that volatilit
 The idea here is that, without needing to know the actual volatility smile, we can estimate the volatility that is needed to price a market strangle instrument consistently with the market, by taking the at-the-money volatility and adding a strangle premium $\sigma_{25-d-ms}$ to it. The premium thus added, in volatility terms, is called the market strangle.
 
 The important point to make is that the strikes for calls and puts are both calculated subject to the Black-Scholes model with constant volatility of $\sigma_{ATM} + \sigma_{25-d-ms}$; these strikes are known as market strangle strikes $K_{25-d-c-ms}$ and $K_{25-d-p-ms}$. With that, we obtain strikes for calls and puts that have deltas of $+0.25$ and $-0.25$ respectively.
+
+This requires the solution of:
+
+$$
+\begin{align*}
+\Delta_{Q}(-1, K_{25-d-p-ms},T,\sigma_{ATM}+\sigma_{25-d-ms}) &=-0.25\\\\
+\Delta_{Q}(1, K_{25-d-c-ms},T,\sigma_{ATM}+\sigma_{25-d-ms}) &=0.25
+\end{align*}
+$$
+
+The crucial part of this, and we return to this point later, is that even if the volatility smile is not symmetric, and therefore neither the call with the strike $K_{25-d-c-ms}$ nor the put with strike $K_{25-d-p-ms}$ should be actually priced with the volatility $\sigma_{ATM} + \sigma_{25-d-ms}$, the aggregate price obtained for the market strangle (long a call with strike $K_{25-d-c-ms}$ and long a put with strike $K_{25-d-p-ms}$) under the actual market volatility smile should be identical to the same aggregate price for the same market strangle instrument, under the assumption of Black-Scholes volatility of $\sigma_{ATM} + \sigma_{25-d-ms}$.
+
+In other words, the market strangle $\sigma_{25-d-ms}$ provides the adjustment to $\sigma_{ATM}$ which is substituted into a Black-Scholes model and used to calculate the $25$-delta call and put strikes and then to price a straddle with those strikes using a full-volatility smile (though the two price components may well differ, the sum must agree).
+
+We put:
+
+$$
+V_{25-d-ms} = V(-1,K_{25-d-p-ms},T,\sigma_{ATM}+\sigma_{25-d-ms}) + V(+1,K_{25-d-c-ms},T,\sigma_{ATM}+\sigma_{25-d-ms})
+$$
+
+$25\Delta$ market strangles are quoted by $\sigma_{25-d-ms}$.
+
+
+```python
+from scipy import optimize
+from scipy.stats import norm
+
+# ---------------------------------------
+#   Market Data
+# ---------------------------------------
+_25dmarket_strangle_quote = 0.004805857
+sigma_ATM=0.08971
+# ---------------------------------------
+
+sigma = sigma_ATM + _25dmarket_strangle_quote
+
+def spot_delta_call(K):
+    d_plus = dPlus(S_t,K,t,T,r_DOM,r_FOR,sigma)
+    return norm.cdf(d_plus) * np.exp(-r_FOR * T)
+
+def spot_delta_put(K):
+    d_plus = dPlus(S_t,K,t,T,r_DOM,r_FOR,sigma)
+    return (-1)* norm.cdf(-d_plus) * np.exp(-r_FOR * T)
+
+def f(K): return (spot_delta_call(K) - 0.250)
+K_25d_call_ms = optimize.brentq(f,0.01,5.00)
+
+def f(K): return(spot_delta_put(K) + 0.250)
+K_25d_put_ms = optimize.brentq(f,0.01,5.00)
+```
+
+
+```python
+_25dcallms = PV(S_t,K_25d_call_ms,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.CALL_OPTION) 
+_25dputms = PV(S_t,K_25d_put_ms,t,T,r_DOM,r_FOR,sigma, CCY1Notional,callPut = CallPut.PUT_OPTION) 
+market_strangle = _25dcallms + _25dputms
+
+print(f"Market Strangle = {market_strangle} USD pips")
+```
+
+    Market Strangle = 3.00508046115969 USD pips
+    
+
+## Smile Strangle and Risk Reversal.
+
+The at-the-money volatility and market-strangle volatility provide two degrees of freedom, which allows a volatility smile to be described but without a skew. To introduce a market parameter corresponding to the skew, we use the risk-reversal. In order to do this, we need to suppose that a volatility smile of the form $\sigma_X(K)$ exists, because each european option with different strike $K$ is priced using the smile volatility $\sigma_X(K)$, unlike the at-the-money or market strangle for which we can use a single volatility (which we know in advance from the market data). 
+
+Let's describe the conditions we have on this smile:
+
+$$\sigma_X(K_{ATM}) = \sigma_{ATM} \tag{1}$$
+
+$$V_{25-d-ms} = V(-1, K_{25-d-p-ms},T,\sigma_X(K_{25-d-p-ms})) +  V(+1, K_{25-d-p-ms},T,\sigma_X(K_{25-d-c-ms})) \tag{2}$$
+
+The task is now to find 25-delta smile strikes $K_{25-d-C}$ and $K_{25-d-P}$ for which the Black-Scholes delta is $\pm0.25$ subject to using the smile volatilities $\sigma_X(K_{25-d-C})$ and $\sigma_X(K_{25-d-P})$ respectively. We therefore need to solve:
+
+$$\Delta_{Q}(-1,K_{25-d-P},T,\sigma_X(K_{25-d-P}))=-0.25 \tag{3}$$
+$$\Delta_{Q}(-1,K_{25-d-C},T,\sigma_X(K_{25-d-C}))=+0.25 \tag{4}$$
+
+Once these strikes have been determined, we set $\sigma_{25-d-P} = \sigma_{X}(K_{25-d-p})$. The 25-delta risk reversal is calculated from the difference. However, the market generally imposes a sign convention that indicates whether the risk-reversal is defined as $\sigma_{25-d-C} - \sigma_{25-d-P}$  or $\sigma_{25-d-P}-\sigma_{25-d-C}$. We use $\phi_{RR}\in \{1,-1\}$ to denote which is meant, depending on whether risk reversals favor (that is attribute higher implied volatilities to) calls on ccy1/ccy2 or ccy2/ccy1 and put :
+
+$$\sigma_{25-d-RR} = \phi_{RR} \cdot [\sigma_{25-d-C} - \sigma_{25-d-P}] \tag{5}$$
+
+The equations (1), (2) and (5) provide us with the conditions necessary for $\sigma_X(K)$ to be consistent with the market, as parameterized by $\sigma_{ATM}$, $\sigma_{25-d-ms}$ and $\sigma_{25-d-RR}$. If other deltas on the smile are quoted, most commonly $10$-delta, then the conditions (3) and (5) applied in the same way, except using $\sigma_{10-d-ms}$ and $\sigma_{10-d-rr}$. 
+
+It is important to note that the smile strikes $K_{25-d-C}$ and $K_{25-d-P}$ are in general not the same as market strangle strikes $K_{25-d-C-MS}$ and $K_{25-d-P-MS}$. The $25$-delta smile strangle is given by the average volatility of the 25-delta call and 25-delta put, expressed as a premium over the at-the-money volatility:
+
+$$
+\sigma_{25-d-SS} = \frac{1}{2}[\sigma_{25-d-C} + \sigma_{25-d-P}] - \sigma_{ATM} \tag{6}
+$$
+
+Note that, if $\sigma_{25-d-RR}=0$ in equation (5), then we have $\sigma_{25-d-C}=\sigma_{25-d-P}$ and therefore, $\sigma_{25-d-SS} = \sigma_{25-d-C} - \sigma_{ATM} = \sigma_{25-d-P} - \sigma_{ATM}$. Consequently, $\sigma_{25-d-ms} = \sigma_{25-d-ss}$ in the case where $\sigma_{25-d-RR} = 0$, but in general, this is not so.
+
+![png](./../../../../exploring-option-greeks04.png)
+
+In the figure, the dotted lines indicate the volatilities at the three strikes $K_{ATM}$, $K_{25-d-P}$ and $K_{25-d-C}$. The oblique dotted line connecting the 25-delta call and 25-delta put points on the graph is bisected, so that the midpoint of that line segment has a volatility equal to the average of $\sigma_{25-d-P}$ and $\sigma_{25-d-C}$. The vertical distance of that midpoint above the ATM level is therefore the smile strangle $\sigma_{25-d-SS}$ as indicated in the graph.
+
+The discrepancy between market strangles and smile strangles is the largest for currency pairs with a large skew (that is large absolute values of risk-reversals) e.g. USDJPY. 
+
+We therefore have several strikes - even without including the 10-delta smile, we have 
+
+$$\{K_{25-d-P},K_{25-d-P-ms},K_{ATM},K_{25-d-C},K_{25-d-C-ms}\}$$
+
+There is no unique prescription of $\sigma_X(K)$ and we therefore need to calibrate a smile $\sigma_X(K)$ that satisfies:
+
+$$\sigma_X(K_{ATM}) = \sigma_{ATM}\tag{7}$$
+
+$$V_{25-d-ms} = V(-1,K_{25-d-P-ms},T,\sigma_X(K_{25-d-P-ms})) + V(+1,K_{25-d-P-ms},T,\sigma_X(K_{25-d-C-ms}))\tag{8}$$
+
+$$\sigma_{25-d-RR} = \phi_{RR}[\sigma_X(K_{25-d-C}) - \sigma_X(K_{25-d-P})]\tag {9}$$
+
+where the strikes are determined as detailed above. When these three equations are satisfied, we have:
+
+$$\sigma_{25-d-ss} = \frac{1}{2}[\sigma_X(K_{25-d-C}) + \sigma_X(K_{25-d-P})] - \sigma_X(K_{ATM})$$
 
 
 ```python
