@@ -233,7 +233,7 @@ In fact, in the case of a short-maturity $T$, the equation (7) can be written as
 
 $$
 \begin{align*}
-&((S_T - K)^{+} - O^{BS}(K)) - \Delta_0(S_T - S_0) \\\\
+&((S\_T - K)^{+} - O^{BS}(K)) - \Delta\_0(S\_T - S\_0)\\\\
 -& \sum_{i=1}^{3} x_i(K) (C_i^{MKT}(K_i) - C_i^{BS}(K_i))\\\\
 &= r_{DOM} (O^{BS}(K) - \Delta_0 S_0 - \sum_{i=1}^{3} x_i(K_i)C_i^{BS}(K_i))T \tag{10}
 \end{align*}$$
