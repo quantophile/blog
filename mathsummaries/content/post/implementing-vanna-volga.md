@@ -92,11 +92,11 @@ $$
 
 The portfolio value process has no driving Brownian motion $dW_t$ term, and hence the source of randomness has been eliminated. Therefore, $\Pi_t$ must be a locally risk-free portfolio. That is, it satisfies:
 
-$$d\Pi_t = r_{DOM}\Pi_t dt$$
+$$d\Pi_t = r_{DOM}\Pi_t dt \tag{7}$$
 
-## Calculating the VV weights.
+## Calculating the VV weights
 
-We assume $t=0$, so we can drop the argument $t$ in the call prices $C_i(t;K)$ in equation (5). The weights $\mathbf{x}=(x_1,x_2,x_3)$ are determined by solving the system of equations $A\mathbf{x}=\mathbf{b}$ where:
+We assume hereafter, that the constant BS volatility is the at-the-money one; $\sigma = \sigma_2 = \sigma_{ATM}$. We assume $t=0$, so we can drop the argument $t$ in the call prices $C_i(t;K)$ in equation (5). The weights $\mathbf{x}=(x_1,x_2,x_3)$ are determined by solving the system of equations $A\mathbf{x}=\mathbf{b}$ where:
 
 $$
 A = \begin{bmatrix}
@@ -126,7 +126,7 @@ $$
 \end{align*}
 $$
 
-We can re-phrase the other greeks in terms of vega $\mathcal{V}$. Recall, that $d_{+}$ varies with the option strike $K$, so all other things equal, we can write $\mathcal{V} = \mathcal{V}(K)$. Also, $\sigma$ is the volatility of the stock-price process in the Black-Scholes framework, and by assumption it is strike-independent, so $\sigma(t;K) = \sigma$. 
+We can re-phrase the other greeks in terms of vega $\mathcal{V}$. Recall, that $d_{+}$ varies with the option strike $K$, so all other things equal, we can write $\mathcal{V} = \mathcal{V}(K)$. 
 
 $$
 \begin{align*}
@@ -219,10 +219,178 @@ Thus, the solution vector $\mathbf{x}$ is:
 
 $$
 \begin{align*}
-x_1 &= \frac{\log \frac{K_3}{K}\log \frac{K_2}{K}\mathcal{V}(K)}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}\mathcal{V}(K_1)}\\\\
-x_2 &= \frac{\log \frac{K}{K_1} \log \frac{K_3}{K}\mathcal{V}(K)}{\log\frac{K_2}{K_1} \log \frac{K_3}{K_2}\mathcal{V}(K_2)}\\\\
-x_3 &= \frac{\log \frac{K}{K_1} \log \frac{K}{K_2}\mathcal{V}(K)}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}\mathcal{V}(K_3)}
+x_1(K) &= \frac{\log \frac{K_3}{K}\log \frac{K_2}{K}\mathcal{V}(K)}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}\mathcal{V}(K_1)}\\\\
+x_2(K) &= \frac{\log \frac{K}{K_1} \log \frac{K_3}{K}\mathcal{V}(K)}{\log\frac{K_2}{K_1} \log \frac{K_3}{K_2}\mathcal{V}(K_2)}\\\\
+x_3(K) &= \frac{\log \frac{K}{K_1} \log \frac{K}{K_2}\mathcal{V}(K)}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}\mathcal{V}(K_3)} \tag{9}
 \end{align*}
 $$
 
+## The VV Option price.
+
+We can now proceed to the definition of an option price that is consistent with the market prices of the basic options. The above replication argument shows that a portfolio comprising of $x_i(K)$ units of the option with strike $K_i$ and $\Delta_0$ units of the underlying gives a local perfect hedge in a Black-Scholes world. The hedging strategy has to be implemented at prevailing market prices, which generates an extra cost with respect to the Black-Scholes value of the options portfolio. Such a cost has to be added to the Black-Scholes price $O^{BS}(K)$, with $t=0$, to produce an arbitrage free price which is consistent with the quoted option prices $C_1^{MKT}(K_1)$, $C_2^{MKT}(K_2)$ and $C_3^{MKT}(K_3)$.
+
+In fact, in the case of a short-maturity $T$, the equation (7) can be written as:
+
+$$
+\begin{align*}
+&((S_T - K)^{+} - O^{BS}(K)) - \Delta_0(S_T - S_0) \\\\
+-& \sum_{i=1}^{3} x_i(K) (C_i^{MKT}(K_i) - C_i^{BS}(K_i))\\\\
+&= r_{DOM} (O^{BS}(K) - \Delta_0 S_0 - \sum_{i=1}^{3} x_i(K_i)C_i^{BS}(K_i))T \tag{10}
+\end{align*}$$
+
+Therefore, setting 
+
+$$O_{VV}^{MKT}(K) = O^{BS}(K) + \sum_{i=1}^{3}x_i(K)(C_i^{MKT}(K_i) - C_i^{BS}(K_i))\tag{11}$$
+
+We get:
+
+
+$$
+\begin{align*}
+(S_T - K)^{+} &= O^{MKT}_{VV}(K) + \Delta_0(S_T - S_0) \\\\
+&+ r_{DOM} (O^{BS}(K) - \Delta_0 S_0 - \sum_{i=1}^{3} x_i(K)C_i^{BS}(K_i))T \tag{12}
+\end{align*}$$
+
+Thus, when actual market prices are considered, the option payout $(S_T-K)^{+}$ can still be replicated by starting with an initial capital of $O_{VV}^{MKT}(K)$, buying $\Delta_0$ units of the stock and $x_i(K)$ units of the pivot options with strike $K_i$, and investing the rest at the cash rate $r_{DOM}$. 
+
+Hence, implicitly ignoring the replication error over longer maturities, the price of the option must the initial capital required to setup the hedge portfolio $O_{VV}^{MKT}(K)$.
+
+The option premium $O_{VV}^{MKT}(K)$ equals the Black-Scholes price of the option $O^{BS}(K)$ plus a *vanna-volga correction* term, or *overhedge* $O_{VV}$, which is the difference between the market quoted prices of the pivot options and the Black-Scholes prices of the pivot options under the constant BS volatility $\sigma = \sigma_{ATM}$.
+
+## Deriving the implied volatility smile.
+
+We can now derive an easy approximation for the *vanna-volga* implied volatility smile curve $\xi(K)$. 
+
+In formula (11), we Taylor expand the market quotes $C_1^{MKT}(K_1)$, $C_2^{MKT}(K_2)$, $C_3^{MKT}(K_3)$ and $O^{MKT}_{VV}(K)$, about $\sigma = \sigma_{2}$. We have:
+
+$$
+\begin{align*}
+C_i^{MKT}(\sigma_i,K_i) &= C_i^{BS}(\sigma,K_i)+ \frac{\partial C_i^{BS}(\sigma,K_i)}{\partial \sigma}(\sigma_i - \sigma)\\\\
+O_{VV}^{MKT}(\xi(K),K) &= O^{BS}(\sigma,K)+ \frac{\partial O^{BS}(\sigma,K)}{\partial \sigma}(\xi(K) - \sigma) \tag{13}
+\end{align*}
+$$
+
+Equivalently,
+
+$$
+\begin{align*}
+C_i^{MKT}(\sigma_i,K_i) - C_i^{BS}(\sigma,K_i) &= \mathcal{V}(K_i)(\sigma_i - \sigma)\\\\
+O_{VV}^{MKT}(\xi(K),K) - O^{BS}(\sigma,K) &= \mathcal{V}(K)(\xi(K) - \sigma) \tag{14}
+\end{align*}
+$$
+
+Substituting (13) and (14) in formula (11), we get:
+
+$$
+\begin{align*}
+\mathcal{V}(K)(\xi(K) - \sigma) &= \sum_{i=1}^{3} x_i(K) \mathcal{V}(K_i)(\sigma_i - \sigma)
+\end{align*}
+$$
+
+Since $\sigma_2 = \sigma$, the second term in the summation vanishes. Simplifying, we have:
+
+$$
+\begin{align*}
+\mathcal{V}(K)(\xi(K) - \sigma_2) &= x_1(K)\mathcal{V}(K_1)(\sigma_1 - \sigma_2) + x_3(K)\mathcal{V}(K_3)(\sigma_3 - \sigma_2)\\\\
+\xi(K) - \sigma_2 &=  x_1(K)\frac{\mathcal{V}(K_1)}{\mathcal{V}(K)}(\sigma_1 - \sigma_2) +  x_3(K)\frac{\mathcal{V}(K_3)}{\mathcal{V}(K)}(\sigma_3 - \sigma_2)\\\\
+\xi(K) &= \frac{\log \frac{K_3}{K}\log \frac{K_2}{K}}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}} \sigma_1 + \frac{\log \frac{K}{K_1} \log \frac{K}{K_2}}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}}\sigma_3 \\\\
+&+ \left(1 - x_1(K)\frac{\mathcal{V}(K_1)}{\mathcal{V}(K)} - x_3(K)\frac{\mathcal{V}(K_3)}{\mathcal{V}(K)} \right)\sigma_2 \tag{15}
+\end{align*}
+$$
+
+But, we know from the matrix system $A\mathbf{x}=b$, that the weights $\mathbf{x}=(x_1,x_2,x_3)$ satisfy:
+
+$$x_1(K) \mathcal{V}(K_1) + x_2(K) \mathcal{V}(K_2) + x_3(K) \mathcal{V}(K_3) = \mathcal{V}(K) \tag{16}$$
+
+So,
+
+$$
+\begin{align*}
+\left(1 - x_1(K)\frac{\mathcal{V}(K_1)}{\mathcal{V}(K)} - x_3(K)\frac{\mathcal{V}(K_3)}{\mathcal{V}(K)} \right) &= x_2(K) \frac{\mathcal{V}(K_2)}{\mathcal{V}(K)}\\\\
+&=\frac{\log \frac{K}{K_1} \log \frac{K_3}{K}}{\log\frac{K_2}{K_1} \log \frac{K_3}{K_2}} \tag{17}
+\end{align*}
+$$
+
+Substituting (17) in the expression (15), we have the result:
+
+$$
+\xi^{1}(K) := \xi(K) = \frac{\log \frac{K_3}{K}\log \frac{K_2}{K}}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}} \sigma_1 + \frac{\log \frac{K}{K_1} \log \frac{K}{K_2}}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}}\sigma_3 + \frac{\log \frac{K}{K_1} \log \frac{K_2}{K_1}}{\log \frac{K_2}{K_1} \log \frac{K_3}{K_2}} \tag{18}
+$$
+
+
+The VV-implied volatility smile $\xi(K)$ is thus approximated by a linear combination of the implied vol quotes $\sigma_1$, $\sigma_2$ and $\sigma_3$ of the vanilla pivot options with coefficients that add up to $1$. This approximation is extremely accurate in the interval $\[K_1,K_3\]$. The wings, however, tend to be overvalued.
+
+## A second order approximation for VV-smile.
+
+Let's Taylor expand the market quotes $C_i^{MKT}(\sigma_i,K_i)$ and $O_{VV}^{MKT}(\xi(K),K)$ upto the second order.
+
+$$
+\begin{align*}
+C_i^{MKT}(\sigma_i,K_i) - C_i^{BS}(\sigma,K_i) &= \frac{\partial C_i^{BS}(\sigma,K_i)}{\partial \sigma}(\sigma_i - \sigma) + \frac{1}{2}\frac{\partial^2 C_i^{BS}(\sigma,K_i)}{\partial \sigma^2}(\sigma_i - \sigma)^2 \\\\
+O^{MKT}_{VV}(\xi(K),K) - O^{BS}(\sigma,K) &= \frac{\partial O^{BS}(\sigma,K)}{\partial \sigma}(\xi(K) - \sigma) + \frac{1}{2}\frac{\partial^2 O^{BS}(\sigma,K)}{\partial \sigma^2}(\xi(K) - \sigma)^2 \tag{19}
+\end{align*}
+$$
+
+Equivalently,
+
+$$
+\begin{align*}
+C_i^{MKT}(\sigma_i,K_i) - C_i^{BS}(\sigma,K_i) &= \mathcal{V}(K_i)(\sigma_i - \sigma) + \frac{1}{2}\frac{d_{+}(K_i)d_{-}(K_i)}{\sigma}\mathcal{V}(K_i)(\sigma_i - \sigma)^2 \\\\
+O^{MKT}_{VV}(\xi(K),K) - O^{BS}(\sigma,K) &= \mathcal{V}(K)(\xi(K) - \sigma) + \frac{1}{2}\frac{d\_{+}(K) d\_{-}(K)}{\sigma}\mathcal{V}(K)(\xi(K) - \sigma)^2 \tag{20}
+\end{align*}
+$$
+
+Substituting (20) in formula (11):
+
+$$
+\mathcal{V}(K)(\xi(K) - \sigma) + \frac{1}{2}\frac{d\_{+}(K)d\_{-}(K)}{\sigma}\mathcal{V}(K)(\xi(K) - \sigma)^2 \\\\
+= x\_1\mathcal{V}(K\_1)(\sigma\_1 - \sigma) + \frac{1}{2}x\_1\frac{d\_{+}(K\_1)d\_{-}(K\_1)}{\sigma}\mathcal{V}(K\_1)(\sigma\_1 - \sigma)^2\\\\
++(\sigma\_3 - \sigma) + \frac{1}{2}x\_3\frac{d\_{+}(K\_3)d\_{-}(K\_3)}{\sigma}\mathcal{V}(K\_3)(\sigma\_3 - \sigma)^2 \tag{21}
+$$
+
+Simplifying we have:
+
+$$
+\begin{align*}
+&(\xi(K) - \sigma_2) + \frac{1}{2}\frac{d_{+}(K)d_{-}(K)}{\sigma}(\xi(K) - \sigma_2)^2 \\\\
+=& \frac{\log \frac{K_3}{K}\log \frac{K_2}{K}}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}}(\sigma_1 - \sigma_2) + \frac{1}{2}\frac{d_{+}(K_1)d_{-}(K_1)}{\sigma}\frac{\log \frac{K_3}{K}\log \frac{K_2}{K}}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}}(\sigma_1 - \sigma_2)^2\\\\
++& \frac{\log \frac{K}{K_1} \log \frac{K}{K_2}}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}}(\sigma_3 - \sigma_2) + \frac{1}{2}\frac{d_{+}(K_3)d_{-}(K_3)}{\sigma}\frac{\log \frac{K}{K_1} \log \frac{K}{K_2}}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}}(\sigma_3 - \sigma_2)^2 
+\end{align*}\tag{22}
+$$
+
+Let 
+
+$$
+\begin{align*}
+D_1(K) &:= \frac{\log \frac{K_3}{K}\log \frac{K_2}{K}}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}}(\sigma_1 - \sigma_2) + \frac{\log \frac{K}{K_1} \log \frac{K}{K_2}}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}}(\sigma_3 - \sigma_2)\\\\
+&= \xi^1(K) - \sigma_2 \tag{23}
+\end{align*}
+$$
+
+and
+
+$$
+\begin{align*}
+D_2(K) &:= d_{+}(K_1)d_{-}(K_1)\frac{\log \frac{K_3}{K}\log \frac{K_2}{K}}{\log \frac{K_3}{K_1}\log \frac{K_2}{K_1}}(\sigma_1 - \sigma_2)^2 \\\\
+&+ d_{+}(K_3)d_{-}(K_3)\frac{\log \frac{K}{K_1} \log \frac{K}{K_2}}{\log \frac{K_3}{K_1} \log \frac{K_3}{K_2}}(\sigma_3 - \sigma_2)^2 \tag{24}
+\end{align*}
+$$
+
+
+Substituting (23) and (24) in equation (22), we get:
+
+$$(\xi(K) - \sigma_2) + \frac{d_{+}(K)d_{-}(K)}{2\sigma_2}(\xi(K) - \sigma_2)^2 = D_1(K) + \frac{D_2(K)}{2\sigma_2}\tag{25}$$
+
+Multiplying throughout by $2\sigma_2$, we get:
+
+$$2\sigma_2(\xi(K) - \sigma_2) + d_{+}(K)d_{-}(K)(\xi(K) - \sigma_2)^2 = 2\sigma_2 D_1(K) + D_2(K)\tag{26}$$
+
+Solving for $\xi(K) - \sigma_2$, we have:
+
+$$
+\begin{align*}
+\xi(K) - \sigma_2 &= \frac{-2\sigma_2 \pm \sqrt{4\sigma_2^2-4d_{+}(K)d_{-}(K)(2\sigma_2 D_1(K) + D_2(K))}}{2d_{+}(K)d_{-}(K)}\\\\
+\xi^2(K) := \xi(K) &=\sigma_2 + \frac{-\sigma_2 \pm \sqrt{\sigma_2^2-d_{+}(K)d_{-}(K)(2\sigma_2 D_1(K) + D_2(K))}}{d_{+}(K)d_{-}(K)} \tag{27}
+\end{align*}
+$$
 
