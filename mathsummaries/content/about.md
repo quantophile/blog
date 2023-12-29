@@ -1,121 +1,74 @@
 ---
-title: About Hugo XMag
-author: Yihui Xie
+title: Curriculum Vitae.
+author: Quasar Chunawala
 ---
 
-**XMag** is the second Hugo theme I have designed. It is based on my first Hugo theme [**XMin**](https://github.com/yihui/hugo-xmin), and similarly, features minimalism but with a magazine style on the homepage inspired by [The Signpost](https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost) on Wikipedia. You can find its source code on Github: https://github.com/yihui/hugo-xmag (licensed under MIT).
+## Work experience.
 
-# Features
+#### Quantiative Analyst.
+Credit Suisse, Quantitative Strategies : Credit Derivatives
 
-This theme includes a few cool features:
+Apr 2019-Present
 
-- Responsive article summary blocks on homepage
+- Developed improvements to the C++/F# global quant library, focusing on bonds, asset swaps/ASW01 calculations, CDS, IndexCDS, CDSwaptions, CLNs (Credit-Linked Notes), Synthetic Funding notes, CDO and tranche products.
 
-- Thumbnails in summary blocks
+- Built an orchestrator framework in F#, put together Bonds Repack spreadsheet tool which streamlines viewing of cashflows, PV, risks and performing bookings of all the legs involved in the issuance of bond-repacks for the structured credit desk.
 
-- Magazine title in Blackletter (&Bfr;&Lfr;&Afr;&Cfr;&Kfr; &Lfr;&Efr;&Tfr;&Tfr;&Efr;&Rfr;)
+- Enhancements to C++ bond analytics to use observation schedule DCF for compounding rate calculations for bonds referencing ARR e.g. USD SOFR. 
 
-- Github edit links
+- Enhanced the Buy-Sell signal report that analyses RFQ volumes and enables corporate bonds desk to take a view if there is more interest on the buy-side or sell-side.
 
-- Author info and site info at the bottom of an article
+- Documented the methodology for DVA computation for CS structured notes business, that captures the risk of issuer and underlying credit defaults.
 
-- Multiple authors of a single page
+#### Risk Analyst	
+Credit Suisse, Exposure validation : SFT
 
-- MathJax for LaTeX math expressions
+Sep 2017-Mar 2019
 
-It also supports features that are probably not even worth mentioning:
+- Analyse exposure-at-default(EAD) moves for collateralized trades such as bond repos, reverse-repos and validate monthly/quarterly submissions to PRA/IHC regulators.
 
-- Google Analytics
+#### Senior Application Developer
+BNY Mellon, STIF(Short Term Investment Funds) Team
 
-- highlight.js for syntax highlighting of code blocks
+Dec 2012-Dec 2014
 
-- Display categories and tags on single pages
+- Developer on the bank’s money market funds (Global Short-term funds) investment platform team. 
+- Project FROG(Fund Re-organization). During the course of business, external fund companies consolidate and acquire other fund companies. When this event happens, operations was required to move securities and cash positions and re-code client accounts. “FROG” objective was to implement a flexible “bug-free” methodology for consolidating and merging funds. I developed and performed unit/regression testing of various key modules.
 
-- Table of contents for single pages
+#### Application Developer
+Capgemini, Metlife Insurance products
 
-Most features can be configured through `config.toml`, and a few can be enabled by custom layouts.
+Dec 2010-Sep 2012
 
-# config.toml
+- Enhancements to Metlife’s annuities and GMDB(Guaranteed Minimum Death Benefit) calculations application to support:
+	- Added online functions to automatically expire an annuity contract (along with all its annuitants); automation of disability retirements processing.
+	- Automation of Goodyear retirements, Commence survivor transactions. Bug fixes to the bulk-check processing system’s SQL reports.
 
-By default, your site title will be displayed at the top in Blackletter fonts if your web browser and operating system support Blackletter fonts. Essentially, for every English letter `X` in your site title, it is substituted with `&Xfr;`, e.g. the Blackletter version of `A` is `&Afr;` (&Afr;). Below are the letters from A to Z:
+#### Application Developer
+TCS, AXA Insurance 
 
-## &Afr;&Bfr;&Cfr;&Dfr;&Efr;&Ffr;&Gfr;&Hfr;&Ifr;&Jfr;&Kfr;&Lfr;&Mfr;&Nfr;&Ofr;&Pfr;&Qfr;&Rfr;&Sfr;&Tfr;&Ufr;&Vfr;&Wfr;&Xfr;&Yfr;&Zfr;
+May 2009-Dec 2010
 
-Alternatively, you can provide a banner image:
+- Worked as a junior analyst for AXA-US, by providing timely resolution for critical issues in AXA’s life-insurance policy admin systems.
 
-```toml
-[params.banner]
-    src = "/path/to/banner.png"
-    alt = "alternative text on image"
-```
+## Education Details.
 
-By default, each summary block on the homepage contains the first 200 letters extracted from all paragraphs of an article. I find Hugo's built in `.Summary` often unsatisfactory (e.g. it may contain headings and code blocks, which really should not go to the summary), so I wrote my own version. It works much better and the size of most summary blocks will be the same, unless certain articles are really short. The length 200 can be customized via `params.summary_length`.
+#### Bachelors of Engineering (Computer Science)
+Vidyavardhini’s College of Engineering, University of Mumbai.
 
-If you are not satisfied with the automatic summary, you can specify the `description` option in the (YAML) metadata of your Markdown document, e.g.,
+2004-2008
 
-```yaml
-title: "My Cool Post"
-description: "Please use this as the summary."
-```
+Relevant courses: Multivariate Calculus, Data Structures and Algorithms design.
 
-Each summary block may contain a thumbnail, which is the first image in an article if exists. You can override it by providing the `thumbnail` option in the meta data of your Markdown document, e.g.,
+## Self-learning and passion projects.
 
-```yaml
----
-title: "My Cool Post"
-thumbnail: "/url/of/the/image"
----
-```
+I present below some quantitative finance projects that I have done or have been working on:
 
-For each page, this theme adds an edit link to the top-right if a parameter `github_edit` is provided, so that your reader may easily help you edit a page and submit a pull request on Github.
+- Solutions to exercise problems in [Stochastic Calculus](https://quantophile.github.io/mathsummaries/post/stochastic_calculus.pdf) and [Real Analysis](https://quantophile.github.io/mathsummaries/post/real-analysis.pdf).
+- [FX market conventions](https://quantophile.github.io/mathsummaries/post/2023/11/19/exploring-option-greeks/), implementation of [vanna-volga](https://www.slideshare.net/QuasarChunawalla/on-building-fx-volatility-surface-the-vanna-volga-method), pricing of [vanilla quantos](https://quantophile.github.io/mathsummaries/post/2023/11/16/pricing-a-quanto/), quanto forwards.
 
-The page footer can be defined in `.Params.footer`, and the text is treated as Markdown. Below are some sample configurations:
+## Programming Skills.
 
-```toml
-[params]
-    summary_length = 200
-    github_edit = "https://github.com/yihui/hugo-xmag/edit/master/exampleSite/content/"
-    footer = "&copy; [Yihui Xie](https://yihui.org) 2017"
-```
+- C++ : Multi-threaded programming, Lambda expressions and std::function, tuples, type traits, STL algorithms. 
+- Python : Focus on writing production quality python code, using attrs, pylint for static code analysis, writing unit tests. 
 
-There are a few phrases that you can "translate" (I didn't use Hugo's multi-language feature just because I'm lazy):
-
-```toml
-[params.text]
-    about_author = "About the Author"
-    author_delimiter = ", "
-    back = "Back to Home"
-    edit = "Edit this page"
-    tags = "Tags: "
-    truncated = " &hellip;"
-    uncategorized = "Uncategorized"
-```
-
-You can define a data file under `data/` to store all authors information, e.g., you can use a TOML file `data/authors.toml` (or YAML/JSON):
-
-```
-"Alice Wonder" = "I'm Alice. More about me on [my homepage](http://example.com)."
-"Yihui Xie" = "Hey this is Yihui. You don't want to follow me on Twitter @xieyihui."
-```
-
-Then for an article with an author name that can be found in `data/authors.toml`, the author info will be added to the bottom of a page. For example, on this page, you can find information about me. You can change the phrase "About the Author" by changing the parameter `about_author` in `config.toml`.
-
-To add a table of contents to an article, you can add `toc: true` to the YAML metadata of the Markdown document.
-
-# Custom layouts
-
-Besides the custom layout^[If this is the first time you have heard about "customizing layouts", please read the Hugo documentation first: https://gohugo.io/themes/customizing/.] files `head_custom.html` and `foot_custom.html` supported in **XMin** (see [documentation](https://xmin.yihui.org/about/)), this theme added a few more layout files such as `banner.html`, `comments.html` and `info.html` under `layouts/partials/`. The first can be used to customize the banner. The second can be used to add a comment section, e.g., if you want to use Hugo's default Disqus template, just add this to `comments.html`:
-
-```
-{{ template "_internal/disqus.html" . }}
-```
-
-You can also append arbitrary text to each article through `info.html`. For example, you may declare copyrights or briefly introduce your site.
-
-There are other partial templates in this theme and I encourage you to read the source code to figure out what they do.
-
-# Final words
-
-I feel the world has become so noisy that I'm often at a loss when looking at a web page, because there are so many things to distract me. I was heavily influenced by the book [_Amusing Ourselves to Death_](https://en.wikipedia.org/wiki/Amusing_Ourselves_to_Death) after I read it in early 2017. From then on, I was hoping to design a theme for a website that gives articles the top priority. Everything else must give way to articles. That is why the navigation menu is at the bottom instead of in the conventional position (top or sidebar). There isn't much to do other than reading an article when you open a page. By the way, this is a pure plain-text theme. You can certainly add images if you want, but this theme itself contains zero binary files. Out of my [OCD](https://en.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder), I was just trying to push the limits of web design without using any images or JavaScript libraries (I'm a totally amateur).^[I used MathJax and highlight.js anyway in this theme because they are helpful.]
-
-I hope you can enjoy this theme. Again, the source code is [on Github](https://github.com/yihui/hugo-xmag). Happy hacking!
