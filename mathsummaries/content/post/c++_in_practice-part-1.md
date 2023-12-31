@@ -46,7 +46,7 @@ One basic strategy for avoiding memory leaks is to immediately add `delete` oper
 
 #### Fragmentation of the Free-Store.
 
-Memory fragmentation can arise in programs that frequently dynamically allocate and release memory blocks. Each time, the `new` operator is used, it allocates a contiguous block of bytes. If you create and destroy many memory blocks of different sizes, it's possible to arrive at a situation in which the allocated memory is interspersed with small blocks of free memory, non of which is large enough to accomodate a new memory allocation request by your program. The aggregate of the free memory can be quite largbe, but if all the individual blocks are small (smaller than a current allocation request), the allocation request will fail.
+Memory fragmentation can arise in programs that frequently dynamically allocate and release memory blocks. Each time, the `new` operator is used, it allocates a contiguous block of bytes. If you create and destroy many memory blocks of different sizes, it's possible to arrive at a situation in which the allocated memory is interspersed with small blocks of free memory, none of which is large enough to accomodate a new memory allocation request by your program. The aggregate of the free memory can be quite large, but if all the individual blocks are small (smaller than a current allocation request), the allocation request will fail.
 
 ### Golden rule of dynamic memory allocation.
 
@@ -56,15 +56,114 @@ Never use the operators `new`, `new[]`, `delete` and `delete[]` directly in day-
 
 Pointer types `int*`, `double*` are referred to as *raw pointers* because variables of these types contain nothing more than an address. A raw pointer can store the address of an automatic variable or a memory-block allocated in the free-store. 
 
-A *smart pointer* is an object that mimics a raw pointer in that, it contains an address, and you can use it in the same way in many respects. Smart pointers are normally used only to store the address of memory allocated in the free store. A smart pointer does much more than a raw pointer, though. The most notable feature of a smart pointer, is that we don't have to worry about using the `delete` or `delete[]` operator to free memory. It will be released automatically, when it is no longer needed. This means that multiple allocations, allocation/deallocation mismatches and memory leaks will no longer be possible. 
+A *smart pointer* is an object that mimics a raw pointer in that, it contains an address, and you can use it in the same way in many respects. Smart pointers are normally used only to store the address of memory allocated in the free store. A smart pointer does much more than a raw pointer, though. The most notable feature of a smart pointer, is that we don't have to worry about using the `delete` or `delete[]` operator to free memory. It will be released automatically, when it is no longer needed. This means that dangling pointers and multiple deallocations, allocation/deallocation mismatches and memory leaks will no longer be possible. 
 
 - A `std::unique_ptr<T>` object behaves as a pointer to type `T` and is unique in the sense that there can be only one single `unique_ptr<>` object containing the same address. In other words, there can never be two or more `unique_ptr<T>` objects pointing to the same memory address at the same time. A `unique_ptr<>` object is said to own the object it points to exclusively. The uniqueness is enforced by the fact, that a compiler will never allow you to copy a `unique_ptr<>`.
 
 - A `std::shared_ptr<T>` object also behaves as a pointer to type `T`, but in contrast with `unique_ptr<T>` there can be any number of `shared_ptr<>` objects that allow *shared ownership* of an object in the free-store. At any given moment, the number of `shared_ptr<>` objects that contain a given address in time is known by the runtime. This is called *reference counting*. The reference count for a `shared_ptr<>` containing a given free store address is incremented each time a new `shared_ptr` object is creating containing that address, and its decremented when a `shared_ptr` containing the address is destroyed or assigned to point to a different address. When there are no `shared_ptr` objects containing a given address, the reference count will have dropped to zero, and the memory for the object at that address is released automatically. All `shared_ptr<>` objects that point to the same address have access to the the count of how many there are.
 
-- A `weak_ptr<T>` is linked to a `shared_ptr<T>` and contains the same address. Creating a `weak_ptr<>` does not increment the reference count associated with the linked `shared_ptr<>` object, though, so a `weak_ptr<>` does not prevent the object pointered to from being destroyed. Its memory will still be released when the last `shared_ptr<>` referencing it is destroyed or reassigned to point to a different address, even when associated `weak_ptr<>` objects still exist. If this happens, the `weak_ptr<>` will nevertheless not contain a dangling pointer, atleast not one that you could inadvertently access. The reason is that you cannot access the address encapsulated by a `weak_ptr<T>` directly. The compiler forces you to first create a `shared_ptr<T>` object out of it that refers to the same address. If the memory address for the `weak_ptr<>` is still valid, forcing you to create a `shared_ptr<>` first ensures that the reference count is again incremented and that the pointer can be used safely again. If the memory is released already, however, this operation will result in a `shared_ptr<>1` containing a `nullptr`.
+- A `weak_ptr<T>` is linked to a `shared_ptr<T>` and contains the same address. Creating a `weak_ptr<>` does not increment the reference count associated with the linked `shared_ptr<>` object, though, so a `weak_ptr<>` does not prevent the object pointed to from being destroyed. Its memory will still be released when the last `shared_ptr<>` referencing it is destroyed or reassigned to point to a different address, even when associated `weak_ptr<>` objects still exist. If this happens, the `weak_ptr<>` will nevertheless not contain a dangling pointer, atleast not one that you could inadvertently access. The reason is that you cannot access the address encapsulated by a `weak_ptr<T>` directly. The compiler forces you to first create a `shared_ptr<T>` object out of it that refers to the same address. If the memory address for the `weak_ptr<>` is still valid, forcing you to create a `shared_ptr<>` first ensures that the reference count is again incremented and that the pointer can be used safely again. If the memory is released already, however, this operation will result in a `shared_ptr<>1` containing a `nullptr`.
 
 One use for having `weak_ptr<>` objects is to avoid so called reference cycles with `shared_ptr<>` objects. Conceptually, a reference cycle is where a `shared_ptr<Y>` inside the object `x` points to some other object `y` that contains a `shared_ptr<X>`, which points back to `x`. With this situation, neither `x` nor `y` can be destroyed. In practice, this may occur in many ways. `weak_ptr` allows you to break such cycles. Another use of weak pointers is in the implementation of object caches. 
+
+In the below code snippet, the destructors `~A()` and `~B()` are not invoked even when the objects `shrd_a` and `shrd_b` go out of scope.
+
+```cpp
+#include <iostream>
+#include <memory>
+
+using namespace std;
+
+class A;
+class B;
+
+class A{
+    public:
+    shared_ptr<B> m_b;
+    A() {cout << "\nA()";}
+    ~A() {cout << "\n~A()";}
+};
+
+class B{
+    public:
+    shared_ptr<A> m_a;
+    B () {cout << "\nB()";}
+    ~B() {cout << "\n~B()";}
+};
+
+int main()
+{
+    {
+        shared_ptr<A> shrd_a {make_shared<A>()}; //A's ref count = 1
+        shared_ptr<B> shrd_b {make_shared<B>()}; //B's ref count = 1
+    
+        shrd_a->m_b = shrd_b; //B's ref count = 2
+        shrd_b->m_a = shrd_a; //A's ref count = 2
+    }
+    //shrd_a and shrd_b go out of scope and are destroyed
+    // A's ref count = 1
+    // B's ref count = 1
+    // ((Memory of A, B is deallocated only when ref count drops to 0))
+    return 0;
+}
+```
+
+```
+A()
+B()
+```
+
+To solve it, the programmer needs to be aware of the ownership relationship among the objects, or needs to invent an ownership relationship, if no such ownership exists. The above C++ code can be changed so that A owns B:
+
+```cpp
+#include <iostream>
+#include <memory>
+
+using namespace std;
+
+class A;
+class B;
+
+class A{
+    public:
+    shared_ptr<B> m_b;
+    A() {cout << "\nA()";}
+    ~A() {cout << "\n~A()";}
+};
+
+class B{
+    public:
+    weak_ptr<A> m_a;
+    B () {cout << "\nB()";}
+    ~B() {cout << "\n~B()";}
+};
+
+int main()
+{
+    {
+        shared_ptr<A> shrd_a {make_shared<A>()}; //A's ref count = 1
+        shared_ptr<B> shrd_b {make_shared<B>()}; //B's ref count = 1
+    
+        shrd_a->m_b = shrd_b; //B's ref count = 2
+        shrd_b->m_a = shrd_a; //A's ref count = 1
+    }
+    //shrd_a and shrd_b go out of scope and are destroyed
+    // A's ref count = 0
+    // B's ref count = 1
+    // A is destroyed
+    // B's ref count = 0
+    // B is destroyed
+    //
+    return 0;
+}
+```
+
+```
+A()
+B()
+~A()
+~B()
+```
 
 ### Using `unique_ptr<T>` and `shared_ptr<T>` pointers.
 
@@ -503,6 +602,8 @@ int main()
 
 ### Access specifiers and class hierarchies.
 
+- The private members of the base class are inaccessible to the derived class.
+
 - When the base class specifier is `public`, the access status of the inherited members remains unchanged. Thus, inherited `public` members are `public`, and inherited `protected` members are `protected` in a derived class.
 
 - When the base class specifier is `protected`, both public and protected members of the base class are inherited as `protected` members in the child class.
@@ -513,7 +614,7 @@ int main()
 
 Every constructor of the derived class always starts by invoking a constructor of the base class. And that base class constructor then invokes the constructor of its base class, and so on.
 
-*Remark.* You cannot initialize the member variables of a base class in the initialization list for the derived class constructor. Not even if thos members are public or protected. 
+*Remark.* You cannot initialize the member variables of a base class in the initialization list for the derived class constructor. Not even if those members are public or protected. 
 
 ```cpp
 #include <iostream>
@@ -637,6 +738,12 @@ int main()
 
     return 0;
 }
+```
+
+```
+Greetings from a!
+Greetings from d!
+Greetings from d!
 ```
 
 When you specify a function as `virtual` in a base class, you indicate to the compiler that you want dynamic binding for function calls in any class that's derived from this base class. A function that you specifyn as `virtual` in the base class will be `virtual` in all classes that directly or indirectly derive from the base class. This is the case, whether or not you specify the function as `virtual` in the derived class. 
