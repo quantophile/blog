@@ -746,7 +746,7 @@ Greetings from d!
 Greetings from d!
 ```
 
-When you specify a function as `virtual` in a base class, you indicate to the compiler that you want dynamic binding for function calls in any class that's derived from this base class. A function that you specifyn as `virtual` in the base class will be `virtual` in all classes that directly or indirectly derive from the base class. This is the case, whether or not you specify the function as `virtual` in the derived class. 
+When you specify a function as `virtual` in a base class, you indicate to the compiler that you want dynamic binding for function calls in any class that's derived from this base class. A function that you specify as `virtual` in the base class will be `virtual` in all classes that directly or indirectly derive from the base class. This is the case, whether or not you specify the function as `virtual` in the derived class. 
 
 The call to a virtual function using an **object** is always resolved statically. You only get dybamic resolution of calls to virtual functions through a pointer or a reference. Consider the below code snippet:
 

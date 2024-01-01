@@ -12,7 +12,9 @@ categories: ["C++"]
 
 ### `lvalue` and `rvalue`.
 
-Every single expression has a value category: an `lvalue` or an `rvalue`. An `lvalue` evaluates to some persistent value with an address in the memory in which you can store something on an ongoing basis. A variable with a name is an `lvalue`. An `rvalue` evaluates to a result that is stored only transiently. Historically, `lvalue`s and `rvalue`s are so called because an `lvalue` typically appears on the left of an expression, whereas an `rvalue` could appear only on the right side. If an expression is not an `lvalue`, its an `rvalue`.
+Every single expression has a value category: an `lvalue` or an `rvalue`. An lvalue is an expression that refers to a persistent memory location and allows us to take the address of that memory location via the address-of `&` operator. An `rvalue` evaluates to a result that is stored only transiently. `rvalue`s are typically things you can't take an address of e.g. unnamed temporary objects. 
+
+Historically, `lvalue`s and `rvalue`s were so called because an `lvalue` typically appears on the left of an expression, whereas an `rvalue` could appear only on the right side. If an expression is not an `lvalue`, its an `rvalue`.
 
 Most function call expressions are `rvalue`s. Only, function calls that return a reference `T&` are `lvalue`s.
 
@@ -20,7 +22,7 @@ The memory that stores the result of expressions such as `b + c` and `std::abs()
 
 ### `rvalue` references.
 
-A reference is a name that you can use an alias for something else. All references that we encountered thus far were `lvalue` references. Normally, an `lvalue` reference is an alias for another variable; it is called an `lvalue` refefence because it normally refers to a persistent storage location in which you can store data, so it can appear on the left of an assignment operator. We say normally because C++ does allow reference-to-`const` `lvalue` references - so variables of the type `const T&` to be bound to temporary `rvalue`s.
+A reference is a name that you can use an alias for something else. All references that we encountered thus far were `lvalue` references. Normally, an `lvalue` reference is an alias for another variable; it is called an `lvalue` reference because it normally refers to a persistent storage location in which you can store data, so it can appear on the left of an assignment operator. We say normally because C++ does allow reference-to-`const` `lvalue` references - so variables of the type `const T&` to be bound to temporary `rvalue`s.
 
 An `rvalue` reference can be an alias for a variable, just like an `lvalue` reference, but it differs from an `lvalue` reference in that it refer the outcome of an `rvalue` expression, even though this value is generally transient. Being bound to an `rvalue` reference extends the lifetime of such a transient value. Its memory will not be discarded as long as the `rvalue` reference is in scope. 
 
@@ -35,7 +37,95 @@ std::cout << rtemp << std::endl;		// Output value of expression
 int& rcount {count};					// lvalue reference
 ```
 
-### Moving objects.
+## The basics of `move` semantics.
+
+Consider the code snippet:
+
+```
+std::vector<int> v1 {1,2,3,4,5};
+std::vector<int> v2 {};
+v2 = v1
+```
+
+The `vector<int> v1` object has a static part that lives on the stack, and a contigous block of memory allocated dynamically on the free store. The static part consists of the `begin()`, `end()` pointers that hold the addresses of the start and end of the array as well as a third pointer to the very end of the memory you have; something you could use to compute the capacity. The memory block on the free store stores the actual contents `{1,2,3,4,5}`. 
+
+The `vector<int> v2` object in the static part has its `begin()` and `end()` pointers zeroed out, since it's still an empty vector.
+
+Now, I assign `v1` to `v2`. 
+
+```
+v2 = v1
+```
+
+Now, what do we expect to happen? We would like to have a deep-copy of `v1`. This exactly turns out to be the case. A contigous block of $5$ `int`'s is allocated on the free-store, the starting and ending addresses of memory block are stored in the static part of `v2`, and the contents `{1,2,3,4,5}` is copied to the array. This is also called as value semantics.
+
+Consider another example:
+
+```cpp
+#include <iostream>
+#include <random>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<double> sampleGaussian(int N)
+{
+    //Generate pseudo-random numbers
+    default_random_engine generator;
+
+    //Pass Uniform[0,1] sample to a distribution functor to 
+    //generate values according to some chosen statistical distribution
+    normal_distribution<double> normal_dist(0.0, 1.0);
+
+    //Generate a Gaussian sample of size N
+    std::vector<double> sample{};
+    auto roller = bind(normal_dist, generator);
+    for (int i{}; i < N; ++i) {
+        sample.push_back(roller());
+    }
+
+    return sample;
+}
+
+int main(){
+	std::vector<double> v2 {};
+	
+	v2 = sampleGaussian(5);
+	
+	return 0;
+}
+```
+
+The function `sampleGaussian(int N)` generates a sample of size `N` that has a $\mathcal{N}(0,1)$ standard normal distribution. The function returns a `vector<double>`. 
+
+To begin with, again the vector `v2` is an empty vector, just like earlier with its pointers zeroed out. Then we directly assign `sampleGaussian(5)` to `v2`. Now, the first thing that happens is, of course, we return a vector from the function. That value is something we don't really have a name for (in the calling scope), we can call it `__tmp__`. This is assigned to `v2`. But, do we really want to create a deep-copy at this point. That would be a shame, because, if we do a deep-copy, `__tmp__` would be destroyed at the end of the statement and we've wasted a lot of energy copying the elements.
+
+What we really want to do is, actually, we would like to transfer the contents of `__tmp__` to `v2`, in a very simple way. We simply want to copy the pointers of `__tmp__` to `v2`. We cannot, however, stop at this point, because effectively, now there are two `vector<double>` objects owning the same memory block. They do not know about each other. The second step is therefore, we have to just zero out the pointers of `__tmp__` vector. 
+
+So, the idea is to do the minimum amount of work to transfer `__tmp__` vector to `v2`. 
+
+Note that, this kind of optimization is only possible, because nobody knows about this `__tmp__` vector except the assignment operation `operator=()`. No one else holds reference to `__tmp__`. If there would be somebody else holding a reference, then we would have a problem. 
+
+At the end of this assignment statement, `__tmp__` goes out of scope, and the final result, the vector we created is in `v2`. Perfecto! 
+
+This is cool stuff! Now, can we do something similar with our earlier code snippet:
+
+```
+std::vector<int> v1 {1,2,3,4,5};
+std::vector<int> v2 {};
+v2 = v1;
+```
+
+If indeed we want to transfer(move) the contents of `v1` to `v2`, then all we need to do is, use `std::move`. 
+
+```
+v2 = std::move(v1);
+```
+
+`std::move` is basically telling us, this is a **transfer of content**. We'll look at the details later, but we basically proclaim we want to transfer the contents of `v1` to `v2`. We do exactly the same as before. We, first of all, copy the pointers from `v1` to `v2` and the second step is we zero them out in `v1`. `v1` however in this case lives on a little longer. It will be an empty vector for quite sometime, until it goes out of scope.
+
+## The details of move semantics.
 
 ```cpp
 #include<iostream>
