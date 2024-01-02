@@ -127,6 +127,27 @@ v2 = std::move(v1);
 
 ## The details of move semantics.
 
+Consider again:
+
+```
+std::vector<int> v1 {1,2,3,4,5};
+std::vector<int> v2 {};
+v2 = v1;
+```
+
+`v1` is an `lvalue`. The statement `v2 = v1` invokes the copy assignment operator `operator=(const vector<int>& v)` inside the `vector<T>` class. The `lvalue` `v1` binds to an `lvalue` reference `const vector<int>&`. This assignment operator would now do a copy. It assumes that you indeed want to have this copy. Everything's fine.
+
+Now, let's go to the second assignment.
+
+```
+v2 = sampleGaussian(5);
+```
+
+`sampleGaussian(5)` creates a vector of $5$ random numbers distributed $N(0,1)$. Prior to C++ 11, this would actually have created a copy. And that was the problem. I could not distinguish between the first case and the second case. 
+
+For that reason, they've introduced `rvalue` references. The statement `v2=sampleGaussian(5)` invokes the move assignment operator `operator=(const vector<int>&& v)` inside the `vector<T>` class. The temporary vector `__tmp__` returned from the function is an `rvalue` and binds to the `rvalue` reference `const vector<int>&&`. Remember, the ref count of the `__tmp__` vector equals $1$, only the move assignment operator function knows about it, so I can do a move. `__tmp__` is not needed afterwards.
+
+
 ```cpp
 #include<iostream>
 #include<memory>
