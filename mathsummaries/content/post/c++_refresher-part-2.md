@@ -330,3 +330,4 @@ int main()
 18 nearer to 10 than 8: false
 ```
 
+The `std::function<>` variable `compare` is assigned all three different kinds of first class functions - a function pointer, a function object from the standard template library and a lambda closure. In between, all three first class functions are called. More precisely, they are invoked through the `compare` variable's function call operator. A `std::function<>` itself is, in other words, a function object - that encapsulates any other kind of first class function.
