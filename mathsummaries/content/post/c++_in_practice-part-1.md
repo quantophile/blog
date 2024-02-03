@@ -62,7 +62,7 @@ A *smart pointer* is an object that mimics a raw pointer in that, it contains an
 
 - A `std::shared_ptr<T>` object also behaves as a pointer to type `T`, but in contrast with `unique_ptr<T>` there can be any number of `shared_ptr<>` objects that allow *shared ownership* of an object in the free-store. At any given moment, the number of `shared_ptr<>` objects that contain a given address in time is known by the runtime. This is called *reference counting*. The reference count for a `shared_ptr<>` containing a given free store address is incremented each time a new `shared_ptr` object is creating containing that address, and its decremented when a `shared_ptr` containing the address is destroyed or assigned to point to a different address. When there are no `shared_ptr` objects containing a given address, the reference count will have dropped to zero, and the memory for the object at that address is released automatically. All `shared_ptr<>` objects that point to the same address have access to the the count of how many there are.
 
-- A `weak_ptr<T>` is linked to a `shared_ptr<T>` and contains the same address. Creating a `weak_ptr<>` does not increment the reference count associated with the linked `shared_ptr<>` object, though, so a `weak_ptr<>` does not prevent the object pointed to from being destroyed. Its memory will still be released when the last `shared_ptr<>` referencing it is destroyed or reassigned to point to a different address, even when associated `weak_ptr<>` objects still exist. If this happens, the `weak_ptr<>` will nevertheless not contain a dangling pointer, atleast not one that you could inadvertently access. The reason is that you cannot access the address encapsulated by a `weak_ptr<T>` directly. The compiler forces you to first create a `shared_ptr<T>` object out of it that refers to the same address. If the memory address for the `weak_ptr<>` is still valid, forcing you to create a `shared_ptr<>` first ensures that the reference count is again incremented and that the pointer can be used safely again. If the memory is released already, however, this operation will result in a `shared_ptr<>1` containing a `nullptr`.
+- A `weak_ptr<T>` is linked to a `shared_ptr<T>` and contains the same address. Creating a `weak_ptr<>` does not increment the reference count associated with the linked `shared_ptr<>` object, though, so a `weak_ptr<>` does not prevent the object pointed to from being destroyed. Its memory will still be released when the last `shared_ptr<>` referencing it is destroyed or reassigned to point to a different address, even when associated `weak_ptr<>` objects still exist. If this happens, the `weak_ptr<>` will nevertheless not contain a dangling pointer, atleast not one that you could inadvertently access. The reason is that you cannot access the address encapsulated by a `weak_ptr<T>` directly. The compiler forces you to first create a `shared_ptr<T>` object out of it that refers to the same address. If the memory address for the `weak_ptr<>` is still valid, forcing you to create a `shared_ptr<>` first ensures that the reference count is again incremented and that the pointer can be used safely again. If the memory is released already, however, this operation will result in a `shared_ptr<T>` containing a `nullptr`.
 
 One use for having `weak_ptr<>` objects is to avoid so called reference cycles with `shared_ptr<>` objects. Conceptually, a reference cycle is where a `shared_ptr<Y>` inside the object `x` points to some other object `y` that contains a `shared_ptr<X>`, which points back to `x`. With this situation, neither `x` nor `y` can be destroyed. In practice, this may occur in many ways. `weak_ptr` allows you to break such cycles. Another use of weak pointers is in the implementation of object caches. 
 
@@ -684,9 +684,10 @@ Every derived class object is a base class object. So, you can use a base class 
 The below code snippet is instructive in understanding run-time polymorphism.
 
 ```cpp
-#include <iostream>
 #include <memory>
-#include <string>
+#include <iostream>
+
+using namespace std;
 
 class A {
 public:
@@ -722,21 +723,17 @@ public:
 
 int main()
 {
-    D d{};
-    A* aptr = &d;
-    aptr->foo();
-
-    B* bptr = &d;
-    bptr->foo();
-
-    C* cptr = &d;
-    //This should not compile. The virtual method foo() is private in C, which is not allowed.
-    //cptr->foo();
+    std::shared_ptr<A> a_ptr = std::make_shared<D>();
+    a_ptr ->foo();
     
-    D* dptr = &d;
-    dptr->foo();
-
-    return 0;
+    std::shared_ptr<B> b_ptr = std::make_shared<D>();
+    b_ptr ->foo();
+    
+    std::shared_ptr<C> c_ptr = std::make_shared<D>();
+    //c_ptr ->foo();  //will not compile, foo() is a private member is not inherited by D
+    
+    std::shared_ptr<D> d_ptr = std::make_shared<D>();
+    d_ptr ->foo();
 }
 ```
 
@@ -982,7 +979,7 @@ Area = 78.5397
 
 An abstract class purely exists for the purpose of deriving classes from it and cannot be instantiated.
 
-Any class that contains atleast one pure virtual function is an abstract class. Because an abstract class cannot be instantiated, you cannot pass it by value to a function, a parameter of type `Shape` will not compile. Similarly, you cannot return a `Shape` object from a functiojn. However, pointers or references to an abstract class can be used as parameter or return types, so types such as `Shape*` `std::shared_ptr<Shape*>` and `Shape&` are fine in these settings. 
+Any class that contains atleast one pure virtual function is an abstract class. Because an abstract class cannot be instantiated, you cannot pass it by value to a function, a parameter of type `Shape` will not compile. Similarly, you cannot return a `Shape` object from a functiojn. However, pointers or references to an abstract class can be used as parameter or return types, so types such as `Shape*` `std::shared_ptr<Shape>` and `Shape&` are fine in these settings. 
 
 Any class that inherits from `Shape` is obligated to provide an implementation of the `area()` method. If it doesn't, it too is an abstract class. More specifically, if any pure virtual function of an abstract base class isn't in a derived class, then the pure virtual function will be inherited as such, and the derived class becomes an abstract class.
 
