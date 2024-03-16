@@ -183,12 +183,88 @@ Forwarding references represent :
 - an `lvalue` reference, if they are initialized by an `lvalue`.
 - an `rvalue` reference, if they are initialized by an `rvalue`. 
 
-`rvalue` references are forwarding references if they:
+A `T&&` or `auto&&` is called a forwarding reference.
 
-- involve type deduction
-- appear exactly in the form `T&&` or `auto&&`.
+Consider the following code snippet:
 
-A programming language is said to offer first-class function if it allows you to treat functions like any other variable. In such a language, for instance, you can assign a function as a value to a variable, just as an `int` or `string`. You can pass a function as an argument to another function or return one as the result of another function. 
+```cpp
+#include <iostream>
+#include <string>
+
+template <typename T>
+void foo(T&& x)
+{
+    std::cout << "\nfoo(T&&)";
+}
+
+class Widget{
+    public:
+        int m_i;
+        std::string m_s;
+        int* m_ptr {nullptr};
+        
+        Widget(int i, std::string s, int* ptr) : m_i{i}, m_s{s}, m_ptr{ptr} {}
+        Widget() : Widget(0,"",nullptr) {}
+};
+
+int main()
+{
+    Widget w {};
+    foo(w);
+    
+    foo(Widget {});
+    return 0;
+}
+```
+
+In the `main()` function, I have a `Widget w`, this is an `lvalue`. It has a name and refers to a persistent memory storage location, with an address. If you pass it to `foo(T&&)`, it suprisingly works! Moreover, passing an `rvalue` to `foo(T&&)` also works.
+
+Now what happens? Why does this work? When you pass an `lvalue` to `foo(T&&)`, in template type argument deduction, this `T` for an `lvalue` deduced to be `Widget&`.
+
+```
+ template <typename T>
+void foo(Widget& && x)
+{
+    std::cout << "\nfoo(T&&)";
+}
+```
+
+Now, I have two references - an `lvalue` reference and an `rvalue` reference, we must do something and that something is called reference collapsing. This means:
+
+```
+& 	&  => &
+&&	&  => &
+&	&& => &
+&&	&& => &&
+```
+
+So, if I have a ref and a ref-ref, it is collapsed to a single ref. Only and exclusively, if I have a ref-ref, ref-ref, in the end, do I have a ref-ref. 
+
+So, finally, this is the function that we would have:
+
+```
+ template <typename T>
+void foo(Widget& x)
+{
+    std::cout << "\nfoo(T&&)";
+}
+```
+
+a function `foo` that accepts an `lvalue` and so it compiles. This fits perfectly. 
+
+When I pass a temporary `Widget {}`, this is an `rvalue`. In template argument deduction, `T` for this `rvalue` is deduced to be `Widget`. So, finally, it would look like:
+
+```
+ template <typename T>
+void foo(Widget&& x)
+{
+    std::cout << "\nfoo(T&&)";
+}
+```
+
+a function `foo` that accepts an `rvalue` and this too compiles.
+
+A programming language is said to offer first-class functions if it allows you to treat functions like any other variable. In such a language, for instance, you can assign a function as a value to a variable, just as an `int` or `string`. You can pass a function as an argument to another function or return one as the result of another function. 
 
 # Lambda expressions.
 
