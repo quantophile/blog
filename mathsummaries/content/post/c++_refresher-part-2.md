@@ -69,37 +69,23 @@ Consider another example:
 
 using namespace std;
 
-vector<double> sampleGaussian(int N)
+vector<double> createVector(double value, int N)
 {
-    //Generate pseudo-random numbers
-    default_random_engine generator;
-
-    //Pass Uniform[0,1] sample to a distribution functor to 
-    //generate values according to some chosen statistical distribution
-    normal_distribution<double> normal_dist(0.0, 1.0);
-
-    //Generate a Gaussian sample of size N
-    std::vector<double> sample{};
-    auto roller = bind(normal_dist, generator);
-    for (int i{}; i < N; ++i) {
-        sample.push_back(roller());
-    }
-
-    return sample;
+    return std::vector<double>(value, N);
 }
 
 int main(){
 	std::vector<double> v2 {};
 	
-	v2 = sampleGaussian(5);
+	v2 = createVector(1,5);
 	
 	return 0;
 }
 ```
 
-The function `sampleGaussian(int N)` generates a sample of size `N` that has a $\mathcal{N}(0,1)$ standard normal distribution. The function returns a `vector<double>`. 
+The function `createVector` returns a vector of size `N` filled with `value`. 
 
-To begin with, again the vector `v2` is an empty vector, just like earlier with its pointers zeroed out. Then we directly assign `sampleGaussian(5)` to `v2`. Now, the first thing that happens is, of course, we return a vector from the function. That value is something we don't really have a name for (in the calling scope), we can call it `__tmp__`. This is assigned to `v2`. But, do we really want to create a deep-copy at this point. That would be a shame, because, if we do a deep-copy, `__tmp__` would be destroyed at the end of the statement and we've wasted a lot of energy copying the elements.
+To begin with, again the vector `v2` is an empty vector, just like earlier with its pointers zeroed out. Then we directly assign `createVector(1,5)` to `v2`. Now, the first thing that happens is, of course, we return a vector from the function. That value is something we don't really have a name for (in the calling scope), we can call it `__tmp__`. This is assigned to `v2`. But, do we really want to create a deep-copy at this point. That would be a shame, because, if we do a deep-copy, `__tmp__` would be destroyed at the end of the statement and we've wasted a lot of energy copying the elements.
 
 What we really want to do is, actually, we would like to transfer the contents of `__tmp__` to `v2`, in a very simple way. We simply want to copy the pointers of `__tmp__` to `v2`. We cannot, however, stop at this point, because effectively, now there are two `vector<double>` objects owning the same memory block. They do not know about each other. The second step is therefore, we have to just zero out the pointers of `__tmp__` vector. 
 
@@ -123,7 +109,7 @@ If indeed we want to transfer(move) the contents of `v1` to `v2`, then all we ne
 v2 = std::move(v1);
 ```
 
-`std::move` is basically telling us, this is a **transfer of content**. We'll look at the details later, but we basically proclaim we want to transfer the contents of `v1` to `v2`. We do exactly the same as before. We, first of all, copy the pointers from `v1` to `v2` and the second step is we zero them out in `v1`. `v1` however in this case lives on a little longer. It will be an empty vector for quite sometime, until it goes out of scope.
+`std::move` is basically telling us, this is a **transfer of ownership**. We'll look at the details later, but we basically proclaim we want to transfer the contents of `v1` to `v2`. We do exactly the same as before. We, first of all, copy the pointers from `v1` to `v2` and the second step is we zero them out in `v1`. `v1` however in this case lives on a little longer. It will be an empty vector for quite sometime, until it goes out of scope.
 
 ## The details of move semantics.
 
@@ -135,17 +121,19 @@ std::vector<int> v2 {};
 v2 = v1;
 ```
 
-`v1` is an `lvalue`. The statement `v2 = v1` invokes the copy assignment operator `operator=(const vector<int>& v)` inside the `vector<T>` class. The `lvalue` `v1` binds to an `lvalue` reference `const vector<int>&`. This assignment operator would now do a copy. It assumes that you indeed want to have this copy. Everything's fine.
+`v1` is an `lvalue`. The statement `v2 = v1` invokes the copy assignment operator `operator=(const vector<int>& v)` on `v2`. The `lvalue` `v1` binds to an `lvalue` reference `const vector<int>&`. This assignment operator would now do a copy. It assumes that you indeed want to have this copy. Everything's fine.
 
 Now, let's go to the second assignment.
 
 ```
-v2 = sampleGaussian(5);
+v2 = createVector(1,5);
 ```
 
-`sampleGaussian(5)` creates a vector of $5$ random numbers distributed $N(0,1)$. Prior to C++ 11, this would actually have created a copy. And that was the problem. I could not distinguish between the first case and the second case. 
+`createVector(1,5)` creates a vector of $5$ elements initialized to $1$. Prior to C++ 11, this would actually have created a copy. And that was the problem. One could not distinguish between the first case and the second case. 
 
-For that reason, they've introduced `rvalue` references. The statement `v2=sampleGaussian(5)` invokes the move assignment operator `operator=(const vector<int>&& v)` inside the `vector<T>` class. The temporary vector `__tmp__` returned from the function is an `rvalue` and binds to the `rvalue` reference `const vector<int>&&`. Remember, the ref count of the `__tmp__` vector equals $1$, only the move assignment operator function knows about it, so I can do a move. `__tmp__` is not needed afterwards.
+For that reason, they've introduced `rvalue` references. The statement `v2=createVector(1,5)` invokes the move assignment operator `operator=(const vector<int>&& v)` inside the `vector<T>` class. The temporary vector `__tmp__` returned from the function is an `rvalue` and binds to the `rvalue` reference `const vector<int>&&`. Remember, the ref count of the `__tmp__` vector equals $1$, only the move assignment operator function knows about it, so I can do a move. `__tmp__` is not needed afterwards. The move assignment operator will re-wire the pointers, it will copy the pointers of `v2` to `v1`. It will then hollow out the pointers of `v2`. 
+
+## Writing a move constructor and a move assignment operator.
 
 
 ```cpp
