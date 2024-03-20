@@ -262,11 +262,101 @@ void foo(Widget&& x)
 }
 ```
 
-a function `foo` that accepts an `rvalue` and this too compiles.
+a function `foo` that accepts an `rvalue` and this too compiles. 
 
-A programming language is said to offer first-class functions if it allows you to treat functions like any other variable. In such a language, for instance, you can assign a function as a value to a variable, just as an `int` or `string`. You can pass a function as an argument to another function or return one as the result of another function. 
+# Perfect Forwarding.
+
+If you want to write a function that is merely forwarding it's arguments to another function, then you have exactly this situation:
+
+```
+template <typename T, typename ???>
+unique_ptr<T> make_unique(???)
+{
+	return unique_ptr<T>(new T(???));
+}
+```
+
+A good example is C++ 14's `std::make_unique<T>()`. `std::make_unique()`'s task is to forward the arguments given to the constructor of type `T`. Now, how do I do that? Interestingly, this was an unsolved problem pre C++ 11, because there was not a good general solution. 
+
+The first solution we would have is to pass by value. This works pretty well, but it creates an overhead for copying. Imagine, I pass a vector of one million elements, something big. I do not want to create an extra copy of this vector in pass-by-value.
+
+```
+template <typename T, typename Arg>
+unique_ptr<T> make_unique(Arg arg)
+{
+	return unique_ptr<T>(new T(arg));
+}
+```
+
+We could pass by reference, non-`const` reference. 
+
+```
+template <typename T, typename Arg>
+unique_ptr<T> make_unique(Arg& arg)
+{
+	return unique_ptr<T>(new T(arg));
+}
+```
+
+But the below statement, for instance:
+
+```
+std::make_unique<int>(1);
+```
+
+would be a compilation error. $1$ is an `rvalue`, and it does not bind to an `lvalue` reference to non-`const`. This would not compile.
+
+The third option I have is reference-to-const. 
+
+```
+template <typename T, typename Arg>
+unique_ptr<T> make_unique(Arg const& arg)
+{
+	return unique_ptr<T>(new T(arg));
+}
+```
+
+Let's say I want to construct an instance of the below `Example`. The `Example` constructor takes an int-ref. 
+
+```
+class Example{
+	public:
+		Example(int& i) {}
+};
+
+std::make_unique<Example>(i);	//Always adds const
+```
+
+But, this would also not compile. This is exactly, what forwarding references are supposed to solve.
+
+```
+template <typename T, typename Arg>
+unique_ptr<T> make_unique(Arg&& arg)
+{
+	return unique_ptr<T>(new T(arg));
+}
+```
+
+This accepts `lvalue`s, `rvalue`s, `const` values, non-`const` values.
+
+There's this small additional problem, that you now have. For example, I can pass an `rvalue` to the function. But, just because inside the body of the `make_unique`, it has a name, it becomes an `lvalue` again. And therefore, I remove the opportunity to `move` this into `T`. So, it's again a flaw. This is a limitation. 
+
+Using `std::move` at this point, again, would be a big mistake. If I pass an `lvalue`, I would unconditionally move, and this would of course destroy an `lvalue` that might be used in the calling scope. So, I need something different. Instead of an unconditional move, I need a conditional move. A `move` that only moves, if it is indeed an `rvalue`. 
+
+`std::forward` conditionally casts its input into an `rvalue` reference. It is the little brother of `std::move`. If the given value is an `lvalue`, it is cast to an `lvalue` reference. If the given value is an `rvalue`, it is cast to an `rvalue` reference. 
+
+```
+template <typename T, typename Arg>
+unique_ptr<T> make_unique(Arg&& arg)
+{
+	return unique_ptr<T>(new T(std::forward<Arg>(arg)));
+}
+```
+
 
 # Lambda expressions.
+
+A programming language is said to offer first-class functions if it allows you to treat functions like any other variable. In such a language, for instance, you can assign a function as a value to a variable, just as an `int` or `string`. You can pass a function as an argument to another function or return one as the result of another function.
 
 Lambda expressions offer a convenient, compact syntax to quickly define callback functions or functors. And not only is the syntax compact, lambda expressions also allow you to define the callback's logic right there where you want to use it. 
 
